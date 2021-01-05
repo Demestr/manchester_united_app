@@ -1,0 +1,14 @@
+<!--
+  ~ Created by Dmitry Lipski on 05.01.21 12:38
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 05.01.21 12:32
+  -->
+
+<vector android:height="48dp" android:viewportHeight="480"
+    android:viewportWidth="480" android:width="48dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#FF000000" android:pathData="M477.656,82.344l-80,-80C396.156,0.844 394.122,0 392,0H88c-2.122,0 -4.156,0.844 -5.656,2.344l-80,80C0.844,83.844 0,85.878 0,88v128c0,4.418 3.582,8 8,8h72v248c0,4.418 3.582,8 8,8h304c4.418,0 8,-3.582 8,-8V224h72c4.418,0 8,-3.582 8,-8V88C480,85.878 479.156,83.844 477.656,82.344zM295.36,16c-4.391,30.574 -32.736,51.8 -63.311,47.409C207.475,59.88 188.169,40.574 184.64,16H295.36zM80,208H16v-16h64V208zM464,208h-64v-16h64V208zM464,176h-64v-56h-16v344H96V120H80v56H16V91.312L91.312,16H104v24h16V16h16v24h16V16h16.472c4.546,39.504 40.255,67.843 79.759,63.297c33.245,-3.826 59.472,-30.052 63.297,-63.297H328v24h16V16h16v24h16V16h12.688L464,91.312V176z"/>
+    <path android:fillColor="#FF000000" android:pathData="M360,136h-48c-4.418,0 -8,3.582 -8,8v31.112c-0.001,2.603 1.264,5.044 3.392,6.544l24,16.888c2.698,1.898 6.285,1.946 9.032,0.12l24,-15.936c2.233,-1.482 3.576,-3.984 3.576,-6.664V144C368,139.582 364.418,136 360,136zM352,171.776l-15.864,10.536L320,170.96V152h32V171.776z"/>
+    <path android:fillColor="#FF000000" android:pathData="M328,112h16v16h-16z"/>
+    <path android:fillColor="#FF000000" android:pathData="M352,112h16v16h-16z"/>
+    <path android:fillColor="#FF000000" android:pathData="M304,112h16v16h-16z"/>
+</vector>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Dmitry Lipski on 05.01.21 12:38
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 05.01.21 12:32
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_news"
+        android:icon="@drawable/ic_news_48dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_standings"
+        android:icon="@drawable/ic_standings_48dp"
+        android:title="@string/title_dashboard" />
+
+    <item
+        android:id="@+id/navigation_squad"
+        android:icon="@drawable/ic_squad_48dp"
+        android:title="@string/title_notifications" />
+
+</menu>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Dmitry Lipski on 05.01.21 12:38
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 05.01.21 12:32
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_news">
+
+    <fragment
+        android:id="@+id/navigation_news"
+        android:name="com.lipssoftware.manchester.united.ui.news.NewsFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_standings"
+        android:name="com.lipssoftware.manchester.united.ui.standings.StandingsFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_squad"
+        android:name="com.lipssoftware.manchester.united.ui.squad.SquadFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>

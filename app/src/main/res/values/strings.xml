@@ -1,0 +1,12 @@
+<!--
+  ~ Created by Dmitry Lipski on 05.01.21 12:38
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 05.01.21 12:32
+  -->
+
+<resources>
+    <string name="app_name">Manchester United</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>

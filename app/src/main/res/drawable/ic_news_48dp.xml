@@ -1,0 +1,15 @@
+<!--
+  ~ Created by Dmitry Lipski on 05.01.21 12:38
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 05.01.21 12:32
+  -->
+
+<vector android:height="48dp" android:viewportHeight="480"
+    android:viewportWidth="480" android:width="48dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#FF000000" android:pathData="M456,0H104c-4.418,0 -8,3.582 -8,8v392H24c-4.418,0 -8,3.582 -8,8c0.048,39.744 32.256,71.951 72,72h336c22.08,-0.026 39.974,-17.92 40,-40V8C464,3.582 460.418,0 456,0zM88,464c-27.826,-0.035 -51.419,-20.465 -55.432,-48H352.44c2.12,18.846 11.589,36.095 26.352,48H88zM448,440c0,13.255 -10.745,24 -24,24c-30.913,-0.035 -55.965,-25.087 -56,-56c0,-4.418 -3.582,-8 -8,-8H112V16h336V440z"/>
+    <path android:fillColor="#FF000000" android:pathData="M152,352h256c4.418,0 8,-3.582 8,-8V56c0,-4.418 -3.582,-8 -8,-8H152c-4.418,0 -8,3.582 -8,8v288C144,348.418 147.582,352 152,352zM208,64h192v32H208V64zM208,112h192v224H208V112zM160,64h32v32h-32V64zM160,112h32v224h-32V112z"/>
+    <path android:fillColor="#FF000000" android:pathData="M224,144h160v16h-160z"/>
+    <path android:fillColor="#FF000000" android:pathData="M224,192h160v16h-160z"/>
+    <path android:fillColor="#FF000000" android:pathData="M224,240h160v16h-160z"/>
+    <path android:fillColor="#FF000000" android:pathData="M224,288h160v16h-160z"/>
+</vector>
