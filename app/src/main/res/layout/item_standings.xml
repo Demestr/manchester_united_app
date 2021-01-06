@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Dmitry Lipski on 06.01.21 9:09
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 06.01.21 9:09
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <TextView
+        android:id="@+id/text_standings_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/gl_rank"
+        app:layout_constraintStart_toStartOf="@id/gl_rank"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <TextView
+        android:id="@+id/text_standings_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gl_team"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Manchester United" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <TextView
+        android:id="@+id/text_standings_games"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/gl_games"
+        app:layout_constraintStart_toStartOf="@id/gl_games"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="16" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_games"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <TextView
+        android:id="@+id/text_standings_gd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/gl_gd"
+        app:layout_constraintStart_toStartOf="@id/gl_gd"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_gd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <TextView
+        android:id="@+id/text_standings_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/gl_points"
+        app:layout_constraintStart_toStartOf="@id/gl_points"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+</androidx.constraintlayout.widget.ConstraintLayout>

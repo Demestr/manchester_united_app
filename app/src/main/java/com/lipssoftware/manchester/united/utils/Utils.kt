@@ -6,6 +6,10 @@
 
 package com.lipssoftware.manchester.united.utils
 
+const val MAN_UTD_ID = 33
+const val PREMIER_LEAGUE_ID = 39
+const val SEASON = 2020
+
 enum class Status {
     SUCCESS,
     ERROR,

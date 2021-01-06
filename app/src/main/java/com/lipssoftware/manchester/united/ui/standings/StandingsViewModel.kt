@@ -9,11 +9,27 @@ package com.lipssoftware.manchester.united.ui.standings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.lipssoftware.manchester.united.data.model.standings.Standing
+import com.lipssoftware.manchester.united.data.network.StatsBuilder
+import com.lipssoftware.manchester.united.utils.PREMIER_LEAGUE_ID
+import com.lipssoftware.manchester.united.utils.SEASON
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class StandingsViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+    private val _standings = MutableLiveData<List<Standing>>()
+    val standings: LiveData<List<Standing>> = _standings
+
+    init {
+        getStandings()
     }
-    val text: LiveData<String> = _text
+
+    private fun getStandings(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val answer = StatsBuilder.statsService.getStandings(PREMIER_LEAGUE_ID, SEASON)
+            _standings.postValue(answer.response.first().league.standings.first())
+        }
+    }
 }
