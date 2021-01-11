@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 11.01.21 12:53
+ * Created by Dmitry Lipski on 11.01.21 17:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.21 12:53
+ * Last modified 11.01.21 15:16
  */
 
 package com.lipssoftware.manchester.united.ui.standings
@@ -32,7 +32,7 @@ class StandingsViewModel(private val repository: StandingsRepository) : ViewMode
                 _standings.postValue(Resource.success(data = repository.getStandings()))
             }
             catch (exception: Exception){
-                _standings.postValue(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+                _standings.postValue(Resource.error(data = null, message = exception.message ?: "Error occurred!"))
             }
         }
     }
