@@ -39,11 +39,11 @@ class NewsAdapter(private val standings: List<NewsItem>) :
             item.newsImage.load(newsItem.imageUrl)
             item.newsTitle.text = newsItem.title
             item.newsDate.text = newsItem.pubDate
-            val text = if (newsItem.text.length > 200) newsItem.text.take(200) + "..." else newsItem.text
+            //val text = if (newsItem.text.length > 200) newsItem.text.take(200) + "...</p>" else newsItem.text
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N)
-                item.newsText.text = Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)
+                item.newsText.text = Html.fromHtml(newsItem.text, Html.FROM_HTML_MODE_COMPACT)
             else
-                item.newsText.text = Html.fromHtml(text)
+                item.newsText.text = Html.fromHtml(newsItem.text)
         }
     }
 }

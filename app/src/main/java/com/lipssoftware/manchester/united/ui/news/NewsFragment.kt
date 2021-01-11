@@ -33,6 +33,9 @@ class NewsFragment : Fragment() {
         binding.listNews.apply {
             layoutManager = LinearLayoutManager(context)
         }
+        binding.refreshNews.setOnRefreshListener {
+            newsViewModel.getNews()
+        }
         newsViewModel.getNews()
         return binding.root
     }
@@ -50,10 +53,12 @@ class NewsFragment : Fragment() {
                         resource.data?.let { binding.listNews.adapter = NewsAdapter(it) }
                         binding.listNews.visibility = View.VISIBLE
                         binding.progressBar.visibility = View.GONE
+                        binding.refreshNews.isRefreshing = false
                     }
                     Status.ERROR ->{
                         binding.listNews.visibility = View.VISIBLE
                         binding.progressBar.visibility = View.GONE
+                        binding.refreshNews.isRefreshing = false
                         Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
