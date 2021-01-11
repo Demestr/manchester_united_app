@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 05.01.21 12:38
+ * Created by Dmitry Lipski on 11.01.21 9:15
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 05.01.21 12:32
+ * Last modified 11.01.21 8:54
  */
 
 plugins {
@@ -11,17 +11,22 @@ plugins {
     id 'kotlin-parcelize'
 }
 
+
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+    
     defaultConfig {
         applicationId "com.lipssoftware.manchester.united"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        buildConfigField "String", "API_KEY", localProperties['apiKey']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,6 +35,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    buildFeatures{
+        viewBinding = true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -69,7 +77,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.7.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
+    implementation 'com.squareup.retrofit2:converter-simplexml:2.6.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.5.0'
+
+    //Coil
+    implementation 'io.coil-kt:coil:1.1.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

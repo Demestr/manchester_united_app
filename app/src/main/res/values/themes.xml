@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Dmitry Lipski on 05.01.21 12:38
+  ~ Created by Dmitry Lipski on 11.01.21 9:15
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 05.01.21 12:32
+  ~ Last modified 06.01.21 13:45
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
@@ -18,5 +18,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ManUtd.TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/roboto_thin</item>
     </style>
 </resources>

@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 05.01.21 12:38
+ * Created by Dmitry Lipski on 11.01.21 9:15
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 05.01.21 12:32
+ * Last modified 11.01.21 9:10
  */
 
 package com.lipssoftware.manchester.united.ui.standings
@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lipssoftware.manchester.united.databinding.FragmentStandingsBinding
 
@@ -28,6 +29,7 @@ class StandingsFragment : Fragment() {
         binding = FragmentStandingsBinding.inflate(inflater)
         binding.listStandings.apply {
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         }
         return binding.root
     }

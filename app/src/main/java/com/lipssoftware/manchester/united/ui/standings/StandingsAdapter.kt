@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 06.01.21 9:27
+ * Created by Dmitry Lipski on 11.01.21 9:15
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 06.01.21 9:27
+ * Last modified 11.01.21 8:59
  */
 
 package com.lipssoftware.manchester.united.ui.standings
@@ -9,6 +9,7 @@ package com.lipssoftware.manchester.united.ui.standings
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.lipssoftware.manchester.united.data.model.standings.Standing
 import com.lipssoftware.manchester.united.databinding.ItemStandingsBinding
 
@@ -27,6 +28,7 @@ class StandingsAdapter(private val standings: List<Standing>): RecyclerView.Adap
 
         fun bind(standing: Standing){
             item.textStandingsRank.text = standing.rank.toString()
+            item.imageTeam.load(standing.team.logo)
             item.textStandingsTeam.text = standing.team.name
             item.textStandingsGames.text = standing.all.played.toString()
             item.textStandingsGd.text = standing.goalsDiff.toString()
