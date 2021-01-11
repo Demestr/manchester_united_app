@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 05.01.21 12:38
+ * Created by Dmitry Lipski on 11.01.21 12:53
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 05.01.21 12:32
+ * Last modified 11.01.21 12:53
  */
 
 package com.lipssoftware.manchester.united.ui.standings
@@ -10,17 +10,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lipssoftware.manchester.united.data.model.standings.Standing
-import com.lipssoftware.manchester.united.data.network.StatsBuilder
-import com.lipssoftware.manchester.united.utils.PREMIER_LEAGUE_ID
-import com.lipssoftware.manchester.united.utils.SEASON
+import com.lipssoftware.manchester.united.data.model.domain.StandingDomain
+import com.lipssoftware.manchester.united.data.repository.StandingsRepository
+import com.lipssoftware.manchester.united.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class StandingsViewModel : ViewModel() {
+class StandingsViewModel(private val repository: StandingsRepository) : ViewModel() {
 
-    private val _standings = MutableLiveData<List<Standing>>()
-    val standings: LiveData<List<Standing>> = _standings
+    private val _standings = MutableLiveData<Resource<List<StandingDomain>>>()
+    val standings: LiveData<Resource<List<StandingDomain>>> = _standings
 
     init {
         getStandings()
@@ -28,8 +27,13 @@ class StandingsViewModel : ViewModel() {
 
     private fun getStandings(){
         viewModelScope.launch(Dispatchers.IO) {
-            val answer = StatsBuilder.statsService.getStandings(PREMIER_LEAGUE_ID, SEASON)
-            _standings.postValue(answer.response.first().league.standings.first())
+            _standings.postValue(Resource.loading(data = null))
+            try {
+                _standings.postValue(Resource.success(data = repository.getStandings()))
+            }
+            catch (exception: Exception){
+                _standings.postValue(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            }
         }
     }
 }

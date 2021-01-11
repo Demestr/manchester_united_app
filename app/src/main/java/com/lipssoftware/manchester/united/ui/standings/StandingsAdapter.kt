@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 11.01.21 9:15
+ * Created by Dmitry Lipski on 11.01.21 12:53
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.21 8:59
+ * Last modified 11.01.21 12:53
  */
 
 package com.lipssoftware.manchester.united.ui.standings
@@ -10,10 +10,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.lipssoftware.manchester.united.data.model.standings.Standing
+import com.lipssoftware.manchester.united.data.model.domain.StandingDomain
 import com.lipssoftware.manchester.united.databinding.ItemStandingsBinding
 
-class StandingsAdapter(private val standings: List<Standing>): RecyclerView.Adapter<StandingsAdapter.StandingsViewHolder>() {
+class StandingsAdapter(private val standings: List<StandingDomain>): RecyclerView.Adapter<StandingsAdapter.StandingsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StandingsViewHolder =
         StandingsViewHolder(ItemStandingsBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -26,7 +26,7 @@ class StandingsAdapter(private val standings: List<Standing>): RecyclerView.Adap
 
     class StandingsViewHolder(private val item: ItemStandingsBinding): RecyclerView.ViewHolder(item.root){
 
-        fun bind(standing: Standing){
+        fun bind(standing: StandingDomain){
             item.textStandingsRank.text = standing.rank.toString()
             item.imageTeam.load(standing.team.logo)
             item.textStandingsTeam.text = standing.team.name
