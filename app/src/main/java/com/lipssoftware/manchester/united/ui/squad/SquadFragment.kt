@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 05.01.21 12:38
+ * Created by Dmitry Lipski on 11.01.21 17:08
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 05.01.21 12:38
+ * Last modified 06.01.21 11:28
  */
 
 package com.lipssoftware.manchester.united.ui.squad
@@ -25,7 +25,7 @@ class SquadFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
+        val root = inflater.inflate(R.layout.fragment_squad, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
         squadViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it

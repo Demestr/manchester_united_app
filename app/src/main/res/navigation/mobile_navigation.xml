@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 05.01.21 12:38
+  ~ Created by Dmitry Lipski on 11.01.21 17:08
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 05.01.21 12:32
+  ~ Last modified 11.01.21 9:13
   -->
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,18 +14,18 @@
     <fragment
         android:id="@+id/navigation_news"
         android:name="com.lipssoftware.manchester.united.ui.news.NewsFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="@string/title_news"
+        tools:layout="@layout/fragment_news" />
 
     <fragment
         android:id="@+id/navigation_standings"
         android:name="com.lipssoftware.manchester.united.ui.standings.StandingsFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:label="@string/title_standings"
+        tools:layout="@layout/fragment_standings" />
 
     <fragment
         android:id="@+id/navigation_squad"
         android:name="com.lipssoftware.manchester.united.ui.squad.SquadFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:label="@string/title_squad"
+        tools:layout="@layout/fragment_squad" />
 </navigation>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 05.01.21 12:38
+  ~ Created by Dmitry Lipski on 11.01.21 17:08
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 05.01.21 12:32
+  ~ Last modified 11.01.21 9:13
   -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
@@ -10,16 +10,16 @@
     <item
         android:id="@+id/navigation_news"
         android:icon="@drawable/ic_news_48dp"
-        android:title="@string/title_home" />
+        android:title="@string/title_news" />
 
     <item
         android:id="@+id/navigation_standings"
         android:icon="@drawable/ic_standings_48dp"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_standings" />
 
     <item
         android:id="@+id/navigation_squad"
         android:icon="@drawable/ic_squad_48dp"
-        android:title="@string/title_notifications" />
+        android:title="@string/title_squad" />
 
 </menu>
