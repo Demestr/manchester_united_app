@@ -1,16 +1,31 @@
 /*
- * Created by Dmitry Lipski on 06.01.21 12:54
+ * Created by Dmitry Lipski on 11.01.21 17:05
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 06.01.21 12:54
+ * Last modified 11.01.21 15:40
  */
 
 package com.lipssoftware.manchester.united.data.network
 
-import com.lipssoftware.manchester.united.utils.API_KEY
+import com.lipssoftware.manchester.united.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
+
+object NewsBuilder{
+
+    private const val BASE_URL = "https://www.manutd.com/Feeds/"
+    val newsService: NewsService = getRetrofit().create(NewsService::class.java)
+
+    private fun getRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(SimpleXmlConverterFactory.create())
+            .build()
+    }
+
+}
 
 object StatsBuilder {
 
@@ -20,7 +35,8 @@ object StatsBuilder {
         addInterceptor(
             Interceptor { chain ->
                 val builder = chain.request().newBuilder()
-                builder.header("X-RapidAPI-Key", API_KEY)
+                val apiKey = BuildConfig.API_KEY
+                builder.header("X-RapidAPI-Key", apiKey)
                 return@Interceptor chain.proceed(builder.build())
             }
         )
