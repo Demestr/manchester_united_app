@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 11.01.21 17:08
+  ~ Created by Dmitry Lipski on 12.01.21 16:56
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.21 9:13
+  ~ Last modified 12.01.21 12:05
   -->
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,7 +15,12 @@
         android:id="@+id/navigation_news"
         android:name="com.lipssoftware.manchester.united.ui.news.NewsFragment"
         android:label="@string/title_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_navigation_news_to_fullNewsFragment"
+            app:destination="@id/navigation_fullnews"
+            app:popUpTo="@id/navigation_news" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_standings"
@@ -28,4 +33,13 @@
         android:name="com.lipssoftware.manchester.united.ui.squad.SquadFragment"
         android:label="@string/title_squad"
         tools:layout="@layout/fragment_squad" />
+    <fragment
+        android:id="@+id/navigation_fullnews"
+        android:name="com.lipssoftware.manchester.united.ui.fullnews.FullNewsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_full_news" >
+        <argument
+            android:name="fullNews"
+            app:argType="com.lipssoftware.manchester.united.data.model.news.NewsDomain" />
+    </fragment>
 </navigation>

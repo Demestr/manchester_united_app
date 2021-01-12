@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 11.01.21 17:05
+ * Created by Dmitry Lipski on 12.01.21 16:56
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.21 17:05
+ * Last modified 12.01.21 16:49
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -11,9 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lipssoftware.manchester.united.data.database.ManUtdDatabase
 import com.lipssoftware.manchester.united.data.network.NewsBuilder
 import com.lipssoftware.manchester.united.data.repository.NewsRepository
 import com.lipssoftware.manchester.united.databinding.FragmentNewsBinding
@@ -22,7 +25,7 @@ import com.lipssoftware.manchester.united.utils.Status
 class NewsFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsBinding
-    private val newsViewModel by viewModels<NewsViewModel>{ NewsViewModelFactory(NewsRepository(NewsBuilder.newsService)) }
+    private val newsViewModel by viewModels<NewsViewModel>{ NewsViewModelFactory(NewsRepository(NewsBuilder.newsService, ManUtdDatabase.getInstance(requireContext()).getNewsDao())) }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -36,7 +39,6 @@ class NewsFragment : Fragment() {
         binding.refreshNews.setOnRefreshListener {
             newsViewModel.getNews()
         }
-        newsViewModel.getNews()
         return binding.root
     }
 
@@ -46,23 +48,37 @@ class NewsFragment : Fragment() {
             standings?.let { resource ->
                 when(standings.status){
                     Status.LOADING ->{
-                        binding.listNews.visibility = View.GONE
-                        binding.progressBar.visibility = View.VISIBLE
+                        showUI(false)
                     }
                     Status.SUCCESS -> {
-                        resource.data?.let { binding.listNews.adapter = NewsAdapter(it) }
-                        binding.listNews.visibility = View.VISIBLE
-                        binding.progressBar.visibility = View.GONE
+                        resource.data?.let { list ->
+                            binding.listNews.apply{
+                                adapter = NewsAdapter(list) { news, extras ->
+                                    findNavController()
+                                        .navigate(NewsFragmentDirections
+                                            .actionNavigationNewsToFullNewsFragment(news), extras) }
+                                postponeEnterTransition()
+                                viewTreeObserver.addOnPreDrawListener {
+                                    startPostponedEnterTransition()
+                                    true
+                                }
+                            }
+                        }
+                        showUI(true)
                         binding.refreshNews.isRefreshing = false
                     }
                     Status.ERROR ->{
-                        binding.listNews.visibility = View.VISIBLE
-                        binding.progressBar.visibility = View.GONE
+                        showUI(true)
                         binding.refreshNews.isRefreshing = false
                         Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
         }
+    }
+
+    private fun showUI(showUi: Boolean) {
+        binding.listNews.isVisible = showUi
+        binding.progressBar.isVisible = !showUi
     }
 }

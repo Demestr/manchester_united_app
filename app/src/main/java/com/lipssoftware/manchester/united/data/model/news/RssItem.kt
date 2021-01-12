@@ -1,16 +1,20 @@
 /*
- * Created by Dmitry Lipski on 11.01.21 17:05
+ * Created by Dmitry Lipski on 12.01.21 16:56
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.21 15:49
+ * Last modified 12.01.21 8:38
  */
 
 package com.lipssoftware.manchester.united.data.model.news
 
+import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
 @Root(name = "item", strict = false)
 data class RssItem @JvmOverloads constructor(
+    @field:Attribute(name = "id")
+    @param:Attribute(name = "id")
+    val id: String,
     @field:Element(name = "title", required = false)
     @param:Element(name = "title", required = false)
     val title: String?,

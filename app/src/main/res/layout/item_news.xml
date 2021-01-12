@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 11.01.21 17:06
+  ~ Created by Dmitry Lipski on 12.01.21 16:56
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.21 17:03
+  ~ Last modified 12.01.21 11:22
   -->
 
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,17 +28,8 @@
 
         <TextView
             android:id="@+id/news_title"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/news_title_background"
-            android:ellipsize="end"
-            android:fontFamily="@font/suez_one"
-            android:gravity="center_vertical"
-            android:maxLines="2"
-            android:padding="16dp"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+            style="@style/NewsItemTitleStyle"
+            android:textAppearance="@style/ManUtd.TextAppearance.NewsTitle"
             app:autoSizeMaxTextSize="26sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@id/news_image"
@@ -49,29 +40,16 @@
 
         <TextView
             android:id="@+id/news_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@id/news_image"
             app:layout_constraintTop_toBottomOf="@id/news_image"
-            tools:text="Date" />
+            tools:text="Date"
+            style="@style/NewsItemDateStyle" />
 
         <TextView
             android:id="@+id/news_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/roboto_light"
-            android:lineSpacingExtra="2sp"
+            style="@style/NewsItemBodyStyle"
             android:maxLines="3"
-            android:textSize="22sp"
+            android:textAppearance="@style/ManUtd.TextAppearance.NewsBody"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 11.01.21 12:53
+ * Created by Dmitry Lipski on 12.01.21 16:56
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.21 12:53
+ * Last modified 12.01.21 8:44
  */
 
 package com.lipssoftware.manchester.united.data.database
@@ -11,8 +11,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.lipssoftware.manchester.united.data.model.domain.StandingDomain
+import com.lipssoftware.manchester.united.data.model.news.NewsDomain
 
-@Database(entities = [StandingDomain::class], version = 1, exportSchema = false)
+@Database(entities = [StandingDomain::class, NewsDomain::class], version = 1, exportSchema = false)
 abstract class ManUtdDatabase : RoomDatabase() {
 
     abstract fun getNewsDao(): NewsDao
