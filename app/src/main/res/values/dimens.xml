@@ -1,11 +1,18 @@
 <!--
-  ~ Created by Dmitry Lipski on 05.01.21 12:38
+  ~ Created by Dmitry Lipski on 12.01.21 16:54
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 05.01.21 12:32
+  ~ Last modified 12.01.21 11:22
   -->
 
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="small_horizontal_margin">8dp</dimen>
+    <dimen name="small_vertical_margin">8dp</dimen>
+    <dimen name="normal_horizontal_margin">16dp</dimen>
+    <dimen name="normal_vertical_margin">16dp</dimen>
+    <dimen name="large_horizontal_margin">24dp</dimen>
+    <dimen name="large_vertical_margin">24dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="normal_padding">16dp</dimen>
+    <dimen name="large_padding">24dp</dimen>
 </resources>

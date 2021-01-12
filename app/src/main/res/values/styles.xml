@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Dmitry Lipski on 12.01.21 16:54
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 12.01.21 11:22
+  -->
+
+<resources>
+
+    <style name="ManUtd.TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+
+    <style name="ManUtd.TextAppearance.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+
+    <style name="ManUtd.TextAppearance.NewsBody" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/roboto_light</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ManUtd.TextAppearance.NewsTitle" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/suez_one</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="NewsItemTitleStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@drawable/news_title_background</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">@dimen/normal_padding</item>
+    </style>
+
+    <style name="NewsItemBodyStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/normal_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/small_vertical_margin</item>
+        <item name="android:layout_marginEnd">@dimen/normal_horizontal_margin</item>
+        <item name="android:layout_marginBottom">@dimen/normal_vertical_margin</item>
+    </style>
+
+    <style name="NewsItemDateStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/normal_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/normal_vertical_margin</item>
+        <item name="android:fontFamily">@font/roboto_condensed_regular</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+</resources>
