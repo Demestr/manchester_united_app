@@ -18,6 +18,6 @@ interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertNews(news: List<NewsDomain>)
 
-    @Query("SELECT * FROM news")
+    @Query("SELECT * FROM news ORDER BY pubDate DESC")
     suspend fun getNews(): List<NewsDomain>
 }

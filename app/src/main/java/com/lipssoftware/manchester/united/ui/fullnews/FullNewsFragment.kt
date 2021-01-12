@@ -18,6 +18,7 @@ import androidx.transition.TransitionInflater
 import coil.load
 import com.lipssoftware.manchester.united.data.model.news.NewsDomain
 import com.lipssoftware.manchester.united.databinding.FragmentFullNewsBinding
+import com.lipssoftware.manchester.united.utils.convertDateToString
 import com.lipssoftware.manchester.united.utils.getTextFromHtml
 
 class FullNewsFragment : Fragment() {
@@ -53,7 +54,7 @@ class FullNewsFragment : Fragment() {
             news?.let {
                 binding.txtTitleFullNews.text = it.title
                 binding.imageFullNews.load(it.imageUrl)
-                binding.txtDateFullNews.text = it.pubDate
+                binding.txtDateFullNews.text = convertDateToString(it.pubDate)
                 binding.txtTextFullNews.text =
                     getTextFromHtml(it.text, Html.FROM_HTML_MODE_LEGACY)
             }

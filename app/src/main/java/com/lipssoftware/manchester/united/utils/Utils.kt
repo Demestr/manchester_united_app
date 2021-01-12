@@ -8,10 +8,14 @@ package com.lipssoftware.manchester.united.utils
 
 import android.text.Html
 import androidx.annotation.Keep
+import java.text.SimpleDateFormat
+import java.util.*
 
 const val MAN_UTD_ID = 33
 const val PREMIER_LEAGUE_ID = 39
 const val SEASON = 2020
+const val DATE_PATTERN_IN = "EEE, d MMM yyyy HH:mm:ss z"
+const val DATE_PATTERN_OUT = "EEE, d MMM yyyy HH:mm:ss"
 
 @Keep
 enum class Status {
@@ -32,6 +36,15 @@ data class Resource<out T>(val status: Status, val data: T?, val message: String
         fun <T> loading(data: T?): Resource<T> =
             Resource(status = Status.LOADING, data = data, message = null)
     }
+}
+
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+fun convertStringToDate(date: String): Long {
+    return SimpleDateFormat(DATE_PATTERN_IN, Locale.UK).parse(date).time
+}
+
+fun convertDateToString(date: Long): String {
+    return SimpleDateFormat(DATE_PATTERN_OUT, Locale.UK).format(date)
 }
 
 fun getTextFromHtml(html: String, flag: Int = Html.FROM_HTML_MODE_COMPACT): String {

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.lipssoftware.manchester.united.data.model.news.NewsDomain
 import com.lipssoftware.manchester.united.databinding.ItemNewsBinding
+import com.lipssoftware.manchester.united.utils.convertDateToString
 import com.lipssoftware.manchester.united.utils.getTextFromHtml
 
 class NewsAdapter(
@@ -54,7 +55,7 @@ class NewsAdapter(
 
             item.newsImage.load(newsDomain.imageUrl)
             item.newsTitle.text = newsDomain.title
-            item.newsDate.text = newsDomain.pubDate
+            item.newsDate.text = convertDateToString(newsDomain.pubDate)
             item.newsText.text = getTextFromHtml(newsDomain.text)
             item.root.setOnClickListener { onClick(newsDomain, extras) }
         }

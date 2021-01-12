@@ -19,7 +19,7 @@ data class NewsDomain(
     @PrimaryKey val id: String,
     val title: String?,
     val link: String,
-    val pubDate: String,
+    val pubDate: Long,
     val text: String,
     val imageUrl: String
 ) : Parcelable
