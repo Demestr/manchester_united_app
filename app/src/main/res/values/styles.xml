@@ -35,9 +35,7 @@
     <style name="NewsItemTitleStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
-        <item name="android:background">@drawable/news_title_background</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:padding">@dimen/normal_padding</item>
     </style>
 
     <style name="NewsItemBodyStyle">
@@ -56,5 +54,23 @@
         <item name="android:layout_marginTop">@dimen/normal_vertical_margin</item>
         <item name="android:fontFamily">@font/roboto_condensed_regular</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="StandingsTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ManUtd.TextAppearance.Standings" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/roboto_condensed_regular</item>
+    </style>
+
+    <style name="ManUtd.TextAppearance.StandingsPosition" parent="ManUtd.TextAppearance.Standings">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="ManUtd.TextAppearance.StandingsTeam" parent="ManUtd.TextAppearance.Standings">
+        <item name="fontFamily">@font/roboto_thin</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
     </style>
 </resources>

@@ -45,6 +45,9 @@ class FullNewsFragment : Fragment() {
             ViewCompat.setTransitionName(binding.txtTextFullNews, "body_${it.id}")
             viewModel.setNews(it)
         }
+        binding.backButton.setOnClickListener {
+            activity?.onBackPressed()
+        }
         return binding.root
     }
 

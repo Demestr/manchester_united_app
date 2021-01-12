@@ -10,4 +10,9 @@
     <string name="title_standings">Standings</string>
     <string name="title_squad">Squad</string>
     <string name="content_description_team_logo">Team logo</string>
+    <string name="label_standings_points">Pts</string>
+    <string name="label_standings_goal_difference">GD</string>
+    <string name="label_standings_games_played">P</string>
+    <string name="label_standings_team">Team</string>
+    <string name="label_standings_position">Pos</string>
 </resources>

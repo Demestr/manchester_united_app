@@ -5,62 +5,90 @@
   ~ Last modified 12.01.21 15:32
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layoutDescription="@xml/fragment_full_news_scene"
     tools:context=".ui.fullnews.FullNewsFragment">
 
-    <ScrollView
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="?android:selectableItemBackground"
+        android:elevation="1dp"
+        android:src="@drawable/abc_vector_test" />
+
+    <ImageView
+        android:id="@+id/image_full_news"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <View
+        android:id="@+id/back_box"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/news_title_background"
+        app:layout_constraintBottom_toBottomOf="@id/image_full_news"
+        app:layout_constraintDimensionRatio="w,1:4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_title_full_news"
+        style="@style/NewsItemTitleStyle"
+        android:paddingStart="@dimen/normal_padding"
+        android:paddingTop="2dp"
+        android:paddingEnd="@dimen/normal_horizontal_margin"
+        android:paddingBottom="2dp"
+        android:textAppearance="@style/ManUtd.TextAppearance.NewsTitle"
+        app:autoSizeMaxTextSize="26sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/image_full_news"
+        app:layout_constraintDimensionRatio="w,1:4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Bardsley highlights threat of two reds of possible changed" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/container_full_news"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/image_full_news">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container_full_news"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/image_full_news"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="h,1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <TextView
-                android:id="@+id/txt_title_full_news"
-                style="@style/NewsItemTitleStyle"
-                android:textAppearance="@style/ManUtd.TextAppearance.NewsTitle"
-                app:autoSizeMaxTextSize="26sp"
-                app:autoSizeTextType="uniform"
-                app:layout_constraintBottom_toBottomOf="@id/image_full_news"
-                app:layout_constraintDimensionRatio="w,1:4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/image_full_news"
-                tools:text="Title" />
             <TextView
                 android:id="@+id/txt_date_full_news"
+                style="@style/NewsItemDateStyle"
                 app:layout_constraintStart_toStartOf="@id/image_full_news"
-                app:layout_constraintTop_toBottomOf="@id/image_full_news"
-                style="@style/NewsItemDateStyle" />
+                app:layout_constraintTop_toBottomOf="@id/image_full_news" />
+
             <TextView
                 android:id="@+id/txt_text_full_news"
                 style="@style/NewsItemBodyStyle"
+                android:textAppearance="@style/ManUtd.TextAppearance.NewsBody"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_date_full_news"
-                android:textSize="18sp"
-                android:textAppearance="@style/ManUtd.TextAppearance.NewsBody"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@id/txt_date_full_news" />
+        </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

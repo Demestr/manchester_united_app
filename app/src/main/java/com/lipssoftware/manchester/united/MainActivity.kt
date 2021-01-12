@@ -14,7 +14,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.lipssoftware.manchester.united.data.model.news.NewsDomain
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,10 +31,13 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when(destination.id){
                 R.id.navigation_fullnews -> {
-                    supportActionBar?.title = arguments?.getParcelable<NewsDomain>("fullNews")?.title
+                    supportActionBar?.hide()
                     navView.isVisible = false
                 }
-                else -> navView.isVisible = true
+                else -> {
+                    supportActionBar?.show()
+                    navView.isVisible = true
+                }
             }
         }
     }

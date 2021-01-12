@@ -28,7 +28,9 @@ class StandingsAdapter(private val standings: List<StandingDomain>): RecyclerVie
 
         fun bind(standing: StandingDomain){
             item.textStandingsRank.text = standing.rank.toString()
-            item.imageTeam.load(standing.team.logo)
+            item.imageTeam.load(standing.team.logo){
+                crossfade(true)
+            }
             item.textStandingsTeam.text = standing.team.name
             item.textStandingsGames.text = standing.all.played.toString()
             item.textStandingsGd.text = standing.goalsDiff.toString()

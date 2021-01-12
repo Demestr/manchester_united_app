@@ -53,7 +53,9 @@ class NewsAdapter(
                 item.newsText to "body_${newsDomain.id}",
             )
 
-            item.newsImage.load(newsDomain.imageUrl)
+            item.newsImage.load(newsDomain.imageUrl){
+                crossfade(true)
+            }
             item.newsTitle.text = newsDomain.title
             item.newsDate.text = convertDateToString(newsDomain.pubDate)
             item.newsText.text = getTextFromHtml(newsDomain.text)

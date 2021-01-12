@@ -14,14 +14,13 @@
 
     <TextView
         android:id="@+id/text_standings_rank"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/gl_rank"
         app:layout_constraintStart_toStartOf="@id/gl_rank"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="1" />
+        style="@style/StandingsTextStyle"
+        android:textAppearance="@style/ManUtd.TextAppearance.StandingsPosition"
+        tools:text="1"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_rank"
@@ -32,14 +31,12 @@
 
     <TextView
         android:id="@+id/text_standings_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:singleLine="true"
-        android:textAppearance="@style/ManUtd.TextAppearance.Body1"
+        android:layout_marginStart="@dimen/small_horizontal_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image_team"
         app:layout_constraintTop_toTopOf="parent"
+        style="@style/StandingsTextStyle"
+        android:textAppearance="@style/ManUtd.TextAppearance.StandingsTeam"
         tools:text="Manchester United" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -47,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.12" />
 
     <ImageView
         android:id="@+id/image_team"
@@ -60,12 +57,12 @@
 
     <TextView
         android:id="@+id/text_standings_games"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/gl_games"
         app:layout_constraintStart_toStartOf="@id/gl_games"
         app:layout_constraintTop_toTopOf="parent"
+        style="@style/StandingsTextStyle"
+        android:textAppearance="@style/ManUtd.TextAppearance.Standings"
         tools:text="16" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -77,12 +74,12 @@
 
     <TextView
         android:id="@+id/text_standings_gd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/gl_gd"
         app:layout_constraintStart_toStartOf="@id/gl_gd"
         app:layout_constraintTop_toTopOf="parent"
+        style="@style/StandingsTextStyle"
+        android:textAppearance="@style/ManUtd.TextAppearance.Standings"
         tools:text="9" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -94,12 +91,12 @@
 
     <TextView
         android:id="@+id/text_standings_points"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/gl_points"
         app:layout_constraintStart_toStartOf="@id/gl_points"
         app:layout_constraintTop_toTopOf="parent"
+        style="@style/StandingsTextStyle"
+        android:textAppearance="@style/ManUtd.TextAppearance.Standings"
         tools:text="33" />
 
     <androidx.constraintlayout.widget.Guideline

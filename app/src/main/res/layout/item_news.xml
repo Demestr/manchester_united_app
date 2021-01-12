@@ -29,6 +29,8 @@
         <TextView
             android:id="@+id/news_title"
             style="@style/NewsItemTitleStyle"
+            android:background="@drawable/news_title_background"
+            android:padding="@dimen/normal_padding"
             android:textAppearance="@style/ManUtd.TextAppearance.NewsTitle"
             app:autoSizeMaxTextSize="26sp"
             app:autoSizeTextType="uniform"
