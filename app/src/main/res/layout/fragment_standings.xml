@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 11.01.21 17:08
+  ~ Created by Dmitry Lipski on 13.01.21 10:45
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.21 12:46
+  ~ Last modified 13.01.21 9:11
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +13,7 @@
     tools:context=".ui.standings.StandingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header_row"
+        android:id="@+id/csl_standings_header_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/header_rank"
+            android:id="@+id/tv_standings_header_rank"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_rank"
             app:layout_constraintStart_toStartOf="@id/gl_rank"
@@ -39,7 +39,7 @@
             app:layout_constraintGuide_percent="0.05" />
 
         <TextView
-            android:id="@+id/header_team"
+            android:id="@+id/tv_standings_header_team"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/gl_team"
             app:layout_constraintTop_toTopOf="parent"
@@ -55,7 +55,7 @@
             app:layout_constraintGuide_percent="0.12" />
 
         <TextView
-            android:id="@+id/header_games"
+            android:id="@+id/tv_standings_header_games"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_games"
             app:layout_constraintStart_toStartOf="@id/gl_games"
@@ -72,7 +72,7 @@
             app:layout_constraintGuide_percent="0.75" />
 
         <TextView
-            android:id="@+id/header_gd"
+            android:id="@+id/tv_standings_header_goal_difference"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_gd"
             app:layout_constraintStart_toStartOf="@id/gl_gd"
@@ -89,7 +89,7 @@
             app:layout_constraintGuide_percent="0.85" />
 
         <TextView
-            android:id="@+id/header_points"
+            android:id="@+id/tv_standings_header_points"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_points"
             app:layout_constraintStart_toStartOf="@id/gl_points"
@@ -107,7 +107,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_standings"
+        android:id="@+id/rv_standings_teams_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
@@ -115,10 +115,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_row" />
+        app:layout_constraintTop_toBottomOf="@id/csl_standings_header_row" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/pb_standings"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

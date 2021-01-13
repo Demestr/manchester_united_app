@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 12.01.21 16:56
+  ~ Created by Dmitry Lipski on 13.01.21 10:45
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 12.01.21 15:32
+  ~ Last modified 13.01.21 9:12
   -->
 
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,7 +14,8 @@
     tools:context=".ui.fullnews.FullNewsFragment">
 
     <ImageButton
-        android:id="@+id/back_button"
+        android:alpha="0"
+        android:id="@+id/ib_full_news_back"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:background="?android:selectableItemBackground"
@@ -22,7 +23,7 @@
         android:src="@drawable/abc_vector_test" />
 
     <ImageView
-        android:id="@+id/image_full_news"
+        android:id="@+id/iv_full_news_picture"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
@@ -33,17 +34,17 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <View
-        android:id="@+id/back_box"
+        android:id="@+id/v_full_news_title_back"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/news_title_background"
-        app:layout_constraintBottom_toBottomOf="@id/image_full_news"
+        app:layout_constraintBottom_toBottomOf="@id/iv_full_news_picture"
         app:layout_constraintDimensionRatio="w,1:4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/txt_title_full_news"
+        android:id="@+id/tv_full_news_title"
         style="@style/NewsItemTitleStyle"
         android:paddingStart="@dimen/normal_padding"
         android:paddingTop="2dp"
@@ -52,20 +53,20 @@
         android:textAppearance="@style/ManUtd.TextAppearance.NewsTitle"
         app:autoSizeMaxTextSize="26sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="@id/image_full_news"
+        app:layout_constraintBottom_toBottomOf="@id/iv_full_news_picture"
         app:layout_constraintDimensionRatio="w,1:4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Bardsley highlights threat of two reds of possible changed" />
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/container_full_news"
+        android:id="@+id/nsv_full_news_scroll_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_full_news">
+        app:layout_constraintTop_toBottomOf="@+id/iv_full_news_picture">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,20 +74,20 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txt_date_full_news"
+                android:id="@+id/tv_full_news_date"
                 style="@style/NewsItemDateStyle"
-                app:layout_constraintStart_toStartOf="@id/image_full_news"
-                app:layout_constraintTop_toBottomOf="@id/image_full_news" />
+                app:layout_constraintStart_toStartOf="@id/iv_full_news_picture"
+                app:layout_constraintTop_toBottomOf="@id/iv_full_news_picture" />
 
             <TextView
-                android:id="@+id/txt_text_full_news"
+                android:id="@+id/tv_full_news_body"
                 style="@style/NewsItemBodyStyle"
                 android:textAppearance="@style/ManUtd.TextAppearance.NewsBody"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_date_full_news" />
+                app:layout_constraintTop_toBottomOf="@id/tv_full_news_date" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

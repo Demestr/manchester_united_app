@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 11.01.21 17:08
+  ~ Created by Dmitry Lipski on 13.01.21 10:45
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.21 15:16
+  ~ Last modified 13.01.21 9:11
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +13,7 @@
     tools:context=".ui.news.NewsFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refresh_news"
+        android:id="@+id/srl_news"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,14 +22,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_news"
+        android:id="@+id/rv_news_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/pb_news"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

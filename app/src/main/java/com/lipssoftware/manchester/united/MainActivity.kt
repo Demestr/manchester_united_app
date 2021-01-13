@@ -1,12 +1,13 @@
 /*
- * Created by Dmitry Lipski on 12.01.21 16:56
+ * Created by Dmitry Lipski on 13.01.21 10:45
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.21 16:56
+ * Last modified 13.01.21 10:45
  */
 
 package com.lipssoftware.manchester.united
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
@@ -14,14 +15,17 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.lipssoftware.manchester.united.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
         val navView: BottomNavigationView = findViewById(R.id.bottom_nav_view)
-
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_news, R.id.navigation_standings, R.id.navigation_squad))

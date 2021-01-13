@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 12.01.21 16:56
+ * Created by Dmitry Lipski on 13.01.21 10:45
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.21 15:42
+ * Last modified 13.01.21 8:59
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -42,23 +42,25 @@ class NewsAdapter(
     inner class StandingsViewHolder(private val item: ItemNewsBinding) :
         RecyclerView.ViewHolder(item.root) {
         fun bind(newsDomain: NewsDomain) {
-            ViewCompat.setTransitionName(item.newsTitle, "title_${newsDomain.id}")
-            ViewCompat.setTransitionName(item.newsImage, "image_${newsDomain.id}")
-            ViewCompat.setTransitionName(item.newsDate, "date_${newsDomain.id}")
-            ViewCompat.setTransitionName(item.newsText, "body_${newsDomain.id}")
+            ViewCompat.setTransitionName(item.tvItemNewsTitle, "title_${newsDomain.id}")
+            ViewCompat.setTransitionName(item.ivItemNewsPicture, "image_${newsDomain.id}")
+            ViewCompat.setTransitionName(item.vItemNewsTitleBack, "back_${newsDomain.id}")
+            ViewCompat.setTransitionName(item.tvItemNewsDate, "date_${newsDomain.id}")
+            ViewCompat.setTransitionName(item.tvItemNewsBody, "body_${newsDomain.id}")
             val extras = FragmentNavigatorExtras(
-                item.newsTitle to "title_${newsDomain.id}",
-                item.newsImage to "image_${newsDomain.id}",
-                item.newsDate to "date_${newsDomain.id}",
-                item.newsText to "body_${newsDomain.id}",
+                item.tvItemNewsTitle to "title_${newsDomain.id}",
+                item.ivItemNewsPicture to "image_${newsDomain.id}",
+                item.vItemNewsTitleBack to "back_${newsDomain.id}",
+                item.tvItemNewsDate to "date_${newsDomain.id}",
+                item.tvItemNewsBody to "body_${newsDomain.id}",
             )
 
-            item.newsImage.load(newsDomain.imageUrl){
+            item.ivItemNewsPicture.load(newsDomain.imageUrl){
                 crossfade(true)
             }
-            item.newsTitle.text = newsDomain.title
-            item.newsDate.text = convertDateToString(newsDomain.pubDate)
-            item.newsText.text = getTextFromHtml(newsDomain.text)
+            item.tvItemNewsTitle.text = newsDomain.title
+            item.tvItemNewsDate.text = convertDateToString(newsDomain.pubDate)
+            item.tvItemNewsBody.text = getTextFromHtml(newsDomain.text)
             item.root.setOnClickListener { onClick(newsDomain, extras) }
         }
     }

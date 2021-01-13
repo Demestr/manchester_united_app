@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene 
+<!--
+  ~ Created by Dmitry Lipski on 13.01.21 10:45
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 13.01.21 8:50
+  -->
+
+<MotionScene
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
@@ -9,7 +15,7 @@
         motion:duration="1000">
        <KeyFrameSet>
        </KeyFrameSet>
-        <OnSwipe motion:touchAnchorId="@+id/container_full_news" />
+        <OnSwipe motion:touchAnchorId="@+id/nsv_full_news_scroll_container" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -22,21 +28,21 @@
             android:layout_height="56dp"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/image_full_news" />
+            android:id="@+id/iv_full_news_picture" />
         <Constraint
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintBottom_toBottomOf="@id/back_button"
+            motion:layout_constraintBottom_toBottomOf="@id/ib_full_news_back"
             motion:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/txt_title_full_news"
+            android:id="@+id/tv_full_news_title"
             android:layout_marginStart="56dp"
-            motion:layout_constraintTop_toTopOf="@id/back_button" />
+            motion:layout_constraintTop_toTopOf="@id/ib_full_news_back" />
         <Constraint
             android:layout_height="0dp"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toBottomOf="@+id/back_button"
+            motion:layout_constraintBottom_toBottomOf="@+id/ib_full_news_back"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
-            android:id="@+id/back_box"
-            motion:layout_constraintTop_toTopOf="@+id/back_button" />
+            android:id="@+id/v_full_news_title_back"
+            motion:layout_constraintTop_toTopOf="@+id/ib_full_news_back" />
     </ConstraintSet>
 </MotionScene>

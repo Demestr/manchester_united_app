@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 12.01.21 16:56
+  ~ Created by Dmitry Lipski on 13.01.21 10:45
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 12.01.21 11:22
+  ~ Last modified 13.01.21 8:59
   -->
 
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/news_image"
+            android:id="@+id/iv_item_news_picture"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="h,1:1"
@@ -26,36 +26,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/news_title"
-            style="@style/NewsItemTitleStyle"
+        <View
+            android:id="@+id/v_item_news_title_back"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:background="@drawable/news_title_background"
+            app:layout_constraintBottom_toBottomOf="@id/iv_item_news_picture"
+            app:layout_constraintDimensionRatio="w,1:4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_item_news_title"
+            style="@style/NewsItemTitleStyle"
             android:padding="@dimen/normal_padding"
             android:textAppearance="@style/ManUtd.TextAppearance.NewsTitle"
             app:autoSizeMaxTextSize="26sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toBottomOf="@id/news_image"
+            app:layout_constraintBottom_toBottomOf="@id/iv_item_news_picture"
             app:layout_constraintDimensionRatio="w,1:4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/news_image"
+            app:layout_constraintStart_toStartOf="@id/iv_item_news_picture"
             tools:text="Title" />
 
         <TextView
-            android:id="@+id/news_date"
-            app:layout_constraintStart_toStartOf="@id/news_image"
-            app:layout_constraintTop_toBottomOf="@id/news_image"
+            android:id="@+id/tv_item_news_date"
+            app:layout_constraintStart_toStartOf="@id/iv_item_news_picture"
+            app:layout_constraintTop_toBottomOf="@id/iv_item_news_picture"
             tools:text="Date"
             style="@style/NewsItemDateStyle" />
 
         <TextView
-            android:id="@+id/news_text"
+            android:id="@+id/tv_item_news_body"
             style="@style/NewsItemBodyStyle"
             android:maxLines="3"
             android:textAppearance="@style/ManUtd.TextAppearance.NewsBody"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/news_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_news_date"
             tools:text="The project you’ll work with, Jokes, is an app that shows you a list of jokes. You can pick a joke to create an image with" />
 
 

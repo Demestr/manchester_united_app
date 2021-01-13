@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 11.01.21 12:53
+ * Created by Dmitry Lipski on 13.01.21 10:45
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.21 12:53
+ * Last modified 13.01.21 9:11
  */
 
 package com.lipssoftware.manchester.united.ui.standings
@@ -27,14 +27,14 @@ class StandingsAdapter(private val standings: List<StandingDomain>): RecyclerVie
     class StandingsViewHolder(private val item: ItemStandingsBinding): RecyclerView.ViewHolder(item.root){
 
         fun bind(standing: StandingDomain){
-            item.textStandingsRank.text = standing.rank.toString()
-            item.imageTeam.load(standing.team.logo){
+            item.tvItemStandingsRank.text = standing.rank.toString()
+            item.ivItemStandingsLogo.load(standing.team.logo){
                 crossfade(true)
             }
-            item.textStandingsTeam.text = standing.team.name
-            item.textStandingsGames.text = standing.all.played.toString()
-            item.textStandingsGd.text = standing.goalsDiff.toString()
-            item.textStandingsPoints.text = standing.points.toString()
+            item.tvItemStandingsTeam.text = standing.team.name
+            item.tvItemStandingsGames.text = standing.all.played.toString()
+            item.tvItemStandingsGoalDifference.text = standing.goalsDiff.toString()
+            item.tvItemStandingsPoints.text = standing.points.toString()
         }
     }
 }

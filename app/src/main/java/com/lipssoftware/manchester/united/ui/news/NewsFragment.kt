@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 12.01.21 16:56
+ * Created by Dmitry Lipski on 13.01.21 10:45
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.21 16:49
+ * Last modified 13.01.21 9:11
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -33,10 +33,10 @@ class NewsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         binding = FragmentNewsBinding.inflate(inflater)
-        binding.listNews.apply {
+        binding.rvNewsList.apply {
             layoutManager = LinearLayoutManager(context)
         }
-        binding.refreshNews.setOnRefreshListener {
+        binding.srlNews.setOnRefreshListener {
             newsViewModel.getNews()
         }
         return binding.root
@@ -52,7 +52,7 @@ class NewsFragment : Fragment() {
                     }
                     Status.SUCCESS -> {
                         resource.data?.let { list ->
-                            binding.listNews.apply{
+                            binding.rvNewsList.apply{
                                 adapter = NewsAdapter(list) { news, extras ->
                                     findNavController()
                                         .navigate(NewsFragmentDirections
@@ -64,12 +64,12 @@ class NewsFragment : Fragment() {
                                 }
                             }
                         }
-                        showUI(true)
-                        binding.refreshNews.isRefreshing = false
+                        showUI()
+                        binding.srlNews.isRefreshing = false
                     }
                     Status.ERROR ->{
-                        showUI(true)
-                        binding.refreshNews.isRefreshing = false
+                        showUI()
+                        binding.srlNews.isRefreshing = false
                         Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
@@ -77,8 +77,8 @@ class NewsFragment : Fragment() {
         }
     }
 
-    private fun showUI(showUi: Boolean) {
-        binding.listNews.isVisible = showUi
-        binding.progressBar.isVisible = !showUi
+    private fun showUI(showUi: Boolean = true) {
+        binding.rvNewsList.isVisible = showUi
+        binding.pbNews.isVisible = !showUi
     }
 }

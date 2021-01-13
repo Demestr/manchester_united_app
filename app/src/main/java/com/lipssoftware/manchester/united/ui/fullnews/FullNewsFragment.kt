@@ -6,6 +6,7 @@
 
 package com.lipssoftware.manchester.united.ui.fullnews
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -39,10 +40,11 @@ class FullNewsFragment : Fragment() {
         binding = FragmentFullNewsBinding.inflate(inflater)
         val news = arguments?.getParcelable<NewsDomain>("fullNews")
         news?.let {
-            ViewCompat.setTransitionName(binding.txtTitleFullNews, "title_${it.id}")
-            ViewCompat.setTransitionName(binding.imageFullNews, "image_${it.id}")
-            ViewCompat.setTransitionName(binding.txtDateFullNews, "date_${it.id}")
-            ViewCompat.setTransitionName(binding.txtTextFullNews, "body_${it.id}")
+            ViewCompat.setTransitionName(binding.tvFullNewsTitle, "title_${it.id}")
+            ViewCompat.setTransitionName(binding.ivFullNewsPicture, "image_${it.id}")
+            ViewCompat.setTransitionName(binding.vFullNewsTitleBack, "back_${it.id}")
+            ViewCompat.setTransitionName(binding.tvFullNewsDate, "date_${it.id}")
+            ViewCompat.setTransitionName(binding.tvFullNewsBody, "body_${it.id}")
             viewModel.setNews(it)
         }
         binding.backButton.setOnClickListener {
@@ -55,10 +57,10 @@ class FullNewsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.news.observe(viewLifecycleOwner) { news ->
             news?.let {
-                binding.txtTitleFullNews.text = it.title
-                binding.imageFullNews.load(it.imageUrl)
-                binding.txtDateFullNews.text = convertDateToString(it.pubDate)
-                binding.txtTextFullNews.text =
+                binding.tvFullNewsTitle.text = it.title
+                binding.ivFullNewsPicture.load(it.imageUrl)
+                binding.tvFullNewsDate.text = convertDateToString(it.pubDate)
+                binding.tvFullNewsBody.text =
                     getTextFromHtml(it.text, Html.FROM_HTML_MODE_LEGACY)
             }
         }

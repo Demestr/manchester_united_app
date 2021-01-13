@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 11.01.21 12:53
+ * Created by Dmitry Lipski on 13.01.21 10:45
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.21 11:26
+ * Last modified 13.01.21 9:11
  */
 
 package com.lipssoftware.manchester.united.ui.standings
@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -32,7 +33,7 @@ class StandingsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         binding = FragmentStandingsBinding.inflate(inflater)
-        binding.listStandings.apply {
+        binding.rvStandingsTeamsList.apply {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             setHasFixedSize(true)
@@ -46,21 +47,23 @@ class StandingsFragment : Fragment() {
             standings?.let { resource ->
                 when(standings.status){
                     Status.LOADING ->{
-                        binding.listStandings.visibility = View.GONE
-                        binding.progressBar.visibility = View.VISIBLE
+                        showUI(false)
                     }
                     Status.SUCCESS -> {
-                        resource.data?.let { binding.listStandings.adapter = StandingsAdapter(it) }
-                        binding.listStandings.visibility = View.VISIBLE
-                        binding.progressBar.visibility = View.GONE
+                        resource.data?.let { binding.rvStandingsTeamsList.adapter = StandingsAdapter(it) }
+                        showUI()
                     }
                     Status.ERROR ->{
-                        binding.listStandings.visibility = View.VISIBLE
-                        binding.progressBar.visibility = View.GONE
+                        showUI()
                         Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
         }
+    }
+
+    private fun showUI(showUi: Boolean = true) {
+        binding.rvStandingsTeamsList.isVisible = showUi
+        binding.pbStandings.isVisible = !showUi
     }
 }

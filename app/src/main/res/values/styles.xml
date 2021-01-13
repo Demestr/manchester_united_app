@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 12.01.21 16:54
+  ~ Created by Dmitry Lipski on 13.01.21 10:45
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 12.01.21 11:22
+  ~ Last modified 13.01.21 10:34
   -->
 
 <resources>
@@ -63,6 +63,7 @@
 
     <style name="ManUtd.TextAppearance.Standings" parent="TextAppearance.MaterialComponents.Body2">
         <item name="fontFamily">@font/roboto_condensed_regular</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="ManUtd.TextAppearance.StandingsPosition" parent="ManUtd.TextAppearance.Standings">
