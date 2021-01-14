@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 12.01.21 16:56
+ * Created by Dmitry Lipski on 14.01.21 15:00
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.21 16:56
+ * Last modified 13.01.21 10:45
  */
 
 package com.lipssoftware.manchester.united.ui.fullnews
@@ -47,7 +47,11 @@ class FullNewsFragment : Fragment() {
             ViewCompat.setTransitionName(binding.tvFullNewsBody, "body_${it.id}")
             viewModel.setNews(it)
         }
-        binding.backButton.setOnClickListener {
+        ObjectAnimator.ofFloat(binding.ibFullNewsBack, "alpha", 1f).apply {
+            duration = 1000
+            start()
+        }
+        binding.ibFullNewsBack.setOnClickListener {
             activity?.onBackPressed()
         }
         return binding.root

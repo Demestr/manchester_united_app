@@ -1,0 +1,484 @@
+{
+  "players": [
+    {
+      "name": "David de Gea",
+      "firstname": "David",
+      "lastname": "David de Gea Quintana",
+      "birth": {
+        "date": "1990-11-07",
+        "place": "Madrid",
+        "country": "Spain"
+      },
+      "nationality": "Spain",
+      "position": "goalkeeper",
+      "height": 192,
+      "weight": 78,
+      "photo": "de_gea.png"
+    },
+    {
+      "name": "Dean Henderson",
+      "firstname": "Dean",
+      "lastname": "Henderson",
+      "birth": {
+        "date": "1997-03-12",
+        "place": "Whitehaven",
+        "country": "England"
+      },
+      "nationality": "England",
+      "position": "goalkeeper",
+      "height": 188,
+      "weight": 85,
+      "photo": "dean_henderson.png"
+    },
+    {
+      "name": "Lee Grant",
+      "firstname": "Lee",
+      "lastname": "Grant",
+      "birth": {
+        "date": "1983-01-27",
+        "place": "Hemel Hempstead",
+        "country": "England"
+      },
+      "nationality": "England",
+      "position": "goalkeeper",
+      "height": 193,
+      "weight": 83,
+      "photo": "lee_grant.png"
+    },
+    {
+      "name": "Sergio Romero",
+      "firstname": "Sergio Germán",
+      "lastname": "Romero",
+      "birth": {
+        "date": "1987-02-22",
+        "place": "Bernardo de Irigoyen",
+        "country": "Argentina"
+      },
+      "nationality": "Argentina",
+      "position": "goalkeeper",
+      "height": 192,
+      "weight": 87,
+      "photo": "sergio_romero.png"
+    },
+    {
+      "name": "Harry Maguire",
+      "firstname": "Harry",
+      "lastname": "Maguire",
+      "birth": {
+        "date": "1993-03-05",
+        "place": "Sheffield",
+        "country": "England"
+      },
+      "nationality": "England",
+      "position": "defender",
+      "height": 194,
+      "weight": 100,
+      "photo": "harry_maguire.png"
+    },
+    {
+      "name": "Aaron Wan-Bissaka",
+      "firstname": "Aaron",
+      "lastname": "Wan-Bissaka",
+      "birth": {
+        "date": "1997-11-26",
+        "place": "London",
+        "country": "England"
+      },
+      "nationality": "England",
+      "position": "defender",
+      "height": 183,
+      "weight": 72,
+      "photo": "aaron_wan-bissaka.png"
+    },
+    {
+      "name": "Axel Tuanzebe",
+      "firstname": "Axel",
+      "lastname": "Tuanzebe",
+      "birth": {
+        "date": "1997-11-14",
+        "place": "Bunia",
+        "country": "Congo DR"
+      },
+      "nationality": "England",
+      "position": "defender",
+      "height": 182,
+      "weight": 75,
+      "photo": "axel_tuanzebe.png"
+    },
+    {
+      "name": "Alex Telles",
+      "firstname": "Alex Nicolao",
+      "lastname": "Telles",
+      "birth": {
+        "date": "1992-12-15",
+        "place": "Caxias do Sul",
+        "country": "Brazil"
+      },
+      "nationality": "Brazil",
+      "position": "defender",
+      "height": 181,
+      "weight": 67,
+      "photo": "alex_telles.png"
+    },
+    {
+      "name": "Brandon Williams",
+      "firstname": "Brandon",
+      "lastname": "Williams",
+      "birth": {
+        "date": "2000-09-03",
+        "place": "Manchester",
+        "country": "England"
+      },
+      "nationality": "England",
+      "position": "defender",
+      "height": 171,
+      "weight": 63,
+      "photo": "brandon_williams.png"
+    },
+    {
+      "name": "Eric Bailly",
+      "firstname": "Eric Bertrand",
+      "lastname": "Bailly",
+      "birth": {
+        "date": "1994-04-12",
+        "place": "Bingerville",
+        "country": "Côte d'Ivoire"
+      },
+      "nationality": "Côte d'Ivoire",
+      "position": "defender",
+      "height": 187,
+      "weight": 77,
+      "photo": "eric_bailly.png"
+    },
+    {
+      "name": "Diogo Dalot",
+      "firstname": "José Diogo",
+      "lastname": "Dalot Teixeira",
+      "birth": {
+        "date": "1999-03-18",
+        "place": "Braga",
+        "country": "Portugal"
+      },
+      "nationality": "Portugal",
+      "position": "defender",
+      "height": 183,
+      "weight": 76,
+      "photo": "diogo_dalot.png"
+    },
+    {
+      "name": "Phil Jones",
+      "firstname": "Phil",
+      "lastname": "Jones",
+      "birth": {
+        "date": "1992-02-21",
+        "place": "Preston",
+        "country": "England"
+      },
+      "nationality": "England",
+      "position": "defender",
+      "height": 180,
+      "weight": 71,
+      "photo": "phil_jones.png"
+    },
+    {
+      "name": "Victor Lindelöf",
+      "firstname": "Victor",
+      "lastname": "Nilsson Lindelöf",
+      "birth": {
+        "date": "1994-07-17",
+        "place": "Västerås",
+        "country": "Sweden"
+      },
+      "nationality": "Sweden",
+      "position": "defender",
+      "height": 187,
+      "weight": 80,
+      "photo": "victor_lindelof.png"
+    },
+    {
+      "name": "Marcos Rojo",
+      "firstname": "Faustino Marcos Alberto",
+      "lastname": "Rojo",
+      "birth": {
+        "date": "1990-03-20",
+        "place": "La Plata",
+        "country": "Argentina"
+      },
+      "nationality": "Argentina",
+      "position": "defender",
+      "height": 187,
+      "weight": 85,
+      "photo": "marcos_rojo.png"
+    },
+    {
+      "name": "Luke Shaw",
+      "firstname": "Luke",
+      "lastname": "Shaw",
+      "birth": {
+        "date": "1995-07-12",
+        "place": "Kingston upon Thames",
+        "country": "England"
+      },
+      "nationality": "England",
+      "position": "defender",
+      "height": 185,
+      "weight": 75,
+      "photo": "luke_shaw.png"
+    },
+    {
+      "name": "Donny van de Beek",
+      "firstname": "Donny",
+      "lastname": "van de Beek",
+      "birth": {
+        "date": "1997-04-18",
+        "place": "Nijkerkerveen",
+        "country": "Netherlands"
+      },
+      "nationality": "Netherlands",
+      "position": "midfielder",
+      "height": 184,
+      "weight": 76,
+      "photo": "donny_van_de_beek.png"
+    },
+    {
+      "name": "James Garner",
+      "firstname": "James",
+      "lastname": "Garner",
+      "birth": {
+        "date": "2001-03-13",
+        "place": "Birkenhead",
+        "country": "England"
+      },
+      "nationality": "England",
+      "position": "midfielder",
+      "height": 182,
+      "weight": 74,
+      "photo": "james_garner.png"
+    },
+    {
+      "name": "Andreas Pereira",
+      "firstname": "Andreas",
+      "lastname": "Hoelgebaum Pereira",
+      "birth": {
+        "date": "1996-01-01",
+        "place": "Duffel",
+        "country": "Belgium"
+      },
+      "nationality": "Brazil",
+      "position": "midfielder",
+      "height": 178,
+      "weight": 71,
+      "photo": "andreas_pereira.png"
+    },
+    {
+      "name": "Jesse Lingard",
+      "firstname": "Jesse",
+      "lastname": "Lingard",
+      "birth": {
+        "date": "1992-12-15",
+        "place": "Warrington",
+        "country": "England"
+      },
+      "nationality": "England",
+      "position": "midfielder",
+      "height": 175,
+      "weight": 62,
+      "photo": "jesse_lingard.png"
+    },
+    {
+      "name": "Juan Mata",
+      "firstname": "Juan Manuel",
+      "lastname": "Mata García",
+      "birth": {
+        "date": "1988-04-28",
+        "place": "Burgos",
+        "country": "Spain"
+      },
+      "nationality": "Spain",
+      "position": "midfielder",
+      "height": 170,
+      "weight": 63,
+      "photo": "juan_mata.png"
+    },
+    {
+      "name": "Nemanja Matić",
+      "firstname": "Nemanja",
+      "lastname": "Matić",
+      "birth": {
+        "date": "1988-08-01",
+        "place": "Šabac",
+        "country": "Serbia"
+      },
+      "nationality": "Serbia",
+      "position": "midfielder",
+      "height": 194,
+      "weight": 85,
+      "photo": "nemanja_matic.png"
+    },
+    {
+      "name": "Scott McTominay",
+      "firstname": "Scott",
+      "lastname": "McTominay",
+      "birth": {
+        "date": "1996-12-08",
+        "place": "Lancaster",
+        "country": "England"
+      },
+      "nationality": "Scotland",
+      "position": "midfielder",
+      "height": 193,
+      "weight": 88,
+      "photo": "scott_mctominay.png"
+    },
+    {
+      "name": "Paul Pogba",
+      "firstname": "Paul",
+      "lastname": "Pogba",
+      "birth": {
+        "date": "1993-03-15",
+        "place": "Lagny-sur-Marne",
+        "country": "France"
+      },
+      "nationality": "France",
+      "position": "midfielder",
+      "height": 191,
+      "weight": 84,
+      "photo": "paul_pogba.png"
+    },
+    {
+      "name": "Fred",
+      "firstname": "Frederico",
+      "lastname": "Rodrigues Santos",
+      "birth": {
+        "date": "1993-03-05",
+        "place": "Belo Horizonte",
+        "country": "Brazil"
+      },
+      "nationality": "Brazil",
+      "position": "midfielder",
+      "height": 169,
+      "weight": 64,
+      "photo": "fred.png"
+    },
+    {
+      "name": "Bruno Fernandes",
+      "firstname": "Bruno Miguel",
+      "lastname": "Borges Fernandes",
+      "birth": {
+        "date": "1994-09-08",
+        "place": "Maia",
+        "country": "Portugal"
+      },
+      "nationality": "Portugal",
+      "position": "midfielder",
+      "height": 173,
+      "weight": 80,
+      "photo": "bruno_fernandes.png"
+    },
+    {
+      "name": "Daniel James",
+      "firstname": "Daniel",
+      "lastname": "James",
+      "birth": {
+        "date": "1997-11-10",
+        "place": "Kingston upon Hull",
+        "country": "England"
+      },
+      "nationality": "Wales",
+      "position": "midfielder",
+      "height": 170,
+      "weight": 76,
+      "photo": "daniel_james.png"
+    },
+    {
+      "name": "Facundo Pellistri",
+      "firstname": "Facundo",
+      "lastname": "Pellistri Rebollo",
+      "birth": {
+        "date": "2001-12-20",
+        "place": "Montevideo",
+        "country": "Uruguay"
+      },
+      "nationality": "Uruguay",
+      "position": "midfielder",
+      "height": 174,
+      "weight": 65,
+      "photo": "facundo_pellistri.png"
+    },
+    {
+      "name": "Amad Diallo Traoré",
+      "firstname": "Amad Diallo",
+      "lastname": "Traoré",
+      "birth": {
+        "date": "2002-07-11",
+        "place": "Abidjan",
+        "country": "Côte d'Ivoire"
+      },
+      "nationality": "Côte d'Ivoire",
+      "position": "midfielder",
+      "height": 180,
+      "weight": 70,
+      "photo": "amad_diallo.png"
+    },
+    {
+      "name": "Anthony Martial",
+      "firstname": "Anthony",
+      "lastname": "Martial",
+      "birth": {
+        "date": "1995-12-05",
+        "place": "Massy",
+        "country": "France"
+      },
+      "nationality": "France",
+      "position": "forward",
+      "height": 181,
+      "weight": 76,
+      "photo": "anthony_martial.png"
+    },
+    {
+      "name": "Marcus Rashford",
+      "firstname": "Marcus",
+      "lastname": "Rashford",
+      "birth": {
+        "date": "1997-10-31",
+        "place": "Manchester",
+        "country": "England"
+      },
+      "nationality": "England",
+      "position": "forward",
+      "height": 180,
+      "weight": 70,
+      "photo": "marcus_rashford.png"
+    },
+    {
+      "name": "Mason Greenwood",
+      "firstname": "Mason",
+      "lastname": "Greenwood",
+      "birth": {
+        "date": "2001-10-01",
+        "place": "Bradford",
+        "country": "England"
+      },
+      "nationality": "England",
+      "position": "forward",
+      "height": 181,
+      "weight": 70,
+      "photo": "mason_greenwood.png"
+    },
+    {
+      "name": "Edinson Cavani",
+      "firstname": "Edinson Roberto",
+      "lastname": "Cavani Gómez",
+      "birth": {
+        "date": "1987-02-14",
+        "place": "Salto",
+        "country": "Uruguay"
+      },
+      "nationality": "Uruguay",
+      "position": "forward",
+      "height": 184,
+      "weight": 71,
+      "photo": "edinson_cavani.png"
+    }
+  ]
+}

@@ -1,12 +1,14 @@
 /*
- * Created by Dmitry Lipski on 12.01.21 16:56
+ * Created by Dmitry Lipski on 14.01.21 15:00
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.21 11:36
+ * Last modified 13.01.21 12:45
  */
 
 package com.lipssoftware.manchester.united.utils
 
+import android.os.Build
 import android.text.Html
+import android.text.Spanned
 import androidx.annotation.Keep
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,11 +49,9 @@ fun convertDateToString(date: Long): String {
     return SimpleDateFormat(DATE_PATTERN_OUT, Locale.UK).format(date)
 }
 
-fun getTextFromHtml(html: String, flag: Int = Html.FROM_HTML_MODE_COMPACT): String {
-    val text =
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N)
-            Html.fromHtml(html, flag)
-        else
-            Html.fromHtml(html)
-    return text.toString()
+fun getTextFromHtml(html: String, flag: Int = Html.FROM_HTML_MODE_COMPACT): Spanned? {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+        Html.fromHtml(html, flag)
+    else
+        Html.fromHtml(html)
 }

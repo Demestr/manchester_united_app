@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 11.01.21 17:08
+ * Created by Dmitry Lipski on 14.01.21 15:00
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 06.01.21 11:28
+ * Last modified 14.01.21 15:00
  */
 
 package com.lipssoftware.manchester.united.ui.squad
@@ -10,26 +10,64 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import com.lipssoftware.manchester.united.R
+import androidx.recyclerview.widget.GridLayoutManager
+import com.lipssoftware.manchester.united.databinding.FragmentSquadBinding
+import com.lipssoftware.manchester.united.utils.Status
 
 class SquadFragment : Fragment() {
 
-    private val squadViewModel by viewModels<SquadViewModel>()
+    private lateinit var binding: FragmentSquadBinding
+    private val squadViewModel by viewModels<SquadViewModel>{ SquadViewModelFactory(requireContext()) }
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_squad, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        squadViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    ): View {
+        binding = FragmentSquadBinding.inflate(inflater)
+        binding.rvSquadList.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            setHasFixedSize(true)
+            addItemDecoration(
+                SquadAdapter.PlayerItemDecoration(
+                    (8 * resources.displayMetrics.density).toInt(),
+                    2,
+                    true
+                )
+            )
+        }
+        squadViewModel.getSquad()
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        squadViewModel.players.observe(viewLifecycleOwner){ squad ->
+            squad?.let { resource ->
+                when(squad.status){
+                    Status.LOADING ->{
+                        showUI(false)
+                    }
+                    Status.SUCCESS -> {
+                        resource.data?.let { binding.rvSquadList.adapter = SquadAdapter(it) }
+                        showUI()
+                    }
+                    Status.ERROR ->{
+                        showUI()
+                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+        }
+    }
+
+    private fun showUI(showUi: Boolean = true) {
+        binding.rvSquadList.isVisible = showUi
+        binding.pbSquad.isVisible = !showUi
     }
 }
