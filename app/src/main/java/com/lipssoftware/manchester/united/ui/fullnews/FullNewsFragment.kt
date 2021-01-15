@@ -1,12 +1,13 @@
 /*
- * Created by Dmitry Lipski on 14.01.21 15:00
+ * Created by Dmitry Lipski on 15.01.21 17:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.01.21 10:45
+ * Last modified 15.01.21 17:09
  */
 
 package com.lipssoftware.manchester.united.ui.fullnews
 
 import android.animation.ObjectAnimator
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -15,8 +16,9 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.transition.TransitionInflater
 import coil.load
+import com.google.android.material.transition.MaterialContainerTransform
+import com.lipssoftware.manchester.united.R
 import com.lipssoftware.manchester.united.data.model.news.NewsDomain
 import com.lipssoftware.manchester.united.databinding.FragmentFullNewsBinding
 import com.lipssoftware.manchester.united.utils.convertDateToString
@@ -30,7 +32,11 @@ class FullNewsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.supportPostponeEnterTransition()
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.nav_host_fragment
+            duration = 350
+            scrimColor = Color.TRANSPARENT
+        }
     }
 
     override fun onCreateView(

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 11.01.21 9:15
+  ~ Created by Dmitry Lipski on 15.01.21 17:10
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 06.01.21 13:33
+  ~ Last modified 15.01.21 14:51
   -->
 
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/iceberg</item>
+        <item>@font/rationale</item>
         <item>@font/roboto_condensed_regular</item>
         <item>@font/roboto_light</item>
         <item>@font/roboto_thin</item>

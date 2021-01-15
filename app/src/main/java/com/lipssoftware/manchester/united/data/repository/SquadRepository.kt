@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 14.01.21 15:00
+ * Created by Dmitry Lipski on 15.01.21 17:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.21 14:50
+ * Last modified 14.01.21 16:18
  */
 
 package com.lipssoftware.manchester.united.data.repository
@@ -18,19 +18,21 @@ class SquadRepository(val context: Context) : Repository {
     fun getSquad(): List<Player> {
         val gson = Gson()
         val jsonFile = context.assets.open("squad.json").bufferedReader().use { it.readText() }
-        return gson.fromJson(jsonFile, Squad::class.java).players.map {
+        return gson.fromJson(jsonFile, Squad::class.java).players.map { player ->
             Player(
-                it.name,
-                it.firstname,
-                it.lastname,
-                it.birth,
-                it.nationality,
-                it.position,
-                it.height,
-                it.weight,
-                it.photo,
-                BitmapFactory.decodeStream(context.assets.open("players_photos/${it.photo}")).scale(400, 680)
-            )
+                player.name,
+                player.firstname,
+                player.lastname,
+                player.birth,
+                player.nationality,
+                player.position,
+                player.height,
+                player.weight,
+                player.photo
+            ).also {
+                it.thumbnail = BitmapFactory.decodeStream(context.assets.open("players_photos/${it.photo}"))
+                    .scale(400, 680)
+            }
         }
     }
 }

@@ -1,0 +1,10 @@
+<!--
+  ~ Created by Dmitry Lipski on 15.01.21 17:10
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 15.01.21 16:46
+  -->
+
+<vector android:height="200dp" android:viewportHeight="1693.32"
+    android:viewportWidth="338.66" android:width="39.999527dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#FEFEFE" android:fillType="nonZero" android:pathData="M338.66,0l0,1693.33 -200.35,0 0,-909.1c0,-131.3 -1.53,-210.51 -4.41,-236.91 -3.05,-26.4 -11.19,-46.74 -24.58,-60.3 -13.39,-13.56 -43.22,-20.33 -89.5,-20.33l-19.83,0 0,-196.6c96.96,-43.52 170.52,-133.79 220.7,-270.09l117.97,0z"/>
+</vector>

@@ -1,13 +1,17 @@
 /*
- * Created by Dmitry Lipski on 14.01.21 15:00
+ * Created by Dmitry Lipski on 15.01.21 17:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.21 14:40
+ * Last modified 14.01.21 15:44
  */
 
 package com.lipssoftware.manchester.united.data.model.players
 
 import android.graphics.Bitmap
+import android.os.Parcelable
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Player(
     val name: String,
     val firstname: String,
@@ -17,6 +21,6 @@ data class Player(
     val position: String,
     val height: Int,
     val weight: Int,
-    val photo: String,
-    val thumbnail: Bitmap
-)
+    val photo: String) : Parcelable {
+    @IgnoredOnParcel var thumbnail: Bitmap? = null
+}

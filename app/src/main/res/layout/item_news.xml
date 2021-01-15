@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 13.01.21 10:45
+  ~ Created by Dmitry Lipski on 15.01.21 17:10
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 13.01.21 8:59
+  ~ Last modified 15.01.21 16:11
   -->
 
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_item_news"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
@@ -40,7 +42,6 @@
             android:id="@+id/tv_item_news_title"
             style="@style/NewsItemTitleStyle"
             android:padding="@dimen/normal_padding"
-            android:textAppearance="@style/ManUtd.TextAppearance.NewsTitle"
             app:autoSizeMaxTextSize="26sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@id/iv_item_news_picture"

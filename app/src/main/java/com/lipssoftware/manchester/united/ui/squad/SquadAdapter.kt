@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 14.01.21 15:00
+ * Created by Dmitry Lipski on 15.01.21 17:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.21 14:40
+ * Last modified 15.01.21 17:09
  */
 
 package com.lipssoftware.manchester.united.ui.squad
@@ -10,13 +10,15 @@ import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.drawable.toDrawable
+import androidx.core.view.ViewCompat
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.lipssoftware.manchester.united.data.model.players.Player
 import com.lipssoftware.manchester.united.databinding.ItemPlayerBinding
 
 
-class SquadAdapter(private val players: List<Player>) :
+class SquadAdapter(private val players: List<Player>, val onClick: (player: Player, extras: FragmentNavigator.Extras) -> Unit) :
     RecyclerView.Adapter<SquadAdapter.SquadViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SquadViewHolder =
@@ -38,8 +40,13 @@ class SquadAdapter(private val players: List<Player>) :
         RecyclerView.ViewHolder(item.root) {
 
         fun bind(player: Player) {
+            ViewCompat.setTransitionName(item.cslItemPlayer, player.birth.date)
             item.tvItemPlayerName.text = player.name
-            item.ivItemPlayerPhoto.setImageDrawable(player.thumbnail.toDrawable(item.root.resources))
+            item.ivItemPlayerPhoto.setImageBitmap(player.thumbnail)
+            val extras = FragmentNavigatorExtras(
+                item.cslItemPlayer to player.birth.date,
+            )
+            item.cardItemPlayer.setOnClickListener { onClick(player, extras) }
         }
     }
 

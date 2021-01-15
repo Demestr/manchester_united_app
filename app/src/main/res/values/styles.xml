@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 13.01.21 10:45
+  ~ Created by Dmitry Lipski on 15.01.21 17:10
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 13.01.21 10:34
+  ~ Last modified 15.01.21 16:26
   -->
 
 <resources>
@@ -36,6 +36,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:textAppearance">@style/ManUtd.TextAppearance.NewsTitle</item>
     </style>
 
     <style name="NewsItemBodyStyle">
@@ -73,5 +74,21 @@
         <item name="fontFamily">@font/roboto_thin</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ProfileLabelsStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/small_vertical_margin</item>
+        <item name="android:layout_marginTop">@dimen/small_vertical_margin</item>
+        <item name="fontFamily">@font/rationale</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ProfileValuesStyle" parent="NewsItemTitleStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/normal_horizontal_margin</item>
+        <item name="android:fontFamily">@font/iceberg</item>
+        <item name="android:textSize">18sp</item>
     </style>
 </resources>

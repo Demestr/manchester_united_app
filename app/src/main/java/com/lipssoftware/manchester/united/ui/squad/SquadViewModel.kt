@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 14.01.21 15:00
+ * Created by Dmitry Lipski on 15.01.21 17:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.21 14:56
+ * Last modified 14.01.21 16:21
  */
 
 package com.lipssoftware.manchester.united.ui.squad
@@ -23,7 +23,11 @@ class SquadViewModel(val context: Context) : ViewModel() {
     val players: LiveData<Resource<List<Player>>>
         get() = _players
 
-    fun getSquad() {
+    init {
+        getSquad()
+    }
+
+    private fun getSquad() {
         viewModelScope.launch(Dispatchers.Default) {
             _players.postValue(Resource.loading(data = null))
             try{

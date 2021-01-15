@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 13.01.21 10:45
+  ~ Created by Dmitry Lipski on 15.01.21 17:10
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 13.01.21 9:12
+  ~ Last modified 15.01.21 16:11
   -->
 
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ml_full_news_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/fragment_full_news_scene"
@@ -50,7 +52,6 @@
         android:paddingTop="2dp"
         android:paddingEnd="@dimen/normal_horizontal_margin"
         android:paddingBottom="2dp"
-        android:textAppearance="@style/ManUtd.TextAppearance.NewsTitle"
         app:autoSizeMaxTextSize="26sp"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@id/iv_full_news_picture"
