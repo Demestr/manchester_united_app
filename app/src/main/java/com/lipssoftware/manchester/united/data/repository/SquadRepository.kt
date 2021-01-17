@@ -26,6 +26,7 @@ class SquadRepository(val context: Context) : Repository {
                 player.birth,
                 player.nationality,
                 player.position,
+                player.number,
                 player.height,
                 player.weight,
                 player.photo

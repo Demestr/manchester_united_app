@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.transition.MaterialElevationScale
+import com.lipssoftware.manchester.united.R
 import com.lipssoftware.manchester.united.databinding.FragmentSquadBinding
 import com.lipssoftware.manchester.united.utils.Status
 
@@ -45,10 +47,14 @@ class SquadFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        postponeEnterTransition()
-        view?.doOnPreDraw { startPostponedEnterTransition() }
         squadViewModel.players.observe(viewLifecycleOwner) { squad ->
             squad?.let { resource ->
                 when (squad.status) {
@@ -58,6 +64,12 @@ class SquadFragment : Fragment() {
                     Status.SUCCESS -> {
                         resource.data?.let { list ->
                             binding.rvSquadList.adapter = SquadAdapter(list) { profile, extras ->
+                                exitTransition = MaterialElevationScale(false).apply {
+                                    duration = resources.getInteger(R.integer.normal_animation_duration).toLong()
+                                }
+                                reenterTransition = MaterialElevationScale(true).apply {
+                                    duration = resources.getInteger(R.integer.normal_animation_duration).toLong()
+                                }
                                 findNavController().navigate(
                                     SquadFragmentDirections.actionNavigationSquadToNavigationPlayerProfile(
                                         profile

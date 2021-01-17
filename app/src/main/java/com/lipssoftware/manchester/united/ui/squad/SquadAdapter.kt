@@ -40,11 +40,11 @@ class SquadAdapter(private val players: List<Player>, val onClick: (player: Play
         RecyclerView.ViewHolder(item.root) {
 
         fun bind(player: Player) {
-            ViewCompat.setTransitionName(item.cslItemPlayer, player.birth.date)
+            ViewCompat.setTransitionName(item.cslItemPlayer, "tn_${player.number}")
             item.tvItemPlayerName.text = player.name
             item.ivItemPlayerPhoto.setImageBitmap(player.thumbnail)
             val extras = FragmentNavigatorExtras(
-                item.cslItemPlayer to player.birth.date,
+                item.cslItemPlayer to "tn_${player.number}",
             )
             item.cardItemPlayer.setOnClickListener { onClick(player, extras) }
         }

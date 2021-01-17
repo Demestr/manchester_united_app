@@ -11,11 +11,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.transition.MaterialSharedAxis
+import com.lipssoftware.manchester.united.R
 import com.lipssoftware.manchester.united.data.database.ManUtdDatabase
 import com.lipssoftware.manchester.united.data.network.NewsBuilder
 import com.lipssoftware.manchester.united.data.repository.NewsRepository
@@ -25,12 +28,19 @@ import com.lipssoftware.manchester.united.utils.Status
 class NewsFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsBinding
-    private val newsViewModel by viewModels<NewsViewModel>{ NewsViewModelFactory(NewsRepository(NewsBuilder.newsService, ManUtdDatabase.getInstance(requireContext()).getNewsDao())) }
+    private val newsViewModel by viewModels<NewsViewModel> {
+        NewsViewModelFactory(
+            NewsRepository(
+                NewsBuilder.newsService,
+                ManUtdDatabase.getInstance(requireContext()).getNewsDao()
+            )
+        )
+    }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         binding = FragmentNewsBinding.inflate(inflater)
         binding.rvNewsList.apply {
@@ -42,32 +52,39 @@ class NewsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        newsViewModel.news.observe(viewLifecycleOwner){ standings ->
+        newsViewModel.news.observe(viewLifecycleOwner) { standings ->
             standings?.let { resource ->
-                when(standings.status){
-                    Status.LOADING ->{
+                when (standings.status) {
+                    Status.LOADING -> {
                         showUI(false)
                     }
                     Status.SUCCESS -> {
                         resource.data?.let { list ->
-                            binding.rvNewsList.apply{
-                                adapter = NewsAdapter(list) { news, extras ->
-                                    findNavController()
-                                        .navigate(NewsFragmentDirections
-                                            .actionNavigationNewsToFullNewsFragment(news), extras) }
-                                postponeEnterTransition()
-                                viewTreeObserver.addOnPreDrawListener {
-                                    startPostponedEnterTransition()
-                                    true
+                            binding.rvNewsList.adapter = NewsAdapter(list) { news, extras ->
+                                    exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+                                        duration = resources.getInteger(R.integer.large_animation_duration).toLong()
+                                    }
+                                    reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+                                        duration = resources.getInteger(R.integer.large_animation_duration).toLong()
+                                    }
+                                    findNavController().navigate(NewsFragmentDirections.actionNavigationNewsToFullNewsFragment(
+                                            news
+                                        ), extras
+                                    )
                                 }
-                            }
                         }
                         showUI()
                         binding.srlNews.isRefreshing = false
                     }
-                    Status.ERROR ->{
+                    Status.ERROR -> {
                         showUI()
                         binding.srlNews.isRefreshing = false
                         Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()

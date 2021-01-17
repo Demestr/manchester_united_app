@@ -5,6 +5,8 @@
   -->
 
 <resources>
+    <item name="normal_animation_duration" type="integer">500</item>
+    <item name="large_animation_duration" type="integer">750</item>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="small_horizontal_margin">8dp</dimen>
     <dimen name="small_vertical_margin">8dp</dimen>

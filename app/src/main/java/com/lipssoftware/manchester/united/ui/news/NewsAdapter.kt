@@ -42,21 +42,14 @@ class NewsAdapter(
     inner class StandingsViewHolder(private val item: ItemNewsBinding) :
         RecyclerView.ViewHolder(item.root) {
         fun bind(newsDomain: NewsDomain) {
-            ViewCompat.setTransitionName(item.tvItemNewsTitle, "title_${newsDomain.id}")
-            ViewCompat.setTransitionName(item.ivItemNewsPicture, "image_${newsDomain.id}")
-            ViewCompat.setTransitionName(item.vItemNewsTitleBack, "back_${newsDomain.id}")
-            ViewCompat.setTransitionName(item.tvItemNewsDate, "date_${newsDomain.id}")
-            ViewCompat.setTransitionName(item.tvItemNewsBody, "body_${newsDomain.id}")
+            ViewCompat.setTransitionName(item.cslItemNews, "news_${newsDomain.id}")
             val extras = FragmentNavigatorExtras(
-                item.tvItemNewsTitle to "title_${newsDomain.id}",
-                item.ivItemNewsPicture to "image_${newsDomain.id}",
-                item.vItemNewsTitleBack to "back_${newsDomain.id}",
-                item.tvItemNewsDate to "date_${newsDomain.id}",
-                item.tvItemNewsBody to "body_${newsDomain.id}",
+                item.cslItemNews to "news_${newsDomain.id}",
             )
 
             item.ivItemNewsPicture.load(newsDomain.imageUrl){
                 crossfade(true)
+                allowHardware(false)
             }
             item.tvItemNewsTitle.text = newsDomain.title
             item.tvItemNewsDate.text = convertDateToString(newsDomain.pubDate)

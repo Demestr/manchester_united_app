@@ -11,6 +11,7 @@
       },
       "nationality": "Spain",
       "position": "goalkeeper",
+      "number": 1,
       "height": 192,
       "weight": 78,
       "photo": "de_gea.png"
@@ -26,6 +27,7 @@
       },
       "nationality": "England",
       "position": "goalkeeper",
+      "number": 26,
       "height": 188,
       "weight": 85,
       "photo": "dean_henderson.png"
@@ -41,6 +43,7 @@
       },
       "nationality": "England",
       "position": "goalkeeper",
+      "number": 13,
       "height": 193,
       "weight": 83,
       "photo": "lee_grant.png"
@@ -56,6 +59,7 @@
       },
       "nationality": "Argentina",
       "position": "goalkeeper",
+      "number": 22,
       "height": 192,
       "weight": 87,
       "photo": "sergio_romero.png"
@@ -71,6 +75,7 @@
       },
       "nationality": "England",
       "position": "defender",
+      "number": 5,
       "height": 194,
       "weight": 100,
       "photo": "harry_maguire.png"
@@ -86,6 +91,7 @@
       },
       "nationality": "England",
       "position": "defender",
+      "number": 29,
       "height": 183,
       "weight": 72,
       "photo": "aaron_wan-bissaka.png"
@@ -101,6 +107,7 @@
       },
       "nationality": "England",
       "position": "defender",
+      "number": 38,
       "height": 182,
       "weight": 75,
       "photo": "axel_tuanzebe.png"
@@ -116,6 +123,7 @@
       },
       "nationality": "Brazil",
       "position": "defender",
+      "number": 27,
       "height": 181,
       "weight": 67,
       "photo": "alex_telles.png"
@@ -131,6 +139,7 @@
       },
       "nationality": "England",
       "position": "defender",
+      "number": 33,
       "height": 171,
       "weight": 63,
       "photo": "brandon_williams.png"
@@ -146,6 +155,7 @@
       },
       "nationality": "Côte d'Ivoire",
       "position": "defender",
+      "number": 3,
       "height": 187,
       "weight": 77,
       "photo": "eric_bailly.png"
@@ -161,6 +171,7 @@
       },
       "nationality": "Portugal",
       "position": "defender",
+      "number": 20,
       "height": 183,
       "weight": 76,
       "photo": "diogo_dalot.png"
@@ -176,6 +187,7 @@
       },
       "nationality": "England",
       "position": "defender",
+      "number": 4,
       "height": 180,
       "weight": 71,
       "photo": "phil_jones.png"
@@ -191,6 +203,7 @@
       },
       "nationality": "Sweden",
       "position": "defender",
+      "number": 2,
       "height": 187,
       "weight": 80,
       "photo": "victor_lindelof.png"
@@ -206,6 +219,7 @@
       },
       "nationality": "Argentina",
       "position": "defender",
+      "number": 16,
       "height": 187,
       "weight": 85,
       "photo": "marcos_rojo.png"
@@ -221,6 +235,7 @@
       },
       "nationality": "England",
       "position": "defender",
+      "number": 23,
       "height": 185,
       "weight": 75,
       "photo": "luke_shaw.png"
@@ -236,6 +251,7 @@
       },
       "nationality": "Netherlands",
       "position": "midfielder",
+      "number": 34,
       "height": 184,
       "weight": 76,
       "photo": "donny_van_de_beek.png"
@@ -251,6 +267,7 @@
       },
       "nationality": "England",
       "position": "midfielder",
+      "number": 37,
       "height": 182,
       "weight": 74,
       "photo": "james_garner.png"
@@ -266,6 +283,7 @@
       },
       "nationality": "Brazil",
       "position": "midfielder",
+      "number": 15,
       "height": 178,
       "weight": 71,
       "photo": "andreas_pereira.png"
@@ -281,6 +299,7 @@
       },
       "nationality": "England",
       "position": "midfielder",
+      "number": 14,
       "height": 175,
       "weight": 62,
       "photo": "jesse_lingard.png"
@@ -296,6 +315,7 @@
       },
       "nationality": "Spain",
       "position": "midfielder",
+      "number": 8,
       "height": 170,
       "weight": 63,
       "photo": "juan_mata.png"
@@ -311,6 +331,7 @@
       },
       "nationality": "Serbia",
       "position": "midfielder",
+      "number": 31,
       "height": 194,
       "weight": 85,
       "photo": "nemanja_matic.png"
@@ -326,6 +347,7 @@
       },
       "nationality": "Scotland",
       "position": "midfielder",
+      "number": 39,
       "height": 193,
       "weight": 88,
       "photo": "scott_mctominay.png"
@@ -341,6 +363,7 @@
       },
       "nationality": "France",
       "position": "midfielder",
+      "number": 6,
       "height": 191,
       "weight": 84,
       "photo": "paul_pogba.png"
@@ -356,6 +379,7 @@
       },
       "nationality": "Brazil",
       "position": "midfielder",
+      "number": 17,
       "height": 169,
       "weight": 64,
       "photo": "fred.png"
@@ -371,6 +395,7 @@
       },
       "nationality": "Portugal",
       "position": "midfielder",
+      "number": 18,
       "height": 173,
       "weight": 80,
       "photo": "bruno_fernandes.png"
@@ -386,6 +411,7 @@
       },
       "nationality": "Wales",
       "position": "midfielder",
+      "number": 21,
       "height": 170,
       "weight": 76,
       "photo": "daniel_james.png"
@@ -401,6 +427,7 @@
       },
       "nationality": "Uruguay",
       "position": "midfielder",
+      "number": 28,
       "height": 174,
       "weight": 65,
       "photo": "facundo_pellistri.png"
@@ -416,6 +443,7 @@
       },
       "nationality": "Côte d'Ivoire",
       "position": "midfielder",
+      "number": 19,
       "height": 180,
       "weight": 70,
       "photo": "amad_diallo.png"
@@ -431,6 +459,7 @@
       },
       "nationality": "France",
       "position": "forward",
+      "number": 9,
       "height": 181,
       "weight": 76,
       "photo": "anthony_martial.png"
@@ -446,6 +475,7 @@
       },
       "nationality": "England",
       "position": "forward",
+      "number": 10,
       "height": 180,
       "weight": 70,
       "photo": "marcus_rashford.png"
@@ -461,6 +491,7 @@
       },
       "nationality": "England",
       "position": "forward",
+      "number": 11,
       "height": 181,
       "weight": 70,
       "photo": "mason_greenwood.png"
@@ -476,6 +507,7 @@
       },
       "nationality": "Uruguay",
       "position": "forward",
+      "number": 7,
       "height": 184,
       "weight": 71,
       "photo": "edinson_cavani.png"

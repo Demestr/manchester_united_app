@@ -10,6 +10,7 @@ import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import androidx.annotation.Keep
+import com.lipssoftware.manchester.united.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -54,4 +55,20 @@ fun getTextFromHtml(html: String, flag: Int = Html.FROM_HTML_MODE_COMPACT): Span
         Html.fromHtml(html, flag)
     else
         Html.fromHtml(html)
+}
+
+fun getNumberPic(number: Int): Int{
+    return when(number){
+        0 -> R.drawable.number_zero
+        1 -> R.drawable.number_one
+        2 -> R.drawable.number_two
+        3 -> R.drawable.number_three
+        4 -> R.drawable.number_four
+        5 -> R.drawable.number_five
+        6 -> R.drawable.number_six
+        7 -> R.drawable.number_seven
+        8 -> R.drawable.number_eight
+        9 -> R.drawable.number_nine
+        else -> -1
+    }
 }

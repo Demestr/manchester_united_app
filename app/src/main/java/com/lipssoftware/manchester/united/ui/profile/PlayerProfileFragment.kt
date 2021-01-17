@@ -12,13 +12,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.transition.MaterialContainerTransform
 import com.lipssoftware.manchester.united.R
 import com.lipssoftware.manchester.united.data.model.players.Player
 import com.lipssoftware.manchester.united.databinding.FragmentPlayerProfileBinding
+import com.lipssoftware.manchester.united.utils.getNumberPic
 
 class PlayerProfileFragment : Fragment() {
 
@@ -30,7 +33,7 @@ class PlayerProfileFragment : Fragment() {
         activity?.supportPostponeEnterTransition()
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.nav_host_fragment
-            duration = 350
+            duration = resources.getInteger(R.integer.normal_animation_duration).toLong()
             scrimColor = Color.TRANSPARENT
         }
     }
@@ -42,10 +45,9 @@ class PlayerProfileFragment : Fragment() {
         binding = FragmentPlayerProfileBinding.inflate(inflater)
         val player = arguments?.getParcelable<Player>("player")
         player?.let {
-            ViewCompat.setTransitionName(binding.root, player.birth.date)
+            ViewCompat.setTransitionName(binding.root, "tn_${player.number}")
             viewModel.setPlayer(player)
         }
-        binding.ibPlayerBack.setOnClickListener { activity?.onBackPressed() }
         return binding.root
     }
 
@@ -54,6 +56,15 @@ class PlayerProfileFragment : Fragment() {
         viewModel.player.observe(viewLifecycleOwner) { player ->
             player?.let {
                 binding.ivPlayerPicture.setImageBitmap(BitmapFactory.decodeStream(requireContext().assets.open("players_photos/${it.photo}")))
+                if(it.number / 10 == 0){
+                    binding.ivFirstNumber.setImageDrawable(ContextCompat.getDrawable(requireContext(), getNumberPic(it.number)))
+                    binding.ivSecondNumber.isVisible = false
+                }
+                else{
+                    binding.ivFirstNumber.setImageDrawable(ContextCompat.getDrawable(requireContext(), getNumberPic(it.number / 10)))
+                    binding.ivSecondNumber.setImageDrawable(ContextCompat.getDrawable(requireContext(), getNumberPic( it.number % 10)))
+                }
+
                 binding.tvPlayerFirstName.text = it.firstname
                 binding.tvPlayerLastName.text = it.lastname
                 binding.tvPlayerDateBirth.text = it.birth.date

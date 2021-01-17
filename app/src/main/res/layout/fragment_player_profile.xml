@@ -13,16 +13,6 @@
     android:clipChildren="false"
     tools:context=".ui.fullnews.FullNewsFragment">
 
-    <ImageButton
-        android:id="@+id/ib_player_back"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:background="?android:selectableItemBackground"
-        android:elevation="1dp"
-        android:src="@drawable/abc_vector_test"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <View
         android:id="@+id/v_player_picture_back"
         android:layout_width="0dp"
@@ -78,14 +68,14 @@
         android:tag="labels"
         android:text="First name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ib_player_back" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_player_first_name"
         style="@style/ProfileValuesStyle"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_player_first_name_label"
         app:layout_constraintStart_toEndOf="@id/barrier_labels"
-        tools:text="Aaron" />
+        tools:text="Bruno" />
 
     <TextView
         android:id="@+id/tv_player_last_name_label"
@@ -100,7 +90,7 @@
         style="@style/ProfileValuesStyle"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_player_last_name_label"
         app:layout_constraintStart_toEndOf="@id/barrier_labels"
-        tools:text="Wan-Bissaka" />
+        tools:text="Fernandes" />
 
     <TextView
         android:id="@+id/tv_player_date_birth_label"
@@ -130,7 +120,7 @@
         style="@style/ProfileValuesStyle"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_player_position_label"
         app:layout_constraintStart_toEndOf="@id/barrier_labels"
-        tools:text="Defender" />
+        tools:text="Midfielder" />
 
     <TextView
         android:id="@+id/tv_player_nationality_label"
@@ -145,7 +135,7 @@
         style="@style/ProfileValuesStyle"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_player_nationality_label"
         app:layout_constraintStart_toEndOf="@id/barrier_labels"
-        tools:text="Spain" />
+        tools:text="Portugal" />
 
     <TextView
         android:id="@+id/tv_player_height_label"

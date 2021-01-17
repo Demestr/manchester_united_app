@@ -6,7 +6,10 @@
 
 package com.lipssoftware.manchester.united
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -20,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
@@ -29,7 +33,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_news, R.id.navigation_standings, R.id.navigation_squad))
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavView.setupWithNavController(navController)
-
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when(destination.id){
                 R.id.navigation_fullnews -> { collapseBars() }
@@ -37,11 +40,13 @@ class MainActivity : AppCompatActivity() {
                 else -> { collapseBars(false) }
             }
         }
+        supportActionBar?.hide()
     }
 
     private fun collapseBars(hide: Boolean = true){
-        if (hide) supportActionBar?.hide() else supportActionBar?.show()
-        binding.bottomNavView.isVisible = !hide
+        //if (hide) supportActionBar?.hide() else supportActionBar?.show()
+        if(hide) binding.bottomNavView.isVisible = false
+        else Handler(Looper.getMainLooper()).postDelayed({ binding.bottomNavView.isVisible = true }, 350)
     }
 
     override fun onSupportNavigateUp(): Boolean {

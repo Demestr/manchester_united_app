@@ -19,6 +19,7 @@ data class Player(
     val birth: Birth,
     val nationality: String,
     val position: String,
+    val number: Int,
     val height: Int,
     val weight: Int,
     val photo: String) : Parcelable {

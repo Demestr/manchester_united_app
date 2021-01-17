@@ -7,7 +7,6 @@
 package com.lipssoftware.manchester.united.ui.fullnews
 
 import android.animation.ObjectAnimator
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -17,7 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
-import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialSharedAxis
 import com.lipssoftware.manchester.united.R
 import com.lipssoftware.manchester.united.data.model.news.NewsDomain
 import com.lipssoftware.manchester.united.databinding.FragmentFullNewsBinding
@@ -32,10 +31,11 @@ class FullNewsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.supportPostponeEnterTransition()
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.nav_host_fragment
-            duration = 350
-            scrimColor = Color.TRANSPARENT
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.large_animation_duration).toLong()
+        }
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.large_animation_duration).toLong()
         }
     }
 
@@ -46,19 +46,15 @@ class FullNewsFragment : Fragment() {
         binding = FragmentFullNewsBinding.inflate(inflater)
         val news = arguments?.getParcelable<NewsDomain>("fullNews")
         news?.let {
-            ViewCompat.setTransitionName(binding.tvFullNewsTitle, "title_${it.id}")
-            ViewCompat.setTransitionName(binding.ivFullNewsPicture, "image_${it.id}")
-            ViewCompat.setTransitionName(binding.vFullNewsTitleBack, "back_${it.id}")
-            ViewCompat.setTransitionName(binding.tvFullNewsDate, "date_${it.id}")
-            ViewCompat.setTransitionName(binding.tvFullNewsBody, "body_${it.id}")
+            ViewCompat.setTransitionName(binding.root, "news_${it.id}")
             viewModel.setNews(it)
         }
-        ObjectAnimator.ofFloat(binding.ibFullNewsBack, "alpha", 1f).apply {
-            duration = 1000
-            start()
-        }
-        binding.ibFullNewsBack.setOnClickListener {
-            activity?.onBackPressed()
+        with(binding.ibFullNewsBack){
+            ObjectAnimator.ofFloat(this, "alpha", 1f).apply {
+                duration = 500
+                start()
+            }
+            setOnClickListener { activity?.onBackPressed() }
         }
         return binding.root
     }
@@ -68,7 +64,7 @@ class FullNewsFragment : Fragment() {
         viewModel.news.observe(viewLifecycleOwner) { news ->
             news?.let {
                 binding.tvFullNewsTitle.text = it.title
-                binding.ivFullNewsPicture.load(it.imageUrl)
+                binding.ivFullNewsPicture.load(it.imageUrl){ allowHardware(false) }
                 binding.tvFullNewsDate.text = convertDateToString(it.pubDate)
                 binding.tvFullNewsBody.text =
                     getTextFromHtml(it.text, Html.FROM_HTML_MODE_LEGACY)
