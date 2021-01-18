@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 06.01.21 11:19
+ * Created by Dmitry Lipski on 18.01.21 15:32
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 06.01.21 11:11
+ * Last modified 18.01.21 13:27
  */
 
 package com.lipssoftware.manchester.united.data.model.common
@@ -15,5 +15,6 @@ data class League(
     val logo: String,
     val name: String,
     val season: Int,
-    val standings: List<List<Standing>>
+    val round: String?,
+    val standings: List<List<Standing>>?
 )
