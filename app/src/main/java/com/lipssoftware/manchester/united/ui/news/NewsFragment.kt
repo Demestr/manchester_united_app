@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 13.01.21 10:45
+ * Created by Dmitry Lipski on 18.01.21 10:42
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.01.21 9:11
+ * Last modified 18.01.21 10:35
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -75,10 +75,8 @@ class NewsFragment : Fragment() {
                                     reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
                                         duration = resources.getInteger(R.integer.large_animation_duration).toLong()
                                     }
-                                    findNavController().navigate(NewsFragmentDirections.actionNavigationNewsToFullNewsFragment(
-                                            news
-                                        ), extras
-                                    )
+                                val bundle = Bundle().apply { putParcelable("fullNews", news) }
+                                    findNavController().navigate(R.id.action_navigation_news_to_fullNewsFragment, bundle)
                                 }
                         }
                         showUI()

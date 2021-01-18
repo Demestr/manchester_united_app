@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 13.01.21 10:45
+ * Created by Dmitry Lipski on 18.01.21 10:42
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.01.21 8:59
+ * Last modified 18.01.21 10:35
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -19,7 +19,7 @@ import com.lipssoftware.manchester.united.utils.convertDateToString
 import com.lipssoftware.manchester.united.utils.getTextFromHtml
 
 class NewsAdapter(
-    private val standings: List<NewsDomain>,
+    private val news: List<NewsDomain>,
     val onClick: (news: NewsDomain, extras: FragmentNavigator.Extras) -> Unit
 ) :
     RecyclerView.Adapter<NewsAdapter.StandingsViewHolder>() {
@@ -34,10 +34,10 @@ class NewsAdapter(
         )
 
     override fun onBindViewHolder(holder: StandingsViewHolder, position: Int) {
-        holder.bind(standings[position])
+        holder.bind(news[position])
     }
 
-    override fun getItemCount(): Int = standings.size
+    override fun getItemCount(): Int = news.size
 
     inner class StandingsViewHolder(private val item: ItemNewsBinding) :
         RecyclerView.ViewHolder(item.root) {

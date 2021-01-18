@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 11.01.21 17:08
+  ~ Created by Dmitry Lipski on 18.01.21 10:42
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.21 9:13
+  ~ Last modified 18.01.21 10:14
   -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_news"
+        android:id="@+id/news"
         android:icon="@drawable/ic_news_48dp"
         android:title="@string/title_news" />
 
     <item
-        android:id="@+id/navigation_standings"
+        android:id="@+id/standings"
         android:icon="@drawable/ic_standings_48dp"
         android:title="@string/title_standings" />
 
     <item
-        android:id="@+id/navigation_squad"
+        android:id="@+id/squad"
         android:icon="@drawable/ic_squad_48dp"
         android:title="@string/title_squad" />
 

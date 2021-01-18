@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Dmitry Lipski on 18.01.21 10:42
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 18.01.21 10:22
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/squad"
+    app:startDestination="@+id/navigation_squad">
+
+    <fragment
+        android:id="@+id/navigation_squad"
+        android:name="com.lipssoftware.manchester.united.ui.squad.SquadFragment"
+        android:label="@string/title_squad"
+        tools:layout="@layout/fragment_squad" >
+        <action
+            android:id="@+id/action_navigation_squad_to_navigation_player_profile"
+            app:destination="@id/navigation_player_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_player_profile"
+        android:name="com.lipssoftware.manchester.united.ui.profile.PlayerProfileFragment"
+        android:label=""
+        tools:layout="@layout/fragment_player_profile" >
+        <argument
+            android:name="player"
+            app:argType="com.lipssoftware.manchester.united.data.model.players.Player" />
+    </fragment>
+</navigation>

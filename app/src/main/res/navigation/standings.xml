@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Dmitry Lipski on 18.01.21 10:42
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 18.01.21 10:22
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/standings"
+    app:startDestination="@+id/navigation_standings">
+
+    <fragment
+        android:id="@+id/navigation_standings"
+        android:name="com.lipssoftware.manchester.united.ui.standings.StandingsFragment"
+        android:label="@string/title_standings"
+        tools:layout="@layout/fragment_standings" />
+</navigation>

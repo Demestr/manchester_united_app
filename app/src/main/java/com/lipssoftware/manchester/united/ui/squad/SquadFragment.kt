@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 15.01.21 17:10
+ * Created by Dmitry Lipski on 18.01.21 10:42
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 15.01.21 17:09
+ * Last modified 18.01.21 10:35
  */
 
 package com.lipssoftware.manchester.united.ui.squad
@@ -70,11 +70,8 @@ class SquadFragment : Fragment() {
                                 reenterTransition = MaterialElevationScale(true).apply {
                                     duration = resources.getInteger(R.integer.normal_animation_duration).toLong()
                                 }
-                                findNavController().navigate(
-                                    SquadFragmentDirections.actionNavigationSquadToNavigationPlayerProfile(
-                                        profile
-                                    ), extras
-                                )
+                                val bundle = Bundle().apply { putParcelable("player", profile) }
+                                findNavController().navigate(R.id.action_navigation_squad_to_navigation_player_profile, bundle)
                             }
                         }
                         showUI()

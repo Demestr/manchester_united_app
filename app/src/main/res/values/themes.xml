@@ -1,12 +1,12 @@
 <!--
-  ~ Created by Dmitry Lipski on 12.01.21 16:54
+  ~ Created by Dmitry Lipski on 18.01.21 10:42
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 12.01.21 11:22
+  ~ Last modified 18.01.21 10:41
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ManchesterUnited" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.ManchesterUnited" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/red_500</item>
         <item name="colorPrimaryVariant">@color/red_700</item>

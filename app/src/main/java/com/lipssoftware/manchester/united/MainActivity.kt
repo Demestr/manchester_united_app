@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 15.01.21 17:10
+ * Created by Dmitry Lipski on 18.01.21 11:18
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 15.01.21 14:24
+ * Last modified 18.01.21 11:18
  */
 
 package com.lipssoftware.manchester.united
@@ -13,44 +13,68 @@ import android.os.Looper
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.lifecycle.LiveData
+import androidx.navigation.NavController
 import com.lipssoftware.manchester.united.databinding.ActivityMainBinding
+import com.lipssoftware.manchester.united.utils.setupWithNavController
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var currentNavController: LiveData<NavController>? = null
 
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
-        val navController = findNavController(R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_news, R.id.navigation_standings, R.id.navigation_squad))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.bottomNavView.setupWithNavController(navController)
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            when(destination.id){
-                R.id.navigation_fullnews -> { collapseBars() }
-                R.id.navigation_player_profile -> { collapseBars() }
-                else -> { collapseBars(false) }
-            }
+        if (savedInstanceState == null) {
+            setupBottomNavigationBar()
         }
-        supportActionBar?.hide()
     }
 
-    private fun collapseBars(hide: Boolean = true){
-        //if (hide) supportActionBar?.hide() else supportActionBar?.show()
-        if(hide) binding.bottomNavView.isVisible = false
-        else Handler(Looper.getMainLooper()).postDelayed({ binding.bottomNavView.isVisible = true }, 350)
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        setupBottomNavigationBar()
+    }
+
+    /**
+     * Called on first creation and when restoring state.
+     */
+    private fun setupBottomNavigationBar() {
+        val navGraphIds = listOf(R.navigation.news, R.navigation.standings, R.navigation.squad)
+        val controller = binding.bottomNavView.setupWithNavController(
+            navGraphIds = navGraphIds,
+            fragmentManager = supportFragmentManager,
+            containerId = R.id.nav_host_fragment,
+            intent = intent
+        )
+
+        controller.observe(this) { navController ->
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                when (destination.id) {
+                    R.id.navigation_fullnews -> {
+                        collapseBars()
+                    }
+                    R.id.navigation_player_profile -> {
+                        collapseBars()
+                    }
+                    else -> {
+                        collapseBars(false)
+                    }
+                }
+            }
+        }
+        currentNavController = controller
+    }
+
+    private fun collapseBars(hide: Boolean = true) {
+        if (hide) binding.bottomNavView.isVisible = false
+        else Handler(Looper.getMainLooper()).postDelayed(
+            { binding.bottomNavView.isVisible = true }, 350)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return currentNavController?.value?.navigateUp() ?: false
     }
 }
