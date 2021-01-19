@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Dmitry Lipski on 19.01.21 16:24
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 19.01.21 15:57
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1.5:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_item_fixture_tournament"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/normal_horizontal_margin"
+                android:layout_marginTop="@dimen/small_vertical_margin"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="English Premier League" />
+
+            <TextView
+                android:id="@+id/tv_item_fixture_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/normal_horizontal_margin"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_item_fixture_tournament"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_item_fixture_home_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.2" />
+
+            <ImageView
+                android:id="@+id/iv_item_fixture_logo_home_team"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginBottom="@dimen/small_vertical_margin"
+                app:layout_constraintBottom_toTopOf="@id/tv_item_fixture_name_home_team"
+                app:layout_constraintEnd_toStartOf="@+id/gl_item_fixture_home_team"
+                app:layout_constraintStart_toStartOf="@+id/gl_item_fixture_home_team"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.7"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:srcCompat="@drawable/mu_test" />
+
+            <TextView
+                android:id="@+id/tv_item_fixture_name_home_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_vertical_margin"
+                android:fontFamily="@font/iceberg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/gl_item_fixture_home_team"
+                app:layout_constraintStart_toStartOf="@+id/gl_item_fixture_home_team"
+                app:layout_constraintTop_toBottomOf="@id/iv_item_fixture_logo_home_team"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Manchester United" />
+
+            <TextView
+                android:id="@+id/tv_item_fixture_score_home_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/rationale"
+                android:textSize="48sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/tv_item_fixture_score_divider"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_fixture_score_divider"
+                app:layout_constraintTop_toTopOf="@id/tv_item_fixture_score_divider"
+                tools:text="3" />
+
+            <TextView
+                android:id="@+id/tv_item_fixture_score_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rationale"
+                android:text=":"
+                android:textSize="56sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.6" />
+
+            <TextView
+                android:id="@+id/tv_item_fixture_score_away_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/rationale"
+                android:textSize="48sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/tv_item_fixture_score_divider"
+                app:layout_constraintStart_toEndOf="@id/tv_item_fixture_score_divider"
+                app:layout_constraintTop_toTopOf="@id/tv_item_fixture_score_divider"
+                tools:text="0" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_item_fixture_away_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.8" />
+
+            <ImageView
+                android:id="@+id/iv_item_fixture_logo_away_team"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginBottom="@dimen/small_vertical_margin"
+                app:layout_constraintBottom_toTopOf="@id/tv_item_fixture_name_away_team"
+                app:layout_constraintEnd_toStartOf="@+id/gl_item_fixture_away_team"
+                app:layout_constraintStart_toStartOf="@+id/gl_item_fixture_away_team"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.7"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:srcCompat="@drawable/mu_test" />
+
+            <TextView
+                android:id="@+id/tv_item_fixture_name_away_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_vertical_margin"
+                android:fontFamily="@font/iceberg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/gl_item_fixture_away_team"
+                app:layout_constraintStart_toStartOf="@+id/gl_item_fixture_away_team"
+                app:layout_constraintTop_toBottomOf="@id/iv_item_fixture_logo_away_team"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Wolverhampton" />
+
+            <TextView
+                android:id="@+id/tv_item_fixture_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/small_vertical_margin"
+                android:fontFamily="@font/roboto_thin"
+                android:textAlignment="center"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_item_fixture_score_divider"
+                app:layout_constraintEnd_toEndOf="@+id/tv_item_fixture_score_away_team"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_fixture_score_home_team"
+                tools:text="Match Finished After Extra Time" />
+
+            <TextView
+                android:id="@+id/tv_item_fixture_venue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/normal_horizontal_margin"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/normal_horizontal_margin"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:maxLines="1"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_item_fixture_referee"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_fixture_tournament"
+                tools:text="Old Trafford" />
+
+            <TextView
+                android:id="@+id/tv_item_fixture_referee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/normal_horizontal_margin"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_item_fixture_venue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                tools:text="Referee: Mike Dean" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

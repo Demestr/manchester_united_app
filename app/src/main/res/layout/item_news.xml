@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 15.01.21 17:10
+  ~ Created by Dmitry Lipski on 19.01.21 16:24
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 15.01.21 16:11
+  ~ Last modified 19.01.21 9:33
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +44,7 @@
             android:layout_height="0dp"
             android:background="@drawable/news_title_background"
             app:layout_constraintBottom_toBottomOf="@id/iv_item_news_picture"
-            app:layout_constraintDimensionRatio="w,1:4"
+            app:layout_constraintDimensionRatio="w,1:2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

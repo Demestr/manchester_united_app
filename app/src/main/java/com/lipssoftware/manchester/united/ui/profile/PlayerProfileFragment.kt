@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 15.01.21 17:10
+ * Created by Dmitry Lipski on 19.01.21 16:24
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 15.01.21 17:09
+ * Last modified 19.01.21 8:53
  */
 
 package com.lipssoftware.manchester.united.ui.profile
@@ -33,6 +33,7 @@ class PlayerProfileFragment : Fragment() {
         activity?.supportPostponeEnterTransition()
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.nav_host_fragment
+            fadeMode = MaterialContainerTransform.FADE_MODE_CROSS
             duration = resources.getInteger(R.integer.normal_animation_duration).toLong()
             scrimColor = Color.TRANSPARENT
         }

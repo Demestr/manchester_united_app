@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 15.01.21 17:10
+  ~ Created by Dmitry Lipski on 19.01.21 16:24
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 15.01.21 17:09
+  ~ Last modified 19.01.21 12:36
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/v_player_picture_back"
         app:layout_constraintEnd_toStartOf="@id/iv_second_number"
         app:layout_constraintStart_toStartOf="@+id/v_player_picture_back"
-        tools:srcCompat="@drawable/number_one" />
+        tools:srcCompat="@drawable/number_two" />
 
     <ImageView
         android:id="@+id/iv_second_number"

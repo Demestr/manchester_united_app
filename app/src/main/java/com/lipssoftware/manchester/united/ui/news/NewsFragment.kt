@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 18.01.21 10:42
+ * Created by Dmitry Lipski on 19.01.21 16:24
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 18.01.21 10:35
+ * Last modified 19.01.21 9:08
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -76,15 +76,13 @@ class NewsFragment : Fragment() {
                                         duration = resources.getInteger(R.integer.large_animation_duration).toLong()
                                     }
                                 val bundle = Bundle().apply { putParcelable("fullNews", news) }
-                                    findNavController().navigate(R.id.action_navigation_news_to_fullNewsFragment, bundle)
+                                    findNavController().navigate(R.id.action_navigation_news_to_fullNewsFragment, bundle, null, extras)
                                 }
                         }
                         showUI()
-                        binding.srlNews.isRefreshing = false
                     }
                     Status.ERROR -> {
                         showUI()
-                        binding.srlNews.isRefreshing = false
                         Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
@@ -95,5 +93,6 @@ class NewsFragment : Fragment() {
     private fun showUI(showUi: Boolean = true) {
         binding.rvNewsList.isVisible = showUi
         binding.pbNews.isVisible = !showUi
+        if(showUi)  binding.srlNews.isRefreshing = false
     }
 }

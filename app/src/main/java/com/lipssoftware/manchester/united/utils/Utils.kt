@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 14.01.21 15:00
+ * Created by Dmitry Lipski on 19.01.21 16:24
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.01.21 12:45
+ * Last modified 19.01.21 12:05
  */
 
 package com.lipssoftware.manchester.united.utils
@@ -19,6 +19,7 @@ const val PREMIER_LEAGUE_ID = 39
 const val SEASON = 2020
 const val DATE_PATTERN_IN = "EEE, d MMM yyyy HH:mm:ss z"
 const val DATE_PATTERN_OUT = "EEE, d MMM yyyy HH:mm:ss"
+const val ISO_OFFSET_DATE_TIME = "yyyy-MM-dd'T'HH:mm:ssZ"
 
 @Keep
 enum class Status {

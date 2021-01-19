@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 18.01.21 11:18
+ * Created by Dmitry Lipski on 19.01.21 16:24
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 18.01.21 11:18
+ * Last modified 19.01.21 16:23
  */
 
 package com.lipssoftware.manchester.united
@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
         if (savedInstanceState == null) {
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
-        val navGraphIds = listOf(R.navigation.news, R.navigation.standings, R.navigation.squad)
+        val navGraphIds = listOf(R.navigation.news, R.navigation.standings, R.navigation.fixtures, R.navigation.squad)
         val controller = binding.bottomNavView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
