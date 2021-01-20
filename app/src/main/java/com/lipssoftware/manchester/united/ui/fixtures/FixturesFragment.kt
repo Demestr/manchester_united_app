@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 19.01.21 16:24
+ * Created by Dmitry Lipski on 20.01.21 11:18
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 19.01.21 16:24
+ * Last modified 20.01.21 9:57
  */
 
 package com.lipssoftware.manchester.united.ui.fixtures
@@ -18,6 +18,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
+import com.lipssoftware.manchester.united.data.database.ManUtdDatabase
 import com.lipssoftware.manchester.united.data.network.StatsBuilder
 import com.lipssoftware.manchester.united.data.repository.FixturesRepository
 import com.lipssoftware.manchester.united.databinding.FragmentFixturesBinding
@@ -30,7 +31,7 @@ class FixturesFragment : Fragment() {
     private lateinit var snapHelper: SnapHelper
     private var isPositioned: Boolean = false
     private val fixturesViewModel by viewModels<FixturesViewModel>{ FixturesViewModelFactory(
-        FixturesRepository(StatsBuilder.statsService)) }
+        FixturesRepository(StatsBuilder.statsService, ManUtdDatabase.getInstance(requireContext()).getFixturesDao())) }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -61,16 +62,7 @@ class FixturesFragment : Fragment() {
                     Status.SUCCESS -> {
                         resource.data?.let { list ->
                             binding.rvFixturesList.adapter = FixturesAdapter(list)
-                            val lastPlayedMatch = list.filter {
-                                it.fixture.status.short == "FT" ||
-                                it.fixture.status.short == "1H" ||
-                                it.fixture.status.short == "HT" ||
-                                it.fixture.status.short == "2H" ||
-                                it.fixture.status.short == "ET" ||
-                                it.fixture.status.short == "P" ||
-                                it.fixture.status.short == "FT"
-                            }.maxByOrNull { it.fixture.timestamp }
-                            if(!isPositioned) initRecyclerViewPosition(list.indexOf(lastPlayedMatch))
+                            if(!isPositioned) initRecyclerViewPosition(fixturesViewModel.indexOfLastPlayedMatch)
                         }
                         showUI()
                     }

@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 12.01.21 16:56
+ * Created by Dmitry Lipski on 20.01.21 11:18
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.21 8:44
+ * Last modified 20.01.21 10:02
  */
 
 package com.lipssoftware.manchester.united.data.database
@@ -11,13 +11,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.lipssoftware.manchester.united.data.model.domain.StandingDomain
+import com.lipssoftware.manchester.united.data.model.fixtures.MatchDomain
 import com.lipssoftware.manchester.united.data.model.news.NewsDomain
 
-@Database(entities = [StandingDomain::class, NewsDomain::class], version = 1, exportSchema = false)
+@Database(entities = [StandingDomain::class, NewsDomain::class, MatchDomain::class], version = 1, exportSchema = false)
 abstract class ManUtdDatabase : RoomDatabase() {
 
     abstract fun getNewsDao(): NewsDao
     abstract fun getStandingsDao(): StandingsDao
+    abstract fun getFixturesDao(): FixturesDao
 
     companion object {
 

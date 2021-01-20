@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 19.01.21 16:24
+ * Created by Dmitry Lipski on 20.01.21 11:18
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 19.01.21 16:23
+ * Last modified 20.01.21 11:18
  */
 
 package com.lipssoftware.manchester.united.ui.fixtures
@@ -15,15 +15,15 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.lipssoftware.manchester.united.data.model.fixtures.Match
+import com.lipssoftware.manchester.united.data.model.fixtures.MatchDomain
 import com.lipssoftware.manchester.united.databinding.ItemFixtureBinding
 import com.lipssoftware.manchester.united.utils.DATE_PATTERN_OUT
-import com.lipssoftware.manchester.united.utils.ISO_OFFSET_DATE_TIME
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
-class FixturesAdapter(private val fixtures: List<Match>): RecyclerView.Adapter<FixturesAdapter.FixturesViewHolder>() {
+class FixturesAdapter(private val fixtures: List<MatchDomain>): RecyclerView.Adapter<FixturesAdapter.FixturesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FixturesViewHolder =
         FixturesViewHolder(ItemFixtureBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -36,24 +36,23 @@ class FixturesAdapter(private val fixtures: List<Match>): RecyclerView.Adapter<F
 
     class FixturesViewHolder(private val item: ItemFixtureBinding): RecyclerView.ViewHolder(item.root){
 
-        fun bind(match: Match){
-            item.tvItemFixtureTournament.text = match.league.name
-            val time = SimpleDateFormat(ISO_OFFSET_DATE_TIME, Locale.getDefault()).parse(match.fixture.date)
-            item.tvItemFixtureTime.text = SimpleDateFormat(DATE_PATTERN_OUT, Locale.getDefault()).format(time)
-            item.tvItemFixtureScoreHomeTeam.text = if(match.goals.home != null) match.goals.home.toString() else ""
-            item.ivItemFixtureLogoHomeTeam.load(match.teams.home.logo){
+        fun bind(match: MatchDomain){
+            item.tvItemFixtureTournament.text = match.leagueName
+            item.tvItemFixtureTime.text = SimpleDateFormat(DATE_PATTERN_OUT, Locale.getDefault()).format(Date(TimeUnit.SECONDS.toMillis(match.timestamp)))
+            item.tvItemFixtureScoreHomeTeam.text = if(match.homeTeamGoals != null) match.homeTeamGoals.toString() else ""
+            item.ivItemFixtureLogoHomeTeam.load(match.homeTeamLogo){
                 crossfade(true)
             }
-            item.tvItemFixtureNameHomeTeam.text = match.teams.home.name
-            item.tvItemFixtureScoreAwayTeam.text = if(match.goals.away != null) match.goals.away.toString() else ""
-            item.ivItemFixtureLogoAwayTeam.load(match.teams.away.logo){
+            item.tvItemFixtureNameHomeTeam.text = match.homeTeamName
+            item.tvItemFixtureScoreAwayTeam.text = if(match.awayTeamGoals != null) match.awayTeamGoals.toString() else ""
+            item.ivItemFixtureLogoAwayTeam.load(match.awayTeamLogo){
                 crossfade(true)
             }
-            item.tvItemFixtureScoreDivider.isVisible = match.fixture.status.short != "NS"
-            item.tvItemFixtureNameAwayTeam.text = match.teams.away.name
-            item.tvItemFixtureStatus.text = match.fixture.status.long
-            item.tvItemFixtureVenue.text = "${match.fixture.venue.name}, ${match.fixture.venue.city}"
-            match.fixture.referee?.let { item.tvItemFixtureReferee.text = "Referee - $it" }
+            item.tvItemFixtureScoreDivider.isVisible = match.statusShort != "NS"
+            item.tvItemFixtureNameAwayTeam.text = match.awayTeamName
+            item.tvItemFixtureStatus.text = match.statusLong
+            item.tvItemFixtureVenue.text = "${match.venueName}, ${match.venueCity}"
+            item.tvItemFixtureReferee.text = if(match.referee != null) "Referee - ${match.referee}" else ""
         }
     }
 
@@ -82,7 +81,7 @@ class FixturesAdapter(private val fixtures: List<Match>): RecyclerView.Adapter<F
     internal class ProminentLayoutManager(
         context: Context,
         private val minScaleDistanceFactor: Float = 1.5f,
-        private val scaleDownBy: Float = 0.3f
+        private val scaleDownBy: Float = 0.2f
     ) : LinearLayoutManager(context, VERTICAL, false) {
 
         override fun onLayoutCompleted(state: RecyclerView.State?) =
