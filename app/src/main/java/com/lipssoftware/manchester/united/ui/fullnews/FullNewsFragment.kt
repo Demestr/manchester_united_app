@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 15.01.21 17:10
+ * Created by Dmitry Lipski on 20.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 15.01.21 17:09
+ * Last modified 20.01.21 13:07
  */
 
 package com.lipssoftware.manchester.united.ui.fullnews
@@ -18,7 +18,7 @@ import androidx.fragment.app.viewModels
 import coil.load
 import com.google.android.material.transition.MaterialSharedAxis
 import com.lipssoftware.manchester.united.R
-import com.lipssoftware.manchester.united.data.model.news.NewsDomain
+import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
 import com.lipssoftware.manchester.united.databinding.FragmentFullNewsBinding
 import com.lipssoftware.manchester.united.utils.convertDateToString
 import com.lipssoftware.manchester.united.utils.getTextFromHtml

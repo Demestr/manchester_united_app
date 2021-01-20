@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 12.01.21 16:56
+ * Created by Dmitry Lipski on 20.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.21 10:15
+ * Last modified 20.01.21 11:52
  */
 
 plugins {
@@ -85,6 +85,10 @@ dependencies {
 
     //Coil
     implementation 'io.coil-kt:coil:1.1.0'
+
+    //WorkManager
+    def work_version = "2.4.0"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -1,12 +1,13 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 11:18
+ * Created by Dmitry Lipski on 20.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 10:26
+ * Last modified 20.01.21 13:07
  */
 
 package com.lipssoftware.manchester.united.data.model.fixtures
 
 import com.lipssoftware.manchester.united.data.model.common.League
+import com.lipssoftware.manchester.united.data.model.domain.MatchDomain
 
 data class Match(
     val fixture: Fixture,
@@ -15,7 +16,7 @@ data class Match(
     val goals: Goals,
     val score: Score
 ){
-    fun toMatchDomain(): MatchDomain{
+    fun toMatchDomain(): MatchDomain {
         return MatchDomain(
             id = fixture.id,
             timestamp = fixture.timestamp,

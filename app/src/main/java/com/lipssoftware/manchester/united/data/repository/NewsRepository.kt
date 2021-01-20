@@ -1,15 +1,14 @@
 /*
- * Created by Dmitry Lipski on 12.01.21 16:56
+ * Created by Dmitry Lipski on 20.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.21 10:08
+ * Last modified 20.01.21 15:50
  */
 
 package com.lipssoftware.manchester.united.data.repository
 
 import com.lipssoftware.manchester.united.data.database.NewsDao
-import com.lipssoftware.manchester.united.data.model.news.NewsDomain
+import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
 import com.lipssoftware.manchester.united.data.network.NewsService
-import com.lipssoftware.manchester.united.utils.convertStringToDate
 
 class NewsRepository(
         private val newsService: NewsService,
@@ -17,23 +16,18 @@ class NewsRepository(
 ) : Repository {
 
     suspend fun getNews(): List<NewsDomain> {
-        refreshNews()
         return newsDao.getNews()
     }
 
-    private suspend fun refreshNews() {
+    suspend fun refreshNews(notify: (news: NewsDomain?) -> Unit) {
         try {
             val result = newsService.getNews().channel
             result.items.let { list ->
                 val listDomain = list.map {
-                    NewsDomain(
-                            it.id,
-                            it.title,
-                            it.link,
-                            convertStringToDate(it.pubDate),
-                            it.newsText,
-                            it.thumbnail.url
-                    )
+                    it.toNewsDomain()
+                }
+                if(!newsDao.getNews().isNullOrEmpty() && !newsDao.isExist(listDomain.last().id)){
+                    notify(listDomain.last())
                 }
                 newsDao.insertNews(listDomain)
             }

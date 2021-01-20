@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 18.01.21 10:42
+  ~ Created by Dmitry Lipski on 20.01.21 16:30
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 18.01.21 10:22
+  ~ Last modified 20.01.21 14:04
   -->
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_full_news" >
         <argument
             android:name="fullNews"
-            app:argType="com.lipssoftware.manchester.united.data.model.news.NewsDomain" />
+            app:argType="com.lipssoftware.manchester.united.data.model.domain.NewsDomain" />
     </fragment>
 
 </navigation>

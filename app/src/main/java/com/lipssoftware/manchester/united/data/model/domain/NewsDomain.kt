@@ -1,10 +1,10 @@
 /*
- * Created by Dmitry Lipski on 12.01.21 16:56
+ * Created by Dmitry Lipski on 20.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.21 10:17
+ * Last modified 20.01.21 13:07
  */
 
-package com.lipssoftware.manchester.united.data.model.news
+package com.lipssoftware.manchester.united.data.model.domain
 
 import android.os.Parcelable
 import androidx.annotation.Keep

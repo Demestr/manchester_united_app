@@ -1,10 +1,10 @@
 /*
- * Created by Dmitry Lipski on 19.01.21 16:24
+ * Created by Dmitry Lipski on 20.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 19.01.21 16:23
+ * Last modified 20.01.21 13:44
  */
 
-package com.lipssoftware.manchester.united
+package com.lipssoftware.manchester.united.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
+import com.lipssoftware.manchester.united.R
 import com.lipssoftware.manchester.united.databinding.ActivityMainBinding
 import com.lipssoftware.manchester.united.utils.setupWithNavController
 
@@ -43,7 +44,12 @@ class MainActivity : AppCompatActivity() {
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
-        val navGraphIds = listOf(R.navigation.news, R.navigation.standings, R.navigation.fixtures, R.navigation.squad)
+        val navGraphIds = listOf(
+            R.navigation.news,
+            R.navigation.standings,
+            R.navigation.fixtures,
+            R.navigation.squad
+        )
         val controller = binding.bottomNavView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,

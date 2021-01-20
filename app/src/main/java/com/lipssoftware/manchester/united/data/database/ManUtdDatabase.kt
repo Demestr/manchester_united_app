@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 11:18
+ * Created by Dmitry Lipski on 20.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 10:02
+ * Last modified 20.01.21 16:30
  */
 
 package com.lipssoftware.manchester.united.data.database
@@ -10,9 +10,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.lipssoftware.manchester.united.data.model.domain.MatchDomain
+import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
 import com.lipssoftware.manchester.united.data.model.domain.StandingDomain
-import com.lipssoftware.manchester.united.data.model.fixtures.MatchDomain
-import com.lipssoftware.manchester.united.data.model.news.NewsDomain
 
 @Database(entities = [StandingDomain::class, NewsDomain::class, MatchDomain::class], version = 1, exportSchema = false)
 abstract class ManUtdDatabase : RoomDatabase() {

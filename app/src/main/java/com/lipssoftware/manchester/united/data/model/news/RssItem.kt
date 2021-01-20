@@ -1,11 +1,13 @@
 /*
- * Created by Dmitry Lipski on 12.01.21 16:56
+ * Created by Dmitry Lipski on 20.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.21 8:38
+ * Last modified 20.01.21 13:58
  */
 
 package com.lipssoftware.manchester.united.data.model.news
 
+import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
+import com.lipssoftware.manchester.united.utils.convertStringToDate
 import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
@@ -30,4 +32,16 @@ data class RssItem @JvmOverloads constructor(
     @field:Element(name = "thumbnail")
     @param:Element(name = "thumbnail")
     val thumbnail: RssThumbnail
-)
+){
+
+    fun toNewsDomain(): NewsDomain{
+        return NewsDomain(
+            id,
+            title,
+            link,
+            convertStringToDate(pubDate),
+            newsText,
+            thumbnail.url
+        )
+    }
+}

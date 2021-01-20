@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 11:18
+ * Created by Dmitry Lipski on 20.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 11:18
+ * Last modified 20.01.21 13:07
  */
 
 package com.lipssoftware.manchester.united.ui.fixtures
@@ -15,7 +15,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.lipssoftware.manchester.united.data.model.fixtures.MatchDomain
+import com.lipssoftware.manchester.united.data.model.domain.MatchDomain
 import com.lipssoftware.manchester.united.databinding.ItemFixtureBinding
 import com.lipssoftware.manchester.united.utils.DATE_PATTERN_OUT
 import java.text.SimpleDateFormat

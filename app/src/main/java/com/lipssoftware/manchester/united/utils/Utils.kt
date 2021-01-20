@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 19.01.21 16:24
+ * Created by Dmitry Lipski on 20.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 19.01.21 12:05
+ * Last modified 20.01.21 15:10
  */
 
 package com.lipssoftware.manchester.united.utils
@@ -20,6 +20,9 @@ const val SEASON = 2020
 const val DATE_PATTERN_IN = "EEE, d MMM yyyy HH:mm:ss z"
 const val DATE_PATTERN_OUT = "EEE, d MMM yyyy HH:mm:ss"
 const val ISO_OFFSET_DATE_TIME = "yyyy-MM-dd'T'HH:mm:ssZ"
+
+//Notifications channels
+const val NEWS_CHANNEL_ID = "notifications_news_channel"
 
 @Keep
 enum class Status {

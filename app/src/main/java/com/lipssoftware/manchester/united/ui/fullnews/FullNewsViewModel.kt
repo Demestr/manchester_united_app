@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 12.01.21 16:56
+ * Created by Dmitry Lipski on 20.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.21 15:02
+ * Last modified 20.01.21 13:07
  */
 
 package com.lipssoftware.manchester.united.ui.fullnews
@@ -9,7 +9,7 @@ package com.lipssoftware.manchester.united.ui.fullnews
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.lipssoftware.manchester.united.data.model.news.NewsDomain
+import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
 
 class FullNewsViewModel : ViewModel() {
 

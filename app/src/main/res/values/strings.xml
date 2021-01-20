@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Dmitry Lipski on 19.01.21 16:24
+  ~ Created by Dmitry Lipski on 20.01.21 16:30
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 19.01.21 10:11
+  ~ Last modified 20.01.21 15:16
   -->
 
 <resources>
@@ -16,4 +16,6 @@
     <string name="label_standings_games_played">P</string>
     <string name="label_standings_team">Team</string>
     <string name="label_standings_position">Pos</string>
+    <string name="channel_name">News channel</string>
+    <string name="channel_description">Channel for getting notifications about last news</string>
 </resources>
