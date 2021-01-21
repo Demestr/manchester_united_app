@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 21.01.21 14:58
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 15:10
+ * Last modified 21.01.21 14:40
  */
 
 package com.lipssoftware.manchester.united.utils
@@ -23,6 +23,7 @@ const val ISO_OFFSET_DATE_TIME = "yyyy-MM-dd'T'HH:mm:ssZ"
 
 //Notifications channels
 const val NEWS_CHANNEL_ID = "notifications_news_channel"
+const val FOREGROUND_SERVICE_CHANNEL_ID = "foreground_service_channel"
 
 @Keep
 enum class Status {

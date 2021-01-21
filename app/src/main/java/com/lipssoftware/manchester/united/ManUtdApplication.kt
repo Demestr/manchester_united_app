@@ -1,12 +1,13 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 21.01.21 14:58
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 15:26
+ * Last modified 21.01.21 14:43
  */
 
 package com.lipssoftware.manchester.united
 
 import android.app.Application
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -14,6 +15,7 @@ import android.os.Build
 import androidx.work.*
 import com.lipssoftware.manchester.united.data.work.RefreshDataWorker
 import com.lipssoftware.manchester.united.data.work.RefreshNewsWorker
+import com.lipssoftware.manchester.united.utils.FOREGROUND_SERVICE_CHANNEL_ID
 import com.lipssoftware.manchester.united.utils.NEWS_CHANNEL_ID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,8 +38,6 @@ class ManUtdApplication: Application() {
                 .setRequiredNetworkType(NetworkType.NOT_ROAMING)
                 .setRequiresBatteryNotLow(true)
                 .build()
-            val newsRequest = OneTimeWorkRequest.from(RefreshNewsWorker::class.java)
-            val dataRequest = OneTimeWorkRequest.from(RefreshDataWorker::class.java)
             val repeatingDataRequest =
                 PeriodicWorkRequestBuilder<RefreshDataWorker>(3, TimeUnit.HOURS)
                     .setConstraints(constraints)
@@ -47,17 +47,16 @@ class ManUtdApplication: Application() {
                     .setConstraints(constraints)
                     .build()
             WorkManager.getInstance(this@ManUtdApplication).apply {
-                enqueueUniquePeriodicWork(
-                    RefreshDataWorker.WORK_NAME,
-                    ExistingPeriodicWorkPolicy.REPLACE,
-                    repeatingDataRequest
-                )
+//                enqueueUniquePeriodicWork(
+//                    RefreshDataWorker.WORK_NAME,
+//                    ExistingPeriodicWorkPolicy.REPLACE,
+//                    repeatingDataRequest
+//                )
                 enqueueUniquePeriodicWork(
                     RefreshNewsWorker.WORK_NAME,
                     ExistingPeriodicWorkPolicy.REPLACE,
                     repeatingNewsRequest
                 )
-                enqueue(listOf(newsRequest, dataRequest))
             }
         }
     }
@@ -72,10 +71,14 @@ class ManUtdApplication: Application() {
             val channel = NotificationChannel(NEWS_CHANNEL_ID, name, importance).apply {
                 description = descriptionText
             }
+            val channelService = NotificationChannel(FOREGROUND_SERVICE_CHANNEL_ID, "Service channel", NotificationManager.IMPORTANCE_NONE).apply {
+                lockscreenVisibility = Notification.VISIBILITY_PRIVATE
+            }
             // Register the channel with the system
             val notificationManager: NotificationManager =
                 applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
+            notificationManager.createNotificationChannel(channelService)
         }
     }
 }

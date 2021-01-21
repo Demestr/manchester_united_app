@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 21.01.21 14:58
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 16:30
+ * Last modified 21.01.21 13:47
  */
 
 package com.lipssoftware.manchester.united.data.database
@@ -36,6 +36,7 @@ abstract class ManUtdDatabase : RoomDatabase() {
                     ManUtdDatabase::class.java,
                     DATABASE_NAME
                 )
+                    .fallbackToDestructiveMigration()
                     .build().also { instance = it }
             }
         }

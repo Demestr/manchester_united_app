@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 21.01.21 14:58
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 15:50
+ * Last modified 21.01.21 13:01
  */
 
 package com.lipssoftware.manchester.united.data.repository
@@ -9,15 +9,15 @@ package com.lipssoftware.manchester.united.data.repository
 import com.lipssoftware.manchester.united.data.database.NewsDao
 import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
 import com.lipssoftware.manchester.united.data.network.NewsService
+import kotlinx.coroutines.flow.Flow
 
 class NewsRepository(
         private val newsService: NewsService,
         private val newsDao: NewsDao
 ) : Repository {
 
-    suspend fun getNews(): List<NewsDomain> {
-        return newsDao.getNews()
-    }
+    val newsFlow: Flow<List<NewsDomain>>
+        get() = newsDao.getNews()
 
     suspend fun refreshNews(notify: (news: NewsDomain?) -> Unit) {
         try {
@@ -26,8 +26,7 @@ class NewsRepository(
                 val listDomain = list.map {
                     it.toNewsDomain()
                 }
-                //if(!newsDao.getNews().isNullOrEmpty() && !newsDao.isExist(listDomain.last().id)){
-                if(!newsDao.isExist(listDomain.last().id)){
+                if(newsDao.newsCount() != 0 && !newsDao.isExist(listDomain.first().id)){
                     notify(listDomain.first())
                 }
                 newsDao.insertNews(listDomain)
@@ -35,5 +34,9 @@ class NewsRepository(
         } catch (exception: Exception) {
             println(exception.message)
         }
+    }
+
+    suspend fun deleteNews(id: String){
+        newsDao.deleteNews(id)
     }
 }

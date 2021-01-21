@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 19.01.21 16:24
+ * Created by Dmitry Lipski on 21.01.21 14:58
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 19.01.21 9:08
+ * Last modified 21.01.21 14:58
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -23,7 +22,6 @@ import com.lipssoftware.manchester.united.data.database.ManUtdDatabase
 import com.lipssoftware.manchester.united.data.network.NewsBuilder
 import com.lipssoftware.manchester.united.data.repository.NewsRepository
 import com.lipssoftware.manchester.united.databinding.FragmentNewsBinding
-import com.lipssoftware.manchester.united.utils.Status
 
 class NewsFragment : Fragment() {
 
@@ -43,11 +41,12 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentNewsBinding.inflate(inflater)
+        context ?: return binding.root
         binding.rvNewsList.apply {
             layoutManager = LinearLayoutManager(context)
         }
         binding.srlNews.setOnRefreshListener {
-            newsViewModel.getNews()
+            newsViewModel.fetchNewsFromRemote()
         }
         return binding.root
     }
@@ -61,38 +60,31 @@ class NewsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         newsViewModel.news.observe(viewLifecycleOwner) { standings ->
-            standings?.let { resource ->
-                when (standings.status) {
-                    Status.LOADING -> {
-                        showUI(false)
+            standings?.let { list ->
+                binding.rvNewsList.adapter = NewsAdapter(list) { news, extras ->
+                    exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+                        duration = resources.getInteger(R.integer.large_animation_duration).toLong()
                     }
-                    Status.SUCCESS -> {
-                        resource.data?.let { list ->
-                            binding.rvNewsList.adapter = NewsAdapter(list) { news, extras ->
-                                    exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
-                                        duration = resources.getInteger(R.integer.large_animation_duration).toLong()
-                                    }
-                                    reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-                                        duration = resources.getInteger(R.integer.large_animation_duration).toLong()
-                                    }
-                                val bundle = Bundle().apply { putParcelable("fullNews", news) }
-                                    findNavController().navigate(R.id.action_navigation_news_to_fullNewsFragment, bundle, null, extras)
-                                }
-                        }
-                        showUI()
+                    reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+                        duration = resources.getInteger(R.integer.large_animation_duration).toLong()
                     }
-                    Status.ERROR -> {
-                        showUI()
-                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
-                    }
+                    val bundle = Bundle().apply { putParcelable("fullNews", news) }
+                    findNavController().navigate(
+                        R.id.action_navigation_news_to_fullNewsFragment,
+                        bundle,
+                        null,
+                        extras
+                    )
+                    newsViewModel.deleteNews()
                 }
             }
+            showUI()
         }
     }
 
     private fun showUI(showUi: Boolean = true) {
         binding.rvNewsList.isVisible = showUi
         binding.pbNews.isVisible = !showUi
-        if(showUi)  binding.srlNews.isRefreshing = false
+        if (showUi) binding.srlNews.isRefreshing = false
     }
 }
