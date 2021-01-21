@@ -33,13 +33,8 @@ class ManUtdApplication: Application() {
     private fun setupRecurringWork() {
         applicationScope.launch {
             val constraints = Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.UNMETERED)
+                .setRequiredNetworkType(NetworkType.NOT_ROAMING)
                 .setRequiresBatteryNotLow(true)
-                .apply {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        setRequiresDeviceIdle(true)
-                    }
-                }
                 .build()
             val newsRequest = OneTimeWorkRequest.from(RefreshNewsWorker::class.java)
             val dataRequest = OneTimeWorkRequest.from(RefreshDataWorker::class.java)
@@ -54,12 +49,12 @@ class ManUtdApplication: Application() {
             WorkManager.getInstance(this@ManUtdApplication).apply {
                 enqueueUniquePeriodicWork(
                     RefreshDataWorker.WORK_NAME,
-                    ExistingPeriodicWorkPolicy.KEEP,
+                    ExistingPeriodicWorkPolicy.REPLACE,
                     repeatingDataRequest
                 )
                 enqueueUniquePeriodicWork(
                     RefreshNewsWorker.WORK_NAME,
-                    ExistingPeriodicWorkPolicy.KEEP,
+                    ExistingPeriodicWorkPolicy.REPLACE,
                     repeatingNewsRequest
                 )
                 enqueue(listOf(newsRequest, dataRequest))

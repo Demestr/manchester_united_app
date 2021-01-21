@@ -26,8 +26,9 @@ class NewsRepository(
                 val listDomain = list.map {
                     it.toNewsDomain()
                 }
-                if(!newsDao.getNews().isNullOrEmpty() && !newsDao.isExist(listDomain.last().id)){
-                    notify(listDomain.last())
+                //if(!newsDao.getNews().isNullOrEmpty() && !newsDao.isExist(listDomain.last().id)){
+                if(!newsDao.isExist(listDomain.last().id)){
+                    notify(listDomain.first())
                 }
                 newsDao.insertNews(listDomain)
             }

@@ -23,6 +23,15 @@ import retrofit2.HttpException
 class RefreshNewsWorker(ctx: Context, params: WorkerParameters): CoroutineWorker(ctx, params) {
 
     override suspend fun doWork(): Result = coroutineScope {
+//        val buildertest = NotificationCompat.Builder(applicationContext, NEWS_CHANNEL_ID)
+//            .setSmallIcon(R.drawable.ic_devil_48dp)
+//            .setContentTitle("Test")
+//            .setContentText("Test notification")
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//        with(NotificationManagerCompat.from(applicationContext)) {
+//            // notificationId is a unique int for each notification that you must define
+//            notify(0, buildertest.build())
+//        }
         val db = ManUtdDatabase.getInstance(applicationContext)
         val newsRepo = NewsRepository(NewsBuilder.newsService, db.getNewsDao())
         try {
