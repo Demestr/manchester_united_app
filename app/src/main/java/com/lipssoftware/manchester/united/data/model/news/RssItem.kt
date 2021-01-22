@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 22.01.21 12:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 13:58
+ * Last modified 22.01.21 11:43
  */
 
 package com.lipssoftware.manchester.united.data.model.news
@@ -23,6 +23,9 @@ data class RssItem @JvmOverloads constructor(
     @field:Element(name = "link")
     @param:Element(name = "link")
     val link: String,
+    @field:Element(name = "category")
+    @param:Element(name = "category")
+    val category: String,
     @field:Element(name = "pubDate")
     @param:Element(name = "pubDate")
     val pubDate: String,
@@ -38,6 +41,7 @@ data class RssItem @JvmOverloads constructor(
         return NewsDomain(
             id,
             title,
+            category,
             link,
             convertStringToDate(pubDate),
             newsText,

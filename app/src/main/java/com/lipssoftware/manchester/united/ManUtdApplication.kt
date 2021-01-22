@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 21.01.21 14:58
+ * Created by Dmitry Lipski on 22.01.21 12:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 21.01.21 14:43
+ * Last modified 22.01.21 12:07
  */
 
 package com.lipssoftware.manchester.united
@@ -39,7 +39,7 @@ class ManUtdApplication: Application() {
                 .setRequiresBatteryNotLow(true)
                 .build()
             val repeatingDataRequest =
-                PeriodicWorkRequestBuilder<RefreshDataWorker>(3, TimeUnit.HOURS)
+                PeriodicWorkRequestBuilder<RefreshDataWorker>(1, TimeUnit.DAYS)
                     .setConstraints(constraints)
                     .build()
             val repeatingNewsRequest =
@@ -47,11 +47,11 @@ class ManUtdApplication: Application() {
                     .setConstraints(constraints)
                     .build()
             WorkManager.getInstance(this@ManUtdApplication).apply {
-//                enqueueUniquePeriodicWork(
-//                    RefreshDataWorker.WORK_NAME,
-//                    ExistingPeriodicWorkPolicy.REPLACE,
-//                    repeatingDataRequest
-//                )
+                enqueueUniquePeriodicWork(
+                    RefreshDataWorker.WORK_NAME,
+                    ExistingPeriodicWorkPolicy.REPLACE,
+                    repeatingDataRequest
+                )
                 enqueueUniquePeriodicWork(
                     RefreshNewsWorker.WORK_NAME,
                     ExistingPeriodicWorkPolicy.REPLACE,
