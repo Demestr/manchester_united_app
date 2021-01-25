@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 22.01.21 12:30
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.21 12:07
+ * Last modified 25.01.21 11:46
  */
 
 package com.lipssoftware.manchester.united
@@ -12,24 +12,36 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
 import com.lipssoftware.manchester.united.data.work.RefreshDataWorker
 import com.lipssoftware.manchester.united.data.work.RefreshNewsWorker
 import com.lipssoftware.manchester.united.utils.FOREGROUND_SERVICE_CHANNEL_ID
 import com.lipssoftware.manchester.united.utils.NEWS_CHANNEL_ID
+import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class ManUtdApplication: Application() {
+@HiltAndroidApp
+class ManUtdApplication: Application(), Configuration.Provider {
 
     private val applicationScope = CoroutineScope(Dispatchers.Default)
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
+    override fun getWorkManagerConfiguration(): Configuration {
+        return Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
+    }
 
     override fun onCreate() {
         super.onCreate()
-        setupRecurringWork()
         createNotificationChannel()
+        setupRecurringWork()
     }
 
     private fun setupRecurringWork() {

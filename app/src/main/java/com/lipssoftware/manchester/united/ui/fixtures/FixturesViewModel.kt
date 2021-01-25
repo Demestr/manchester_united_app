@@ -1,11 +1,12 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 13:07
+ * Last modified 25.01.21 10:53
  */
 
 package com.lipssoftware.manchester.united.ui.fixtures
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,7 +17,8 @@ import com.lipssoftware.manchester.united.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class FixturesViewModel(private val repository: FixturesRepository) : ViewModel() {
+class FixturesViewModel @ViewModelInject constructor(private val repository: FixturesRepository) :
+    ViewModel() {
 
     private val _standings = MutableLiveData<Resource<List<MatchDomain>>>()
     val standings: LiveData<Resource<List<MatchDomain>>> = _standings
@@ -26,7 +28,7 @@ class FixturesViewModel(private val repository: FixturesRepository) : ViewModel(
         getStandings()
     }
 
-    private fun getStandings(){
+    private fun getStandings() {
         viewModelScope.launch(Dispatchers.IO) {
             _standings.postValue(Resource.loading(data = null))
             try {
@@ -42,9 +44,13 @@ class FixturesViewModel(private val repository: FixturesRepository) : ViewModel(
                 }.maxByOrNull { it.timestamp }
                 indexOfLastPlayedMatch = list.indexOf(lastPlayedMatch)
                 _standings.postValue(Resource.success(data = list))
-            }
-            catch (exception: Exception){
-                _standings.postValue(Resource.error(data = null, message = exception.message ?: "Error occurred!"))
+            } catch (exception: Exception) {
+                _standings.postValue(
+                    Resource.error(
+                        data = null,
+                        message = exception.message ?: "Error occurred!"
+                    )
+                )
             }
         }
     }

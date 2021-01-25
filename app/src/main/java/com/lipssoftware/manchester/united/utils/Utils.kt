@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 21.01.21 14:58
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 21.01.21 14:40
+ * Last modified 25.01.21 10:13
  */
 
 package com.lipssoftware.manchester.united.utils
@@ -20,6 +20,9 @@ const val SEASON = 2020
 const val DATE_PATTERN_IN = "EEE, d MMM yyyy HH:mm:ss z"
 const val DATE_PATTERN_OUT = "EEE, d MMM yyyy HH:mm:ss"
 const val ISO_OFFSET_DATE_TIME = "yyyy-MM-dd'T'HH:mm:ssZ"
+const val BASE_URL_NEWS = "https://www.manutd.com/Feeds/"
+const val BASE_URL_STATS = "https://v3.football.api-sports.io/"
+
 
 //Notifications channels
 const val NEWS_CHANNEL_ID = "notifications_news_channel"

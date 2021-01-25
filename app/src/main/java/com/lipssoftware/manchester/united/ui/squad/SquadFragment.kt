@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 19.01.21 16:24
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 19.01.21 8:53
+ * Last modified 25.01.21 11:17
  */
 
 package com.lipssoftware.manchester.united.ui.squad
@@ -21,11 +21,13 @@ import com.google.android.material.transition.MaterialElevationScale
 import com.lipssoftware.manchester.united.R
 import com.lipssoftware.manchester.united.databinding.FragmentSquadBinding
 import com.lipssoftware.manchester.united.utils.Status
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SquadFragment : Fragment() {
 
     private lateinit var binding: FragmentSquadBinding
-    private val squadViewModel by viewModels<SquadViewModel> { SquadViewModelFactory(requireContext()) }
+    private val squadViewModel by viewModels<SquadViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

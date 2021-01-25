@@ -1,11 +1,12 @@
 /*
- * Created by Dmitry Lipski on 11.01.21 17:10
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.21 15:16
+ * Last modified 25.01.21 10:53
  */
 
 package com.lipssoftware.manchester.united.ui.standings
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,7 +17,8 @@ import com.lipssoftware.manchester.united.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class StandingsViewModel(private val repository: StandingsRepository) : ViewModel() {
+class StandingsViewModel @ViewModelInject constructor(private val repository: StandingsRepository) :
+    ViewModel() {
 
     private val _standings = MutableLiveData<Resource<List<StandingDomain>>>()
     val standings: LiveData<Resource<List<StandingDomain>>> = _standings
@@ -25,14 +27,18 @@ class StandingsViewModel(private val repository: StandingsRepository) : ViewMode
         getStandings()
     }
 
-    private fun getStandings(){
+    private fun getStandings() {
         viewModelScope.launch(Dispatchers.IO) {
             _standings.postValue(Resource.loading(data = null))
             try {
                 _standings.postValue(Resource.success(data = repository.getStandings()))
-            }
-            catch (exception: Exception){
-                _standings.postValue(Resource.error(data = null, message = exception.message ?: "Error occurred!"))
+            } catch (exception: Exception) {
+                _standings.postValue(
+                    Resource.error(
+                        data = null,
+                        message = exception.message ?: "Error occurred!"
+                    )
+                )
             }
         }
     }

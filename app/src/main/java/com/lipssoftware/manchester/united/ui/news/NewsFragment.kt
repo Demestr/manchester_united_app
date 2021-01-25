@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 21.01.21 14:58
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 21.01.21 14:58
+ * Last modified 25.01.21 11:17
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -18,22 +18,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.transition.MaterialSharedAxis
 import com.lipssoftware.manchester.united.R
-import com.lipssoftware.manchester.united.data.database.ManUtdDatabase
-import com.lipssoftware.manchester.united.data.network.NewsBuilder
-import com.lipssoftware.manchester.united.data.repository.NewsRepository
 import com.lipssoftware.manchester.united.databinding.FragmentNewsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewsFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsBinding
-    private val newsViewModel by viewModels<NewsViewModel> {
-        NewsViewModelFactory(
-            NewsRepository(
-                NewsBuilder.newsService,
-                ManUtdDatabase.getInstance(requireContext()).getNewsDao()
-            )
-        )
-    }
+    private val newsViewModel by viewModels<NewsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,7 +67,6 @@ class NewsFragment : Fragment() {
                         null,
                         extras
                     )
-                    newsViewModel.deleteNews()
                 }
             }
             showUI()

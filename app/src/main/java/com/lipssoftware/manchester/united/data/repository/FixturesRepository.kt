@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 13:44
+ * Last modified 25.01.21 10:53
  */
 
 package com.lipssoftware.manchester.united.data.repository
@@ -11,8 +11,9 @@ import com.lipssoftware.manchester.united.data.model.domain.MatchDomain
 import com.lipssoftware.manchester.united.data.network.StatsService
 import com.lipssoftware.manchester.united.utils.MAN_UTD_ID
 import com.lipssoftware.manchester.united.utils.SEASON
+import javax.inject.Inject
 
-class FixturesRepository(
+class FixturesRepository @Inject constructor(
     private val statsService: StatsService,
     private val fixturesDao: FixturesDao
     ): Repository {

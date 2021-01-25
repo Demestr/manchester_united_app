@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 13.01.21 10:45
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.01.21 9:11
+ * Last modified 25.01.21 11:17
  */
 
 package com.lipssoftware.manchester.united.ui.standings
@@ -16,16 +16,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lipssoftware.manchester.united.data.database.ManUtdDatabase
-import com.lipssoftware.manchester.united.data.network.StatsBuilder
-import com.lipssoftware.manchester.united.data.repository.StandingsRepository
 import com.lipssoftware.manchester.united.databinding.FragmentStandingsBinding
 import com.lipssoftware.manchester.united.utils.Status
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StandingsFragment : Fragment() {
 
     private lateinit var binding: FragmentStandingsBinding
-    private val standingsViewModel by viewModels<StandingsViewModel>{ StandingsViewModelFactory(StandingsRepository(StatsBuilder.statsService, ManUtdDatabase.getInstance(requireContext()).getStandingsDao())) }
+    private val standingsViewModel by viewModels<StandingsViewModel>()
 
     override fun onCreateView(
             inflater: LayoutInflater,

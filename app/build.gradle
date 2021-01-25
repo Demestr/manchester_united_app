@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 11:52
+ * Last modified 25.01.21 11:25
  */
 
 plugins {
@@ -10,6 +10,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
 }
 
 
@@ -89,6 +90,17 @@ dependencies {
     //WorkManager
     def work_version = "2.4.0"
     implementation "androidx.work:work-runtime-ktx:$work_version"
+
+    //dagger hilt
+    implementation "com.google.dagger:hilt-android:2.28.3-alpha"
+    kapt "com.google.dagger:hilt-android-compiler:2.28.3-alpha"
+
+    // hilt viewModel extension
+    def hilt_jetpack_version = "1.0.0-alpha01"
+    //noinspection GradleDependency
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_version"
+    implementation "androidx.hilt:hilt-work:$hilt_jetpack_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

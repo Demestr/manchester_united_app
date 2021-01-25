@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 21.01.21 14:58
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 21.01.21 13:01
+ * Last modified 25.01.21 10:53
  */
 
 package com.lipssoftware.manchester.united.data.repository
@@ -10,8 +10,9 @@ import com.lipssoftware.manchester.united.data.database.NewsDao
 import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
 import com.lipssoftware.manchester.united.data.network.NewsService
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class NewsRepository(
+class NewsRepository @Inject constructor(
         private val newsService: NewsService,
         private val newsDao: NewsDao
 ) : Repository {

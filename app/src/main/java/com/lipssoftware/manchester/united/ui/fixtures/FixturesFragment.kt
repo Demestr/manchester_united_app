@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 11:18
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 9:57
+ * Last modified 25.01.21 11:17
  */
 
 package com.lipssoftware.manchester.united.ui.fixtures
@@ -18,20 +18,18 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
-import com.lipssoftware.manchester.united.data.database.ManUtdDatabase
-import com.lipssoftware.manchester.united.data.network.StatsBuilder
-import com.lipssoftware.manchester.united.data.repository.FixturesRepository
 import com.lipssoftware.manchester.united.databinding.FragmentFixturesBinding
 import com.lipssoftware.manchester.united.utils.Status
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FixturesFragment : Fragment() {
 
     private lateinit var binding: FragmentFixturesBinding
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var snapHelper: SnapHelper
     private var isPositioned: Boolean = false
-    private val fixturesViewModel by viewModels<FixturesViewModel>{ FixturesViewModelFactory(
-        FixturesRepository(StatsBuilder.statsService, ManUtdDatabase.getInstance(requireContext()).getFixturesDao())) }
+    private val fixturesViewModel by viewModels<FixturesViewModel>()
 
     override fun onCreateView(
             inflater: LayoutInflater,

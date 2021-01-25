@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 15.01.21 17:10
+ * Created by Dmitry Lipski on 25.01.21 13:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.21 16:18
+ * Last modified 25.01.21 10:53
  */
 
 package com.lipssoftware.manchester.united.data.repository
@@ -12,8 +12,9 @@ import androidx.core.graphics.scale
 import com.google.gson.Gson
 import com.lipssoftware.manchester.united.data.model.players.Player
 import com.lipssoftware.manchester.united.data.model.players.Squad
+import javax.inject.Inject
 
-class SquadRepository(val context: Context) : Repository {
+class SquadRepository @Inject constructor(val context: Context) : Repository {
 
     fun getSquad(): List<Player> {
         val gson = Gson()
