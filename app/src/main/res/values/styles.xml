@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 15.01.21 17:10
+  ~ Created by Dmitry Lipski on 26.01.21 16:30
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 15.01.21 16:26
+  ~ Last modified 26.01.21 16:16
   -->
 
 <resources>
@@ -92,5 +92,9 @@
         <item name="android:layout_marginStart">@dimen/normal_horizontal_margin</item>
         <item name="android:fontFamily">@font/iceberg</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="ExtendedFabScroll" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon">
+        <item name="minHeight">24dp</item>
     </style>
 </resources>

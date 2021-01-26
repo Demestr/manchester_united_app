@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 19.01.21 16:24
+  ~ Created by Dmitry Lipski on 26.01.21 16:30
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 19.01.21 9:54
+  ~ Last modified 26.01.21 16:16
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:animateLayoutChanges="true"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -33,4 +34,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_scroll_to_last_match"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginBottom="@dimen/small_vertical_margin"
+        android:backgroundTint="@color/red_500"
+        android:fontFamily="@font/iceberg"
+        android:paddingStart="24dp"
+        android:paddingLeft="24dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="Last match"
+        android:textAllCaps="true"
+        android:textAppearance="@style/ManUtd.TextAppearance.Standings"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

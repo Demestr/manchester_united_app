@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 26.01.21 16:30
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 11:17
+ * Last modified 26.01.21 16:16
  */
 
 package com.lipssoftware.manchester.united.ui.fixtures
@@ -17,10 +17,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.lipssoftware.manchester.united.databinding.FragmentFixturesBinding
 import com.lipssoftware.manchester.united.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.abs
 
 @AndroidEntryPoint
 class FixturesFragment : Fragment() {
@@ -32,9 +34,9 @@ class FixturesFragment : Fragment() {
     private val fixturesViewModel by viewModels<FixturesViewModel>()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         binding = FragmentFixturesBinding.inflate(inflater)
         layoutManager = FixturesAdapter.ProminentLayoutManager(requireContext())
@@ -46,25 +48,39 @@ class FixturesFragment : Fragment() {
             setHasFixedSize(true)
         }
         snapHelper.attachToRecyclerView(binding.rvFixturesList)
+        binding.fabScrollToLastMatch.setOnClickListener {
+            val direction =
+                if ((binding.rvFixturesList.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() < fixturesViewModel.indexOfLastPlayedMatch) 1 else -1
+            binding.rvFixturesList.smoothScrollToPosition(fixturesViewModel.indexOfLastPlayedMatch + direction)
+        }
+        binding.rvFixturesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (abs((recyclerView.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition() - fixturesViewModel.indexOfLastPlayedMatch) > 1)
+                    binding.fabScrollToLastMatch.show()
+                else
+                    binding.fabScrollToLastMatch.hide()
+            }
+        })
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        fixturesViewModel.standings.observe(viewLifecycleOwner){ standings ->
+        fixturesViewModel.standings.observe(viewLifecycleOwner) { standings ->
             standings?.let { resource ->
-                when(standings.status){
-                    Status.LOADING ->{
+                when (standings.status) {
+                    Status.LOADING -> {
                         showUI(false)
                     }
                     Status.SUCCESS -> {
                         resource.data?.let { list ->
                             binding.rvFixturesList.adapter = FixturesAdapter(list)
-                            if(!isPositioned) initRecyclerViewPosition(fixturesViewModel.indexOfLastPlayedMatch)
+                            if (!isPositioned) initRecyclerViewPosition(fixturesViewModel.indexOfLastPlayedMatch)
                         }
                         showUI()
                     }
-                    Status.ERROR ->{
+                    Status.ERROR -> {
                         showUI()
                         Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
                     }
