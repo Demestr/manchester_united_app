@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 26.01.21 16:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 10:53
+ * Last modified 26.01.21 11:54
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -22,6 +22,9 @@ class NewsViewModel @ViewModelInject constructor(private val newsRepository: New
     val news: LiveData<List<NewsDomain>>
         get() = newsRepository.newsFlow.asLiveData()
 
+    init {
+        fetchNewsFromRemote()
+    }
 
     fun fetchNewsFromRemote() {
         viewModelScope.launch(Dispatchers.IO) {

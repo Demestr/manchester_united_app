@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 25.01.21 13:10
+  ~ Created by Dmitry Lipski on 26.01.21 16:06
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 25.01.21 11:46
+  ~ Last modified 26.01.21 16:06
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.lipssoftware.manchester.united">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -31,10 +30,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <provider
-            android:name="androidx.work.impl.WorkManagerInitializer"
-            android:authorities="${applicationId}.workmanager-init"
-            tools:node="remove" />
     </application>
 
 </manifest>

@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 26.01.21 16:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 13:09
+ * Last modified 26.01.21 16:06
  */
 
 package com.lipssoftware.manchester.united.data.work
@@ -10,8 +10,6 @@ import android.app.Notification
 import android.content.Context
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.hilt.Assisted
-import androidx.hilt.work.WorkerInject
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
@@ -25,9 +23,9 @@ import com.lipssoftware.manchester.united.utils.getTextFromHtml
 import kotlinx.coroutines.coroutineScope
 import retrofit2.HttpException
 
-class RefreshNewsWorker @WorkerInject constructor(
-    @Assisted ctx: Context,
-    @Assisted params: WorkerParameters,
+class RefreshNewsWorker(
+    ctx: Context,
+    params: WorkerParameters,
     private val newsRepository: NewsRepository) :
     CoroutineWorker(ctx, params) {
 
