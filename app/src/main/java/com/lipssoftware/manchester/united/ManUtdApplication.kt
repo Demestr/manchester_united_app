@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 26.01.21 16:06
+ * Created by Dmitry Lipski on 27.01.21 16:14
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.21 16:06
+ * Last modified 27.01.21 10:16
  */
 
 package com.lipssoftware.manchester.united
@@ -12,6 +12,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
 import com.lipssoftware.manchester.united.data.work.RefreshDataWorker
 import com.lipssoftware.manchester.united.data.work.RefreshNewsWorker
@@ -22,11 +23,20 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 @HiltAndroidApp
-class ManUtdApplication: Application() {
+class ManUtdApplication: Application(), Configuration.Provider {
 
     private val applicationScope = CoroutineScope(Dispatchers.Default)
+
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
+    override fun getWorkManagerConfiguration() =
+        Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
 
     override fun onCreate() {
         super.onCreate()
@@ -49,7 +59,9 @@ class ManUtdApplication: Application() {
                     .setConstraints(constraints)
                     .setInitialDelay(15, TimeUnit.MINUTES)
                     .build()
-            WorkManager.getInstance(this@ManUtdApplication).apply {
+            WorkManager.getInstance(this@ManUtdApplication)
+//                .enqueue(listOf(repeatingDataRequest, repeatingNewsRequest))
+                .apply {
                 enqueueUniquePeriodicWork(
                     RefreshDataWorker.WORK_NAME,
                     ExistingPeriodicWorkPolicy.REPLACE,

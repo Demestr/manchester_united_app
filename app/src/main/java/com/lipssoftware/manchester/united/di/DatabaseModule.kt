@@ -1,16 +1,13 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 27.01.21 16:14
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 10:31
+ * Last modified 27.01.21 11:34
  */
 
 package com.lipssoftware.manchester.united.di
 
 import android.content.Context
-import com.lipssoftware.manchester.united.data.database.FixturesDao
-import com.lipssoftware.manchester.united.data.database.ManUtdDatabase
-import com.lipssoftware.manchester.united.data.database.NewsDao
-import com.lipssoftware.manchester.united.data.database.StandingsDao
+import com.lipssoftware.manchester.united.data.database.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,4 +31,7 @@ class DatabaseModule {
 
     @Provides
     fun provideStandingsDao(database: ManUtdDatabase): StandingsDao = database.getStandingsDao()
+
+    @Provides
+    fun provideHelpersDao(database: ManUtdDatabase): HelperDao = database.getHelperDao()
 }

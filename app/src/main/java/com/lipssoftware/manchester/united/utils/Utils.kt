@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 27.01.21 16:14
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 10:13
+ * Last modified 27.01.21 12:27
  */
 
 package com.lipssoftware.manchester.united.utils
@@ -27,6 +27,7 @@ const val BASE_URL_STATS = "https://v3.football.api-sports.io/"
 //Notifications channels
 const val NEWS_CHANNEL_ID = "notifications_news_channel"
 const val FOREGROUND_SERVICE_CHANNEL_ID = "foreground_service_channel"
+const val NEWS_GROUP_ID = "news_notification_group"
 
 @Keep
 enum class Status {

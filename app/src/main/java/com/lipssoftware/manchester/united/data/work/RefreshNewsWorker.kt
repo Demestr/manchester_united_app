@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 26.01.21 16:06
+ * Created by Dmitry Lipski on 27.01.21 16:14
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.21 16:06
+ * Last modified 27.01.21 12:27
  */
 
 package com.lipssoftware.manchester.united.data.work
@@ -10,6 +10,8 @@ import android.app.Notification
 import android.content.Context
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.hilt.Assisted
+import androidx.hilt.work.WorkerInject
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
@@ -19,13 +21,14 @@ import com.lipssoftware.manchester.united.data.repository.NewsRepository
 import com.lipssoftware.manchester.united.ui.fullnews.FullNewsFragmentArgs
 import com.lipssoftware.manchester.united.utils.FOREGROUND_SERVICE_CHANNEL_ID
 import com.lipssoftware.manchester.united.utils.NEWS_CHANNEL_ID
+import com.lipssoftware.manchester.united.utils.NEWS_GROUP_ID
 import com.lipssoftware.manchester.united.utils.getTextFromHtml
 import kotlinx.coroutines.coroutineScope
 import retrofit2.HttpException
 
-class RefreshNewsWorker(
-    ctx: Context,
-    params: WorkerParameters,
+class RefreshNewsWorker @WorkerInject constructor(
+    @Assisted ctx: Context,
+    @Assisted params: WorkerParameters,
     private val newsRepository: NewsRepository) :
     CoroutineWorker(ctx, params) {
 
@@ -49,6 +52,7 @@ class RefreshNewsWorker(
                         .setSmallIcon(R.drawable.ic_devil_48dp)
                         .setContentTitle(it.category)
                         .setContentText(it.title)
+                        .setGroup(NEWS_GROUP_ID)
                         .setStyle(
                             NotificationCompat.BigTextStyle().bigText(getTextFromHtml(it.text))
                         )
@@ -56,7 +60,6 @@ class RefreshNewsWorker(
                         .setAutoCancel(true)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     with(NotificationManagerCompat.from(applicationContext)) {
-                        // notificationId is a unique int for each notification that you must define
                         notify(it.pubDate.toInt(), builder.build())
                     }
                 }
