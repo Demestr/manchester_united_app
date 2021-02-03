@@ -209,22 +209,6 @@
       "photo": "victor_lindelof.png"
     },
     {
-      "name": "Marcos Rojo",
-      "firstname": "Faustino Marcos Alberto",
-      "lastname": "Rojo",
-      "birth": {
-        "date": "1990-03-20",
-        "place": "La Plata",
-        "country": "Argentina"
-      },
-      "nationality": "Argentina",
-      "position": "defender",
-      "number": 16,
-      "height": 187,
-      "weight": 85,
-      "photo": "marcos_rojo.png"
-    },
-    {
       "name": "Luke Shaw",
       "firstname": "Luke",
       "lastname": "Shaw",

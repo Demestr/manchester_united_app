@@ -1,10 +1,10 @@
 <!--
-  ~ Created by Dmitry Lipski on 15.01.21 17:10
+  ~ Created by Dmitry Lipski on 03.02.21 11:40
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 15.01.21 16:55
+  ~ Last modified 03.02.21 11:23
   -->
 
-<vector android:height="200dp" android:viewportHeight="1693.32"
-    android:viewportWidth="465.66" android:width="54.999645dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <path android:fillColor="#FEFEFE" android:fillType="nonZero" android:pathData="M412.24,-0.01l0,1106.77 53.44,0 0,289 -53.44,0 0,297.56 -187.99,0 0,-297.56 -224.25,0 0,-289 163.02,-1106.77 249.22,0zM224.25,1106.76l0,-720.36 -83.65,720.36 83.65,0z"/>
+<vector android:height="200.00237dp" android:viewportHeight="1693.32"
+    android:viewportWidth="338.66" android:width="40dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#FEFEFE" android:fillType="nonZero" android:pathData="M299.8,-0.01l0,1106.77 38.86,0 0,289 -38.86,0 0,297.56 -136.72,0 0,-297.56 -163.09,0 0,-289 118.56,-1106.77 181.25,0zM163.08,1106.76l0,-720.36 -60.84,720.36 60.84,0z"/>
 </vector>
