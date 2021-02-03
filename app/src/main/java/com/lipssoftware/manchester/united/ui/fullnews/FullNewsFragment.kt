@@ -1,12 +1,14 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 03.02.21 14:35
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 13:07
+ * Last modified 03.02.21 12:43
  */
 
 package com.lipssoftware.manchester.united.ui.fullnews
 
 import android.animation.ObjectAnimator
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -45,9 +47,13 @@ class FullNewsFragment : Fragment() {
     ): View {
         binding = FragmentFullNewsBinding.inflate(inflater)
         val news = arguments?.getParcelable<NewsDomain>("fullNews")
-        news?.let {
-            ViewCompat.setTransitionName(binding.root, "news_${it.id}")
-            viewModel.setNews(it)
+        news?.let { newsDomain ->
+            ViewCompat.setTransitionName(binding.root, "news_${newsDomain.id}")
+            viewModel.setNews(newsDomain)
+            binding.btnOpenInBrowser.setOnClickListener {
+                val newsIntent = Intent(Intent.ACTION_VIEW, Uri.parse(newsDomain.link))
+                startActivity(newsIntent)
+            }
         }
         with(binding.ibFullNewsBack){
             ObjectAnimator.ofFloat(this, "alpha", 1f).apply {

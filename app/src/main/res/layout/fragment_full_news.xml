@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 19.01.21 16:24
+  ~ Created by Dmitry Lipski on 03.02.21 14:35
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 19.01.21 9:33
+  ~ Last modified 03.02.21 12:33
   -->
 
 <androidx.constraintlayout.motion.widget.MotionLayout
@@ -76,17 +76,23 @@
 
             <TextView
                 android:id="@+id/tv_full_news_date"
-                style="@style/NewsItemDateStyle"
-                app:layout_constraintStart_toStartOf="@id/iv_full_news_picture"
-                app:layout_constraintTop_toBottomOf="@id/iv_full_news_picture" />
+                style="@style/NewsItemDateStyle" />
 
             <TextView
                 android:id="@+id/tv_full_news_body"
-                style="@style/NewsItemBodyStyle"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_full_news_date" />
+                style="@style/NewsItemBodyStyle" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_open_in_browser"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="@dimen/normal_horizontal_margin"
+                android:layout_marginEnd="@dimen/normal_horizontal_margin"
+                android:text="Open in browser"
+                android:textAppearance="@style/ManUtd.TextAppearance.StandingsPosition"
+                app:icon="@drawable/ic_open_in_browser" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
