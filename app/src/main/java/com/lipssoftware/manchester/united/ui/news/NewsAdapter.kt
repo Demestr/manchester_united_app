@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 03.02.21 11:43
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 13:07
+ * Last modified 01.02.21 9:28
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -49,7 +49,6 @@ class NewsAdapter(
 
             item.ivItemNewsPicture.load(newsDomain.imageUrl){
                 crossfade(true)
-                allowHardware(false)
             }
             item.tvItemNewsTitle.text = newsDomain.title
             item.tvItemNewsDate.text = convertDateToString(newsDomain.pubDate)

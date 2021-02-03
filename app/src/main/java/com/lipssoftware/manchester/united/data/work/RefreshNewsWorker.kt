@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 27.01.21 16:14
+ * Created by Dmitry Lipski on 03.02.21 11:43
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.21 12:27
+ * Last modified 01.02.21 10:49
  */
 
 package com.lipssoftware.manchester.united.data.work
@@ -33,13 +33,11 @@ class RefreshNewsWorker @WorkerInject constructor(
     CoroutineWorker(ctx, params) {
 
     override suspend fun doWork(): Result = coroutineScope {
-        //Log.d("WORK_DEBUG", "Начало работы воркера!")
         val serviceNotification = NotificationCompat.Builder(applicationContext, FOREGROUND_SERVICE_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_devil_48dp)
             .setCategory(Notification.CATEGORY_SERVICE).build()
         setForegroundAsync(ForegroundInfo(0, serviceNotification))
         try {
-            //Log.d("WORK_DEBUG", "Попытка получить последние новости посредством воркера!")
             newsRepository.refreshNews {
                 it?.let {
                     val args = FullNewsFragmentArgs(it).toBundle()
@@ -64,7 +62,6 @@ class RefreshNewsWorker @WorkerInject constructor(
                     }
                 }
             }
-
             Result.success()
         } catch (e: HttpException) {
             Result.retry()

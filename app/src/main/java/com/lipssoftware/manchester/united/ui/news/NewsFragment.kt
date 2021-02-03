@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 03.02.21 11:43
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 11:17
+ * Last modified 03.02.21 10:31
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -40,6 +40,12 @@ class NewsFragment : Fragment() {
         binding.srlNews.setOnRefreshListener {
             newsViewModel.fetchNewsFromRemote()
         }
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.large_animation_duration).toLong()
+        }
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.large_animation_duration).toLong()
+        }
         return binding.root
     }
 
@@ -54,12 +60,6 @@ class NewsFragment : Fragment() {
         newsViewModel.news.observe(viewLifecycleOwner) { standings ->
             standings?.let { list ->
                 binding.rvNewsList.adapter = NewsAdapter(list) { news, extras ->
-                    exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
-                        duration = resources.getInteger(R.integer.large_animation_duration).toLong()
-                    }
-                    reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-                        duration = resources.getInteger(R.integer.large_animation_duration).toLong()
-                    }
                     val bundle = Bundle().apply { putParcelable("fullNews", news) }
                     findNavController().navigate(
                         R.id.action_navigation_news_to_fullNewsFragment,

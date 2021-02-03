@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 03.02.21 11:43
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 11:25
+ * Last modified 28.01.21 13:07
  */
 
 plugins {
@@ -88,7 +88,7 @@ dependencies {
     implementation 'io.coil-kt:coil:1.1.0'
 
     //WorkManager
-    def work_version = "2.4.0"
+    def work_version = "2.5.0"
     implementation "androidx.work:work-runtime-ktx:$work_version"
 
     //dagger hilt

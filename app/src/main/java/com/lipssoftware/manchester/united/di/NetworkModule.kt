@@ -1,11 +1,13 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 03.02.21 11:43
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 11:11
+ * Last modified 28.01.21 9:22
  */
 
 package com.lipssoftware.manchester.united.di
 
+import android.content.Context
+import androidx.work.WorkManager
 import com.lipssoftware.manchester.united.BuildConfig
 import com.lipssoftware.manchester.united.data.network.NewsService
 import com.lipssoftware.manchester.united.data.network.StatsService
@@ -15,6 +17,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -71,4 +74,7 @@ class NetworkModule {
     fun provideStatsApiService(@StatsRetrofit retrofit: Retrofit): StatsService =
         retrofit.create(StatsService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideWorkManager(@ApplicationContext context: Context) = WorkManager.getInstance(context)
 }

@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 27.01.21 16:14
+ * Created by Dmitry Lipski on 03.02.21 11:43
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.21 10:16
+ * Last modified 28.01.21 9:53
  */
 
 package com.lipssoftware.manchester.united
@@ -32,6 +32,8 @@ class ManUtdApplication: Application(), Configuration.Provider {
 
     @Inject
     lateinit var workerFactory: HiltWorkerFactory
+    @Inject
+    lateinit var workManager: WorkManager
 
     override fun getWorkManagerConfiguration() =
         Configuration.Builder()
@@ -57,11 +59,9 @@ class ManUtdApplication: Application(), Configuration.Provider {
             val repeatingNewsRequest =
                 PeriodicWorkRequestBuilder<RefreshNewsWorker>(15, TimeUnit.MINUTES)
                     .setConstraints(constraints)
-                    .setInitialDelay(15, TimeUnit.MINUTES)
+                    .setInitialDelay(2, TimeUnit.MINUTES)
                     .build()
-            WorkManager.getInstance(this@ManUtdApplication)
-//                .enqueue(listOf(repeatingDataRequest, repeatingNewsRequest))
-                .apply {
+            workManager.apply {
                 enqueueUniquePeriodicWork(
                     RefreshDataWorker.WORK_NAME,
                     ExistingPeriodicWorkPolicy.REPLACE,
