@@ -1,10 +1,10 @@
 /*
- * Created by Dmitry Lipski on 15.01.21 17:10
+ * Created by Dmitry Lipski on 05.02.21 14:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 15.01.21 17:09
+ * Last modified 05.02.21 9:45
  */
 
-package com.lipssoftware.manchester.united.ui.profile
+package com.lipssoftware.manchester.united.ui.squad.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

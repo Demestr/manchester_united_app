@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 03.02.21 14:35
+  ~ Created by Dmitry Lipski on 05.02.21 14:06
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 03.02.21 12:33
+  ~ Last modified 05.02.21 9:45
   -->
 
 <androidx.constraintlayout.motion.widget.MotionLayout
@@ -13,7 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/fragment_full_news_scene"
-    tools:context=".ui.fullnews.FullNewsFragment">
+    tools:context=".ui.news.fullnews.FullNewsFragment">
 
     <ImageButton
         android:alpha="0"

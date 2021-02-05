@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 05.02.21 14:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 11:17
+ * Last modified 05.02.21 10:28
  */
 
 package com.lipssoftware.manchester.united.ui.squad
@@ -15,6 +15,7 @@ import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.transition.MaterialElevationScale
@@ -65,17 +66,29 @@ class SquadFragment : Fragment() {
                     }
                     Status.SUCCESS -> {
                         resource.data?.let { list ->
-                            binding.rvSquadList.adapter = SquadAdapter(list) { profile, extras ->
+                            binding.rvSquadList.adapter = SquadAdapter(list) { profile, itemView ->
                                 exitTransition = MaterialElevationScale(false).apply {
-                                    duration = resources.getInteger(R.integer.normal_animation_duration).toLong()
+                                    duration =
+                                        resources.getInteger(R.integer.normal_animation_duration)
+                                            .toLong()
                                 }
                                 reenterTransition = MaterialElevationScale(true).apply {
-                                    duration = resources.getInteger(R.integer.normal_animation_duration).toLong()
+                                    duration =
+                                        resources.getInteger(R.integer.normal_animation_duration)
+                                            .toLong()
                                 }
                                 val bundle = Bundle().apply {
                                     putParcelable("player", profile)
                                 }
-                                findNavController().navigate(R.id.action_navigation_squad_to_navigation_player_profile, bundle, null, extras)
+                                val extras = FragmentNavigatorExtras(
+                                    itemView to "tn_${profile.number}",
+                                )
+                                findNavController().navigate(
+                                    R.id.action_navigation_squad_to_navigation_player_profile,
+                                    bundle,
+                                    null,
+                                    extras
+                                )
                             }
                         }
                         showUI()

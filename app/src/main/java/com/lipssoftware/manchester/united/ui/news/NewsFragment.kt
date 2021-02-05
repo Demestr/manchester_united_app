@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 03.02.21 11:43
+ * Created by Dmitry Lipski on 05.02.21 14:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 03.02.21 10:31
+ * Last modified 05.02.21 10:23
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -14,6 +14,7 @@ import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.transition.MaterialSharedAxis
@@ -59,8 +60,11 @@ class NewsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         newsViewModel.news.observe(viewLifecycleOwner) { standings ->
             standings?.let { list ->
-                binding.rvNewsList.adapter = NewsAdapter(list) { news, extras ->
+                binding.rvNewsList.adapter = NewsAdapter(list) { news, itemView ->
                     val bundle = Bundle().apply { putParcelable("fullNews", news) }
+                    val extras = FragmentNavigatorExtras(
+                        itemView to "news_${news.id}",
+                    )
                     findNavController().navigate(
                         R.id.action_navigation_news_to_fullNewsFragment,
                         bundle,

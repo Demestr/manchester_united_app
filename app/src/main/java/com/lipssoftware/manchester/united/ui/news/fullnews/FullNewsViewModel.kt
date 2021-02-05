@@ -1,10 +1,10 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 05.02.21 14:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 13:07
+ * Last modified 05.02.21 9:45
  */
 
-package com.lipssoftware.manchester.united.ui.fullnews
+package com.lipssoftware.manchester.united.ui.news.fullnews
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

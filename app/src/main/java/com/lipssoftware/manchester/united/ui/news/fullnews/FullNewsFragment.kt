@@ -1,10 +1,10 @@
 /*
- * Created by Dmitry Lipski on 03.02.21 14:35
+ * Created by Dmitry Lipski on 05.02.21 14:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 03.02.21 12:43
+ * Last modified 05.02.21 9:45
  */
 
-package com.lipssoftware.manchester.united.ui.fullnews
+package com.lipssoftware.manchester.united.ui.news.fullnews
 
 import android.animation.ObjectAnimator
 import android.content.Intent

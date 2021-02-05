@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 15.01.21 17:10
+ * Created by Dmitry Lipski on 05.02.21 14:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 15.01.21 17:09
+ * Last modified 05.02.21 14:06
  */
 
 package com.lipssoftware.manchester.united.ui.squad
@@ -11,14 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
-import androidx.navigation.fragment.FragmentNavigator
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.lipssoftware.manchester.united.data.model.players.Player
 import com.lipssoftware.manchester.united.databinding.ItemPlayerBinding
 
 
-class SquadAdapter(private val players: List<Player>, val onClick: (player: Player, extras: FragmentNavigator.Extras) -> Unit) :
+class SquadAdapter(private val players: List<Player>, val onClick: (player: Player, itemView: View) -> Unit) :
     RecyclerView.Adapter<SquadAdapter.SquadViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SquadViewHolder =
@@ -39,14 +37,16 @@ class SquadAdapter(private val players: List<Player>, val onClick: (player: Play
     inner class SquadViewHolder(private val item: ItemPlayerBinding) :
         RecyclerView.ViewHolder(item.root) {
 
+        init {
+            item.root.setOnClickListener {
+                onClick(players[layoutPosition], it)
+            }
+        }
+
         fun bind(player: Player) {
-            ViewCompat.setTransitionName(item.cslItemPlayer, "tn_${player.number}")
+            ViewCompat.setTransitionName(item.root, "tn_${player.number}")
             item.tvItemPlayerName.text = player.name
             item.ivItemPlayerPhoto.setImageBitmap(player.thumbnail)
-            val extras = FragmentNavigatorExtras(
-                item.cslItemPlayer to "tn_${player.number}",
-            )
-            item.cardItemPlayer.setOnClickListener { onClick(player, extras) }
         }
     }
 

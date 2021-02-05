@@ -1,10 +1,10 @@
 /*
- * Created by Dmitry Lipski on 19.01.21 16:24
+ * Created by Dmitry Lipski on 05.02.21 14:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 19.01.21 8:53
+ * Last modified 05.02.21 9:45
  */
 
-package com.lipssoftware.manchester.united.ui.profile
+package com.lipssoftware.manchester.united.ui.squad.profile
 
 import android.graphics.BitmapFactory
 import android.graphics.Color

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 19.01.21 16:24
+  ~ Created by Dmitry Lipski on 05.02.21 14:06
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 19.01.21 12:36
+  ~ Last modified 05.02.21 9:45
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,7 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
-    tools:context=".ui.fullnews.FullNewsFragment">
+    tools:context=".ui.news.fullnews.FullNewsFragment">
 
     <View
         android:id="@+id/v_player_picture_back"
