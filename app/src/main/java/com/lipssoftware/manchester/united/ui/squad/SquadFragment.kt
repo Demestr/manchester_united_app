@@ -1,11 +1,12 @@
 /*
- * Created by Dmitry Lipski on 05.02.21 14:06
+ * Created by Dmitry Lipski on 08.02.21 14:09
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 05.02.21 10:28
+ * Last modified 08.02.21 10:36
  */
 
 package com.lipssoftware.manchester.united.ui.squad
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,15 +38,24 @@ class SquadFragment : Fragment() {
     ): View {
         binding = FragmentSquadBinding.inflate(inflater)
         binding.rvSquadList.apply {
-            layoutManager = GridLayoutManager(context, 2)
-            setHasFixedSize(true)
-            addItemDecoration(
+            val itemDecoration = if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                layoutManager = GridLayoutManager(context, 2)
                 SquadAdapter.PlayerItemDecoration(
                     (8 * resources.displayMetrics.density).toInt(),
                     2,
                     true
                 )
-            )
+            }
+            else {
+                layoutManager = GridLayoutManager(context, 4)
+                SquadAdapter.PlayerItemDecoration(
+                    (8 * resources.displayMetrics.density).toInt(),
+                    4,
+                    true
+                )
+            }
+            addItemDecoration(itemDecoration)
+            setHasFixedSize(true)
         }
         return binding.root
     }

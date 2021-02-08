@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Dmitry Lipski on 08.02.21 14:09
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 08.02.21 9:28
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/csl_item_news"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="@dimen/small_horizontal_margin"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_item_news_picture"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="w,1:4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_item_news_picture">
+
+            <TextView
+                android:id="@+id/tv_item_news_title"
+                style="@style/NewsItemTitleStyle"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="14sp"
+                android:maxLines="1"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_news_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="See how United destroyed City" />
+
+            <TextView
+                android:id="@+id/tv_item_news_date"
+                style="@style/NewsItemDateStyle"
+                android:layout_marginStart="@dimen/normal_horizontal_margin"
+                android:layout_marginEnd="@dimen/normal_horizontal_margin"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_item_news_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_item_news_title"
+                tools:text="Date" />
+
+        <TextView
+            android:id="@+id/tv_item_news_body"
+            style="@style/NewsItemBodyStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:maxLines="3"
+            android:layout_margin="@dimen/small_horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_news_title"
+            tools:text="The project you’ll work with, Jokes, is an app that shows you a list of jokes. You can pick a joke to create an image with small letters" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

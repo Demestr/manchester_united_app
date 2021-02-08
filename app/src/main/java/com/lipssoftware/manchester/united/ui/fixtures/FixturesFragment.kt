@@ -1,11 +1,12 @@
 /*
- * Created by Dmitry Lipski on 26.01.21 16:30
+ * Created by Dmitry Lipski on 08.02.21 14:09
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.21 16:16
+ * Last modified 08.02.21 13:42
  */
 
 package com.lipssoftware.manchester.united.ui.fixtures
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,12 +40,21 @@ class FixturesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFixturesBinding.inflate(inflater)
-        layoutManager = FixturesAdapter.ProminentLayoutManager(requireContext())
+        layoutManager =
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) FixturesAdapter.ProminentLayoutManager(
+                requireContext(),
+                desiredOrientation = LinearLayoutManager.VERTICAL
+            ) else FixturesAdapter.ProminentLayoutManager(
+                requireContext(),
+                desiredOrientation = LinearLayoutManager.HORIZONTAL
+            )
         snapHelper = PagerSnapHelper()
         binding.rvFixturesList.apply {
             setItemViewCacheSize(4)
             layoutManager = this@FixturesFragment.layoutManager
-            addItemDecoration(FixturesAdapter.BoundsOffsetDecoration())
+            val itemDecor = FixturesAdapter.BoundsOffsetDecoration(
+                    isVertical = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            addItemDecoration(itemDecor)
             setHasFixedSize(true)
         }
         snapHelper.attachToRecyclerView(binding.rvFixturesList)
@@ -98,8 +108,12 @@ class FixturesFragment : Fragment() {
             val distanceToFinalSnap =
                 snapHelper.calculateDistanceToFinalSnap(layoutManager, targetView)
                     ?: return@doOnPreDraw
-
-            layoutManager.scrollToPositionWithOffset(position, -distanceToFinalSnap[1])
+            val distance =
+                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+                    -distanceToFinalSnap[1]
+                else
+                    -distanceToFinalSnap[0]
+            layoutManager.scrollToPositionWithOffset(position, distance)
         }
 
         isPositioned = true

@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 20.01.21 16:30
+ * Created by Dmitry Lipski on 08.02.21 14:09
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.21 13:07
+ * Last modified 08.02.21 11:15
  */
 
 package com.lipssoftware.manchester.united.ui.fixtures
@@ -23,10 +23,17 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
-class FixturesAdapter(private val fixtures: List<MatchDomain>): RecyclerView.Adapter<FixturesAdapter.FixturesViewHolder>() {
+class FixturesAdapter(private val fixtures: List<MatchDomain>) :
+    RecyclerView.Adapter<FixturesAdapter.FixturesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FixturesViewHolder =
-        FixturesViewHolder(ItemFixtureBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        FixturesViewHolder(
+            ItemFixtureBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     override fun onBindViewHolder(holder: FixturesViewHolder, position: Int) {
         holder.bind(fixtures[position])
@@ -34,46 +41,57 @@ class FixturesAdapter(private val fixtures: List<MatchDomain>): RecyclerView.Ada
 
     override fun getItemCount(): Int = fixtures.size
 
-    class FixturesViewHolder(private val item: ItemFixtureBinding): RecyclerView.ViewHolder(item.root){
+    class FixturesViewHolder(private val item: ItemFixtureBinding) :
+        RecyclerView.ViewHolder(item.root) {
 
-        fun bind(match: MatchDomain){
+        fun bind(match: MatchDomain) {
             item.tvItemFixtureTournament.text = match.leagueName
-            item.tvItemFixtureTime.text = SimpleDateFormat(DATE_PATTERN_OUT, Locale.getDefault()).format(Date(TimeUnit.SECONDS.toMillis(match.timestamp)))
-            item.tvItemFixtureScoreHomeTeam.text = if(match.homeTeamGoals != null) match.homeTeamGoals.toString() else ""
-            item.ivItemFixtureLogoHomeTeam.load(match.homeTeamLogo){
+            item.tvItemFixtureTime.text = SimpleDateFormat(
+                DATE_PATTERN_OUT,
+                Locale.getDefault()
+            ).format(Date(TimeUnit.SECONDS.toMillis(match.timestamp)))
+            item.tvItemFixtureScoreHomeTeam.text =
+                if (match.homeTeamGoals != null) match.homeTeamGoals.toString() else ""
+            item.ivItemFixtureLogoHomeTeam.load(match.homeTeamLogo) {
                 crossfade(true)
             }
             item.tvItemFixtureNameHomeTeam.text = match.homeTeamName
-            item.tvItemFixtureScoreAwayTeam.text = if(match.awayTeamGoals != null) match.awayTeamGoals.toString() else ""
-            item.ivItemFixtureLogoAwayTeam.load(match.awayTeamLogo){
+            item.tvItemFixtureScoreAwayTeam.text =
+                if (match.awayTeamGoals != null) match.awayTeamGoals.toString() else ""
+            item.ivItemFixtureLogoAwayTeam.load(match.awayTeamLogo) {
                 crossfade(true)
             }
             item.tvItemFixtureScoreDivider.isVisible = match.statusShort != "NS"
             item.tvItemFixtureNameAwayTeam.text = match.awayTeamName
             item.tvItemFixtureStatus.text = match.statusLong
             item.tvItemFixtureVenue.text = "${match.venueName}, ${match.venueCity}"
-            item.tvItemFixtureReferee.text = if(match.referee != null) "Referee - ${match.referee}" else ""
+            item.tvItemFixtureReferee.text =
+                if (match.referee != null) "Referee - ${match.referee}" else ""
         }
     }
 
-    class BoundsOffsetDecoration : RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(outRect: Rect,
-                                    view: View,
-                                    parent: RecyclerView,
-                                    state: RecyclerView.State) {
+    class BoundsOffsetDecoration(private val isVertical: Boolean) : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
             super.getItemOffsets(outRect, view, parent, state)
 
             val itemPosition = parent.getChildAdapterPosition(view)
 
             // It is crucial to refer to layoutParams.width
             // (view.width is 0 at this time)!
-            val itemHeight = view.layoutParams.height
-            val offset = (parent.height - itemHeight) / 2
+            val itemSize = if(isVertical) view.layoutParams.height else view.layoutParams.width
+            val offset = if(isVertical) (parent.height - itemSize) / 2 else (parent.width - itemSize) / 2
 
             if (itemPosition == 0) {
-                outRect.top = offset / 2
+                if (isVertical) outRect.top = offset / 2
+                else outRect.left = offset / 2
             } else if (itemPosition == state.itemCount - 1) {
-                outRect.bottom = offset / 2
+                if(isVertical) outRect.bottom = offset / 2
+                else outRect.right = offset / 2
             }
         }
     }
@@ -81,22 +99,31 @@ class FixturesAdapter(private val fixtures: List<MatchDomain>): RecyclerView.Ada
     internal class ProminentLayoutManager(
         context: Context,
         private val minScaleDistanceFactor: Float = 1.5f,
-        private val scaleDownBy: Float = 0.2f
-    ) : LinearLayoutManager(context, VERTICAL, false) {
+        private val scaleDownBy: Float = 0.2f,
+        private val desiredOrientation: Int
+    ) : LinearLayoutManager(context, desiredOrientation, false) {
 
         override fun onLayoutCompleted(state: RecyclerView.State?) =
-            super.onLayoutCompleted(state).also { scaleChildren() }
+            super.onLayoutCompleted(state).also { scaleChildren(desiredOrientation) }
 
         override fun scrollVerticallyBy(
             dy: Int,
             recycler: RecyclerView.Recycler,
             state: RecyclerView.State
         ) = super.scrollVerticallyBy(dy, recycler, state).also {
-            if (orientation == VERTICAL) scaleChildren()
+            scaleChildren(desiredOrientation)
         }
 
-        private fun scaleChildren() {
-            val containerCenter = height / 2f
+        override fun scrollHorizontallyBy(
+            dx: Int,
+            recycler: RecyclerView.Recycler?,
+            state: RecyclerView.State?
+        ) = super.scrollHorizontallyBy(dx, recycler, state).also {
+            scaleChildren(desiredOrientation)
+        }
+
+        private fun scaleChildren(orient: Int) {
+            val containerCenter = if (orient == VERTICAL) height / 2f else width / 2f
 
             // Any view further than this threshold will be fully scaled down
             val scaleDistanceThreshold = minScaleDistanceFactor * containerCenter
@@ -104,7 +131,8 @@ class FixturesAdapter(private val fixtures: List<MatchDomain>): RecyclerView.Ada
             for (i in 0 until childCount) {
                 val child = getChildAt(i)!!
 
-                val childCenter = (child.top + child.bottom) / 2f
+                val childCenter =
+                    if (orient == VERTICAL) (child.top + child.bottom) / 2f else (child.left + child.right) / 2f
                 val distanceToCenter = kotlin.math.abs(childCenter - containerCenter)
 
                 val scaleDownAmount = (distanceToCenter / scaleDistanceThreshold).coerceAtMost(1f)
@@ -114,19 +142,28 @@ class FixturesAdapter(private val fixtures: List<MatchDomain>): RecyclerView.Ada
                 child.scaleY = scale
 
                 val translationDirection = if (childCenter > containerCenter) -1 else 1
+                val translationXFromScale = translationDirection * child.width * (1 - scale) / 2f
                 val translationYFromScale = translationDirection * child.height * (1 - scale) / 2f
-                child.translationY = translationYFromScale
+                if (orient == VERTICAL) child.translationY = translationYFromScale else
+                    child.translationX = translationXFromScale
 
                 var translationYForward = 0f
 
-                if (translationYFromScale > 0 && i >= 1) {
-                    // Edit previous child
-                    getChildAt(i - 1)!!.translationY += 2 * translationYFromScale
-
-                } else if (translationYFromScale < 0) {
-                    // Pass on to next child
-                    translationYForward = 2 * translationYFromScale
+                if (orient == VERTICAL) {
+                    if (translationYFromScale > 0 && i >= 1) {
+                        // Edit previous child
+                        getChildAt(i - 1)!!.translationY += 2 * translationYFromScale
+                    }
+                } else {
+                    if (translationXFromScale > 0 && i >= 1) {
+                        // Edit previous child
+                        getChildAt(i - 1)!!.translationX += 2 * translationXFromScale
+                    }
                 }
+//                else if (translationYFromScale < 0) {
+//                    // Pass on to next child
+//                    translationYForward = 2 * translationYFromScale
+//                }
             }
         }
 

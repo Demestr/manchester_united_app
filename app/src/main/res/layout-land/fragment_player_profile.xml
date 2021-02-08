@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Dmitry Lipski on 08.02.21 14:09
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 08.02.21 10:33
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    tools:context=".ui.news.fullnews.FullNewsFragment">
+
+    <View
+        android:id="@+id/v_player_picture_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/item_player_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_first_number"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:adjustViewBounds="true"
+        android:alpha="0.1"
+        app:layout_constraintBottom_toBottomOf="@+id/v_player_picture_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/number_two" />
+
+    <ImageView
+        android:id="@+id/iv_second_number"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:adjustViewBounds="true"
+        android:alpha="0.1"
+        app:layout_constraintBottom_toBottomOf="@+id/v_player_picture_back"
+        app:layout_constraintStart_toEndOf="@id/iv_first_number"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/number_eight"
+        tools:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_player_picture"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="@+id/v_player_picture_back"
+        app:layout_constraintEnd_toEndOf="@+id/v_player_picture_back"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/test_player_photo" />
+
+    <TextView
+        android:id="@+id/tv_player_first_name_label"
+        style="@style/ProfileLabelsStyle"
+        android:tag="labels"
+        android:text="First name"
+        app:layout_constraintStart_toEndOf="@id/iv_second_number"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_player_first_name"
+        style="@style/ProfileValuesStyle"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_player_first_name_label"
+        app:layout_constraintStart_toEndOf="@id/barrier_labels"
+        tools:text="Bruno" />
+
+    <TextView
+        android:id="@+id/tv_player_last_name_label"
+        style="@style/ProfileLabelsStyle"
+        android:tag="labels"
+        android:text="Last name"
+        app:layout_constraintStart_toEndOf="@id/iv_second_number"
+        app:layout_constraintTop_toBottomOf="@id/tv_player_first_name_label" />
+
+    <TextView
+        android:id="@+id/tv_player_last_name"
+        style="@style/ProfileValuesStyle"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_player_last_name_label"
+        app:layout_constraintStart_toEndOf="@id/barrier_labels"
+        tools:text="Fernandes" />
+
+    <TextView
+        android:id="@+id/tv_player_date_birth_label"
+        style="@style/ProfileLabelsStyle"
+        android:tag="labels"
+        android:text="Date of birth"
+        app:layout_constraintStart_toEndOf="@id/iv_second_number"
+        app:layout_constraintTop_toBottomOf="@id/tv_player_last_name_label" />
+
+    <TextView
+        android:id="@+id/tv_player_date_birth"
+        style="@style/ProfileValuesStyle"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_player_date_birth_label"
+        app:layout_constraintStart_toEndOf="@id/barrier_labels"
+        tools:text="1998-06-15" />
+
+    <TextView
+        android:id="@+id/tv_player_position_label"
+        style="@style/ProfileLabelsStyle"
+        android:tag="labels"
+        android:text="Position"
+        app:layout_constraintStart_toEndOf="@id/iv_second_number"
+        app:layout_constraintTop_toBottomOf="@id/tv_player_date_birth_label" />
+
+    <TextView
+        android:id="@+id/tv_player_position"
+        style="@style/ProfileValuesStyle"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_player_position_label"
+        app:layout_constraintStart_toEndOf="@id/barrier_labels"
+        tools:text="Midfielder" />
+
+    <TextView
+        android:id="@+id/tv_player_nationality_label"
+        style="@style/ProfileLabelsStyle"
+        android:tag="labels"
+        android:text="Nationality"
+        app:layout_constraintStart_toEndOf="@id/iv_second_number"
+        app:layout_constraintTop_toBottomOf="@id/tv_player_position_label" />
+
+    <TextView
+        android:id="@+id/tv_player_nationality"
+        style="@style/ProfileValuesStyle"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_player_nationality_label"
+        app:layout_constraintStart_toEndOf="@id/barrier_labels"
+        tools:text="Portugal" />
+
+    <TextView
+        android:id="@+id/tv_player_height_label"
+        style="@style/ProfileLabelsStyle"
+        android:tag="labels"
+        android:text="Height"
+        app:layout_constraintStart_toEndOf="@id/iv_second_number"
+        app:layout_constraintTop_toBottomOf="@id/tv_player_nationality_label" />
+
+    <TextView
+        android:id="@+id/tv_player_height"
+        style="@style/ProfileValuesStyle"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_player_height_label"
+        app:layout_constraintStart_toEndOf="@id/barrier_labels"
+        tools:text="178 cm" />
+
+    <TextView
+        android:id="@+id/tv_player_weight_label"
+        style="@style/ProfileLabelsStyle"
+        android:tag="labels"
+        android:text="Weight"
+        app:layout_constraintStart_toEndOf="@id/iv_second_number"
+        app:layout_constraintTop_toBottomOf="@id/tv_player_height_label" />
+
+    <TextView
+        android:id="@+id/tv_player_weight"
+        style="@style/ProfileValuesStyle"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_player_weight_label"
+        app:layout_constraintStart_toEndOf="@id/barrier_labels"
+        tools:text="71 kg" />
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_labels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="tv_player_first_name_label, tv_player_last_name_label, tv_player_date_birth_label, tv_player_position_label, tv_player_nationality_label, tv_player_height_label, tv_player_weight_label"
+        tools:layout_editor_absoluteX="98dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_player_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="tv_player_first_name, tv_player_last_name, tv_player_date_birth, tv_player_position, tv_player_nationality, tv_player_height, tv_player_weight"
+        tools:layout_editor_absoluteX="98dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

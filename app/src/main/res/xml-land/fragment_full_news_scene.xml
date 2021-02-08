@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Dmitry Lipski on 08.02.21 14:09
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 08.02.21 12:21
+  -->
+
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="400">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:motionTarget="@+id/nsv_full_news_scroll_container"
+                motion:framePosition="10"
+                android:alpha="0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/nsv_full_news_scroll_container"
+                motion:framePosition="90"
+                android:alpha="0" />
+        </KeyFrameSet>
+        <OnClick motion:clickAction="toggle" motion:targetId="@+id/ib_full_news_hide_image" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start"/>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/iv_full_news_picture"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@+id/iv_full_news_picture"
+            motion:layout_constraintBottom_toBottomOf="@+id/iv_full_news_picture"
+            motion:layout_constraintStart_toStartOf="@+id/iv_full_news_picture"
+            android:id="@+id/tv_full_news_title"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/ib_full_news_hide_image"
+            motion:layout_constraintEnd_toEndOf="@+id/iv_full_news_picture"
+            motion:layout_constraintBottom_toBottomOf="@+id/iv_full_news_picture"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:rotationY="180"/>
+        <Constraint
+            android:layout_height="0dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintBottom_toBottomOf="@+id/iv_full_news_picture"
+            motion:layout_constraintEnd_toEndOf="@+id/iv_full_news_picture"
+            android:layout_width="0dp"
+            android:id="@+id/v_full_news_title_back"
+            motion:layout_constraintTop_toTopOf="@+id/iv_full_news_picture" />
+    </ConstraintSet>
+</MotionScene>
