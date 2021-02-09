@@ -1,16 +1,18 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 09.02.21 17:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 10:53
+ * Last modified 09.02.21 9:36
  */
 
 package com.lipssoftware.manchester.united.data.repository
 
+import android.annotation.SuppressLint
 import com.lipssoftware.manchester.united.data.database.FixturesDao
 import com.lipssoftware.manchester.united.data.model.domain.MatchDomain
 import com.lipssoftware.manchester.united.data.network.StatsService
 import com.lipssoftware.manchester.united.utils.MAN_UTD_ID
 import com.lipssoftware.manchester.united.utils.SEASON
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class FixturesRepository @Inject constructor(
@@ -18,14 +20,16 @@ class FixturesRepository @Inject constructor(
     private val fixturesDao: FixturesDao
     ): Repository {
 
-    suspend fun getFixtures(): List<MatchDomain>{
+    fun getFixtures(): Observable<List<MatchDomain>>{
         return fixturesDao.getFixtures()
     }
 
-    suspend fun refreshFixtures(){
+    @SuppressLint("CheckResult")
+    fun refreshFixtures(){
         try {
-            val matches = statsService.getFixtures(MAN_UTD_ID, SEASON).response
-            fixturesDao.insertFixtures(matches.map { it.toMatchDomain() })
+            statsService.getFixtures(MAN_UTD_ID, SEASON).subscribe { answer ->
+                fixturesDao.insertFixtures(answer.response.map { it.toMatchDomain() })
+            }
         } catch (exception: Exception){
             println(exception.message)
         }

@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 03.02.21 11:43
+ * Created by Dmitry Lipski on 09.02.21 17:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 28.01.21 9:22
+ * Last modified 08.02.21 14:55
  */
 
 package com.lipssoftware.manchester.united.di
@@ -21,6 +21,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import javax.inject.Qualifier
@@ -43,6 +44,7 @@ class NetworkModule {
     @Singleton
     fun provideNewsRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL_NEWS)
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .addConverterFactory(SimpleXmlConverterFactory.create())
         .build()
 
@@ -66,6 +68,7 @@ class NetworkModule {
                 }
             )
         }.build())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

@@ -1,36 +1,38 @@
 /*
- * Created by Dmitry Lipski on 26.01.21 16:06
+ * Created by Dmitry Lipski on 09.02.21 17:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.21 16:04
+ * Last modified 09.02.21 17:05
  */
 
 package com.lipssoftware.manchester.united.data.repository
 
+import android.annotation.SuppressLint
 import com.lipssoftware.manchester.united.data.database.NewsDao
 import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
 import com.lipssoftware.manchester.united.data.network.NewsService
-import kotlinx.coroutines.flow.Flow
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class NewsRepository @Inject constructor(
-        private val newsService: NewsService,
-        private val newsDao: NewsDao
+    private val newsService: NewsService,
+    private val newsDao: NewsDao
 ) : Repository {
 
-    val newsFlow: Flow<List<NewsDomain>>
-        get() = newsDao.getNews()
+    fun getNews() = newsDao.getNews()
 
-    suspend fun refreshNews(notify: (news: NewsDomain?) -> Unit) {
+    @SuppressLint("CheckResult")
+    fun refreshNews(notify: (news: NewsDomain?) -> Unit) {
         try {
-            val result = newsService.getNews().channel
-            result.items.let { list ->
-                val listDomain = list.map {
-                    it.toNewsDomain()
+            newsService.getNews().subscribeOn(Schedulers.io()).subscribe { rssFeed ->
+                rssFeed.channel.items.let { list ->
+                    val listDomain = list.map {
+                        it.toNewsDomain()
+                    }
+                    if (newsDao.newsCount() != 0 && !newsDao.isExist(listDomain.first().id)) {
+                        notify(listDomain.first())
+                    }
+                    newsDao.insertNews(listDomain)
                 }
-                if(newsDao.newsCount() != 0 && !newsDao.isExist(listDomain.first().id)){
-                    notify(listDomain.first())
-                }
-                newsDao.insertNews(listDomain)
             }
         } catch (exception: Exception) {
             println(exception.message)

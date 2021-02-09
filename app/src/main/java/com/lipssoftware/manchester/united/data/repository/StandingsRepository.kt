@@ -1,16 +1,18 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 09.02.21 17:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 10:53
+ * Last modified 09.02.21 9:36
  */
 
 package com.lipssoftware.manchester.united.data.repository
 
+import android.annotation.SuppressLint
 import com.lipssoftware.manchester.united.data.database.StandingsDao
 import com.lipssoftware.manchester.united.data.model.domain.StandingDomain
 import com.lipssoftware.manchester.united.data.network.StatsService
 import com.lipssoftware.manchester.united.utils.PREMIER_LEAGUE_ID
 import com.lipssoftware.manchester.united.utils.SEASON
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class StandingsRepository @Inject constructor(
@@ -18,18 +20,22 @@ class StandingsRepository @Inject constructor(
     private val standingsDao: StandingsDao
     ): Repository {
 
-    suspend fun getStandings(): List<StandingDomain>{
+    fun getStandings(): Observable<List<StandingDomain>> {
         return standingsDao.getStandings()
     }
 
-    suspend fun refreshStandings() {
+    @SuppressLint("CheckResult")
+    fun refreshStandings() {
         try {
-            val result = statsService.getStandings(PREMIER_LEAGUE_ID, SEASON).response.firstOrNull()
-            result?.league?.standings?.let { list ->
-                val listDomain = list.first().map {
-                    it.toStandingDomain()
+            statsService.getStandings(PREMIER_LEAGUE_ID, SEASON).subscribe { answer ->
+                val result =  answer.response.firstOrNull()
+                result?.league?.standings?.let { list ->
+                    val listDomain = list.first().map {
+                        it.toStandingDomain()
+                    }
+                    standingsDao.insertStandings(listDomain)
                 }
-                standingsDao.insertStandings(listDomain) }
+            }
         }
         catch (exception: Exception){
             println(exception.message)

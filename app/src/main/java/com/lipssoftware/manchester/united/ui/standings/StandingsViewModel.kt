@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 09.02.21 17:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 10:53
+ * Last modified 09.02.21 9:36
  */
 
 package com.lipssoftware.manchester.united.ui.standings
@@ -31,7 +31,7 @@ class StandingsViewModel @ViewModelInject constructor(private val repository: St
         viewModelScope.launch(Dispatchers.IO) {
             _standings.postValue(Resource.loading(data = null))
             try {
-                _standings.postValue(Resource.success(data = repository.getStandings()))
+                repository.getStandings().subscribe { _standings.postValue(Resource.success(data = it)) }
             } catch (exception: Exception) {
                 _standings.postValue(
                     Resource.error(

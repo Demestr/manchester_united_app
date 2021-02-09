@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 09.02.21 17:06
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 10:53
+ * Last modified 09.02.21 9:36
  */
 
 package com.lipssoftware.manchester.united.ui.fixtures
@@ -32,18 +32,20 @@ class FixturesViewModel @ViewModelInject constructor(private val repository: Fix
         viewModelScope.launch(Dispatchers.IO) {
             _standings.postValue(Resource.loading(data = null))
             try {
-                val list = repository.getFixtures().sortedBy { it.timestamp }
-                val lastPlayedMatch = list.filter {
-                    it.statusShort == "FT" ||
-                            it.statusShort == "1H" ||
-                            it.statusShort == "HT" ||
-                            it.statusShort == "2H" ||
-                            it.statusShort == "ET" ||
-                            it.statusShort == "P" ||
-                            it.statusShort == "FT"
-                }.maxByOrNull { it.timestamp }
-                indexOfLastPlayedMatch = list.indexOf(lastPlayedMatch)
-                _standings.postValue(Resource.success(data = list))
+                repository.getFixtures().subscribe { matches ->
+                    val list =  matches.sortedBy { it.timestamp }
+                    val lastPlayedMatch = list.filter {
+                        it.statusShort == "FT" ||
+                                it.statusShort == "1H" ||
+                                it.statusShort == "HT" ||
+                                it.statusShort == "2H" ||
+                                it.statusShort == "ET" ||
+                                it.statusShort == "P" ||
+                                it.statusShort == "FT"
+                    }.maxByOrNull { it.timestamp }
+                    indexOfLastPlayedMatch = list.indexOf(lastPlayedMatch)
+                    _standings.postValue(Resource.success(data = list))
+                }
             } catch (exception: Exception) {
                 _standings.postValue(
                     Resource.error(
