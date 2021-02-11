@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 05.02.21 14:06
+ * Created by Dmitry Lipski on 11.02.21 14:44
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 05.02.21 9:45
+ * Last modified 11.02.21 14:43
  */
 
 package com.lipssoftware.manchester.united.ui.squad.profile
@@ -16,17 +16,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.google.android.material.transition.MaterialContainerTransform
 import com.lipssoftware.manchester.united.R
 import com.lipssoftware.manchester.united.data.model.players.Player
 import com.lipssoftware.manchester.united.databinding.FragmentPlayerProfileBinding
 import com.lipssoftware.manchester.united.utils.getNumberPic
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PlayerProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentPlayerProfileBinding
-    private val viewModel by viewModels<PlayerProfileViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,15 +47,13 @@ class PlayerProfileFragment : Fragment() {
         val player = arguments?.getParcelable<Player>("player")
         player?.let {
             ViewCompat.setTransitionName(binding.root, "tn_${player.number}")
-            viewModel.setPlayer(player)
+            showPlayerInfo(player)
         }
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel.player.observe(viewLifecycleOwner) { player ->
-            player?.let {
+    private fun showPlayerInfo(player: Player) {
+            player.let {
                 binding.ivPlayerPicture.setImageBitmap(BitmapFactory.decodeStream(requireContext().assets.open("players_photos/${it.photo}")))
                 if(it.number / 10 == 0){
                     binding.ivFirstNumber.setImageDrawable(ContextCompat.getDrawable(requireContext(), getNumberPic(it.number)))
@@ -65,7 +63,6 @@ class PlayerProfileFragment : Fragment() {
                     binding.ivFirstNumber.setImageDrawable(ContextCompat.getDrawable(requireContext(), getNumberPic(it.number / 10)))
                     binding.ivSecondNumber.setImageDrawable(ContextCompat.getDrawable(requireContext(), getNumberPic( it.number % 10)))
                 }
-
                 binding.tvPlayerFirstName.text = it.firstname
                 binding.tvPlayerLastName.text = it.lastname
                 binding.tvPlayerDateBirth.text = it.birth.date
@@ -75,5 +72,4 @@ class PlayerProfileFragment : Fragment() {
                 binding.tvPlayerWeight.text = "${it.weight} kg"
             }
         }
-    }
 }

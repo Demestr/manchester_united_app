@@ -1,18 +1,16 @@
 /*
- * Created by Dmitry Lipski on 09.02.21 17:06
+ * Created by Dmitry Lipski on 11.02.21 15:35
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.02.21 9:36
+ * Last modified 11.02.21 15:35
  */
 
 package com.lipssoftware.manchester.united.data.repository
 
 import android.annotation.SuppressLint
 import com.lipssoftware.manchester.united.data.database.StandingsDao
-import com.lipssoftware.manchester.united.data.model.domain.StandingDomain
 import com.lipssoftware.manchester.united.data.network.StatsService
 import com.lipssoftware.manchester.united.utils.PREMIER_LEAGUE_ID
 import com.lipssoftware.manchester.united.utils.SEASON
-import io.reactivex.Observable
 import javax.inject.Inject
 
 class StandingsRepository @Inject constructor(
@@ -20,9 +18,7 @@ class StandingsRepository @Inject constructor(
     private val standingsDao: StandingsDao
     ): Repository {
 
-    fun getStandings(): Observable<List<StandingDomain>> {
-        return standingsDao.getStandings()
-    }
+    fun getStandings() = standingsDao.getStandings()
 
     @SuppressLint("CheckResult")
     fun refreshStandings() {

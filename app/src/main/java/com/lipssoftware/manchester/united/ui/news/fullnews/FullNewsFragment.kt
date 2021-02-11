@@ -1,13 +1,14 @@
 /*
- * Created by Dmitry Lipski on 05.02.21 14:06
+ * Created by Dmitry Lipski on 11.02.21 14:44
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 05.02.21 9:45
+ * Last modified 11.02.21 14:43
  */
 
 package com.lipssoftware.manchester.united.ui.news.fullnews
 
 import android.animation.ObjectAnimator
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
@@ -16,28 +17,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import coil.load
-import com.google.android.material.transition.MaterialSharedAxis
+import com.google.android.material.transition.MaterialContainerTransform
 import com.lipssoftware.manchester.united.R
 import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
 import com.lipssoftware.manchester.united.databinding.FragmentFullNewsBinding
 import com.lipssoftware.manchester.united.utils.convertDateToString
 import com.lipssoftware.manchester.united.utils.getTextFromHtml
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FullNewsFragment : Fragment() {
 
     private lateinit var binding: FragmentFullNewsBinding
-    private val viewModel by viewModels<FullNewsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.supportPostponeEnterTransition()
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
-            duration = resources.getInteger(R.integer.large_animation_duration).toLong()
-        }
-        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-            duration = resources.getInteger(R.integer.large_animation_duration).toLong()
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.nav_host_fragment
+            fadeMode = MaterialContainerTransform.FADE_MODE_CROSS
+            duration = resources.getInteger(R.integer.normal_animation_duration).toLong()
+            scrimColor = Color.TRANSPARENT
         }
     }
 
@@ -46,16 +47,16 @@ class FullNewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFullNewsBinding.inflate(inflater)
-        val news = arguments?.getParcelable<NewsDomain>("fullNews")
+        val news = arguments?.getParcelable<NewsDomain>(NEWS_ARG_KEY)
         news?.let { newsDomain ->
-            ViewCompat.setTransitionName(binding.root, "news_${newsDomain.id}")
-            viewModel.setNews(newsDomain)
+            ViewCompat.setTransitionName(binding.root, "news_${newsDomain.pubDate}")
+            showNews(newsDomain)
             binding.btnOpenInBrowser.setOnClickListener {
                 val newsIntent = Intent(Intent.ACTION_VIEW, Uri.parse(newsDomain.link))
                 startActivity(newsIntent)
             }
         }
-        with(binding.ibFullNewsBack){
+        with(binding.ibFullNewsBack) {
             ObjectAnimator.ofFloat(this, "alpha", 1f).apply {
                 duration = 500
                 start()
@@ -65,16 +66,16 @@ class FullNewsFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel.news.observe(viewLifecycleOwner) { news ->
-            news?.let {
-                binding.tvFullNewsTitle.text = it.title
-                binding.ivFullNewsPicture.load(it.imageUrl){ allowHardware(false) }
-                binding.tvFullNewsDate.text = convertDateToString(it.pubDate)
-                binding.tvFullNewsBody.text =
-                    getTextFromHtml(it.text, Html.FROM_HTML_MODE_LEGACY)
-            }
-        }
+
+    private fun showNews(news: NewsDomain) {
+        binding.tvFullNewsTitle.text = news.title
+        binding.ivFullNewsPicture.load(news.imageUrl) { allowHardware(false) }
+        binding.tvFullNewsDate.text = convertDateToString(news.pubDate)
+        binding.tvFullNewsBody.text =
+            getTextFromHtml(news.text, Html.FROM_HTML_MODE_LEGACY)
+    }
+
+    companion object {
+        const val NEWS_ARG_KEY = "fullNews"
     }
 }

@@ -1,40 +1,34 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 11.02.21 15:35
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 10:53
+ * Last modified 11.02.21 15:35
  */
 
 package com.lipssoftware.manchester.united.data.repository
 
 import android.content.Context
-import android.graphics.BitmapFactory
-import androidx.core.graphics.scale
 import com.google.gson.Gson
 import com.lipssoftware.manchester.united.data.model.players.Player
 import com.lipssoftware.manchester.united.data.model.players.Squad
+import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class SquadRepository @Inject constructor(val context: Context) : Repository {
 
-    fun getSquad(): List<Player> {
-        val gson = Gson()
-        val jsonFile = context.assets.open("squad.json").bufferedReader().use { it.readText() }
-        return gson.fromJson(jsonFile, Squad::class.java).players.map { player ->
-            Player(
-                player.name,
-                player.firstname,
-                player.lastname,
-                player.birth,
-                player.nationality,
-                player.position,
-                player.number,
-                player.height,
-                player.weight,
-                player.photo
-            ).also {
-                it.thumbnail = BitmapFactory.decodeStream(context.assets.open("players_photos/${it.photo}"))
-                    .scale(400, 680)
-            }
-        }
+    fun getSquad(): Single<List<Player>> {
+       return openPlayersFile()
+           .subscribeOn(Schedulers.io())
+           .flatMap { file -> getPlayersWithCompressedProfileImages(file) }
     }
+
+    private fun getPlayersWithCompressedProfileImages(jsonFile: String): Single<List<Player>> {
+        return Single.just(Gson().fromJson(jsonFile, Squad::class.java).players.map { player ->
+            player.also{ it.setCompressedThumbnail(context.assets.open("players_photos/${player.photo}")) }
+        })
+    }
+
+    private fun openPlayersFile(): Single<String> =
+        Single.just(context.assets.open("squad.json").bufferedReader().use { it.readText() })
+
 }

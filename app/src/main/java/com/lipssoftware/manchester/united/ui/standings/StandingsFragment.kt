@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 25.01.21 13:10
+ * Created by Dmitry Lipski on 11.02.21 14:44
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.21 11:17
+ * Last modified 10.02.21 15:13
  */
 
 package com.lipssoftware.manchester.united.ui.standings
@@ -12,19 +12,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lipssoftware.manchester.united.data.model.domain.StandingDomain
 import com.lipssoftware.manchester.united.databinding.FragmentStandingsBinding
-import com.lipssoftware.manchester.united.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
+import javax.inject.Inject
+import javax.inject.Provider
 
 @AndroidEntryPoint
-class StandingsFragment : Fragment() {
+class StandingsFragment : MvpAppCompatFragment(), StandingsView {
 
+    @Inject
+    lateinit var presenterProvider: Provider<StandingsPresenter>
+    private val standingsPresenter: StandingsPresenter by moxyPresenter { presenterProvider.get() }
     private lateinit var binding: FragmentStandingsBinding
-    private val standingsViewModel by viewModels<StandingsViewModel>()
+
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -40,29 +45,16 @@ class StandingsFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        standingsViewModel.standings.observe(viewLifecycleOwner){ standings ->
-            standings?.let { resource ->
-                when(standings.status){
-                    Status.LOADING ->{
-                        showUI(false)
-                    }
-                    Status.SUCCESS -> {
-                        resource.data?.let { binding.rvStandingsTeamsList.adapter = StandingsAdapter(it) }
-                        showUI()
-                    }
-                    Status.ERROR ->{
-                        showUI()
-                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
-        }
+    override fun loadStandings(standings: List<StandingDomain>) {
+        binding.rvStandingsTeamsList.adapter = StandingsAdapter(standings)
     }
 
-    private fun showUI(showUi: Boolean = true) {
-        binding.rvStandingsTeamsList.isVisible = showUi
-        binding.pbStandings.isVisible = !showUi
+    override fun showLoading(isLoading: Boolean) {
+        binding.rvStandingsTeamsList.isVisible = !isLoading
+        binding.pbStandings.isVisible = isLoading
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 }

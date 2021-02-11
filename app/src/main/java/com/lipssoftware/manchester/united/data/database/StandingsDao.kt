@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 09.02.21 17:06
+ * Created by Dmitry Lipski on 11.02.21 15:35
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.02.21 9:36
+ * Last modified 11.02.21 15:00
  */
 
 package com.lipssoftware.manchester.united.data.database
@@ -11,7 +11,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.lipssoftware.manchester.united.data.model.domain.StandingDomain
-import io.reactivex.Observable
+import io.reactivex.Single
 
 @Dao
 interface StandingsDao {
@@ -20,5 +20,5 @@ interface StandingsDao {
     fun insertStandings(standings: List<StandingDomain>)
 
     @Query("SELECT * FROM standings")
-    fun getStandings(): Observable<List<StandingDomain>>
+    fun getStandings(): Single<List<StandingDomain>>
 }
