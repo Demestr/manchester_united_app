@@ -1,62 +1,56 @@
 /*
- * Created by Dmitry Lipski on 09.02.21 17:06
+ * Created by Dmitry Lipski on 11.02.21 14:44
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.02.21 17:05
+ * Last modified 11.02.21 13:54
  */
 
 package com.lipssoftware.manchester.united.ui.news
 
+import android.view.View
+import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
 import com.lipssoftware.manchester.united.data.repository.NewsRepository
-import com.lipssoftware.manchester.united.ui.BasePresenter
+import com.lipssoftware.manchester.united.mvp.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class NewsPresenter @Inject constructor(
-    private val newsRepository: NewsRepository): BasePresenter<NewsView> {
+    private val newsRepository: NewsRepository): BasePresenter<NewsView>() {
 
-    var view: NewsView? = null
-    var news: Disposable? = null
-
-    init {
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
         fetchNewsFromRemote()
+        loadNews()
     }
 
+    fun onRefresh() {
+        fetchNewsFromRemote()
+        viewState.showLoading(false)
+    }
+
+    fun onNewsClick(newsDomain: NewsDomain, view: View){
+        viewState.openNewsDetail(newsDomain, view)
+    }
 
     private fun loadNews() {
-        //viewState.showProgress(false)
-        news = newsRepository
+        viewState.showLoading(true)
+        compositeDisposable.add(newsRepository
             .getNews()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { matchesList ->
-                    view?.loadNews(matchesList)
-                    view?.showProgress(false)
+                    with(viewState){
+                        updateNews(matchesList)
+                        showLoading(false)
+                    }
                 },
-                { view?.showError(it.message ?: "Error") })
-    }
-
-    fun onRefresh() {
-        fetchNewsFromRemote()
-        view?.showProgress(false)
+                { viewState.showError(it.message ?: "Error") }))
     }
 
     private fun fetchNewsFromRemote() {
-        newsRepository.refreshNews { }
-    }
-
-    override fun attachView(view: NewsView) {
-        this.view = view
-        loadNews()
-    }
-
-    override fun detachView() {
-        this.view = null
-    }
-
-    override fun destroy() {
-        news?.dispose()
+        newsRepository.refreshNews {
+            viewState.showIsUpdatedMessage("News has been updated")
+        }
     }
 }

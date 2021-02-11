@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 09.02.21 17:06
+ * Created by Dmitry Lipski on 11.02.21 14:44
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.02.21 9:36
+ * Last modified 10.02.21 15:59
  */
 
 package com.lipssoftware.manchester.united.data.repository
@@ -20,9 +20,7 @@ class StandingsRepository @Inject constructor(
     private val standingsDao: StandingsDao
     ): Repository {
 
-    fun getStandings(): Observable<List<StandingDomain>> {
-        return standingsDao.getStandings()
-    }
+    fun getStandings(): Observable<List<StandingDomain>> = standingsDao.getStandings()
 
     @SuppressLint("CheckResult")
     fun refreshStandings() {

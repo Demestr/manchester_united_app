@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 09.02.21 17:06
+ * Created by Dmitry Lipski on 11.02.21 14:44
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.02.21 9:36
+ * Last modified 11.02.21 10:15
  */
 
 package com.lipssoftware.manchester.united.data.repository
@@ -20,9 +20,8 @@ class FixturesRepository @Inject constructor(
     private val fixturesDao: FixturesDao
     ): Repository {
 
-    fun getFixtures(): Observable<List<MatchDomain>>{
-        return fixturesDao.getFixtures()
-    }
+    fun getFixtures(): Observable<List<MatchDomain>> = fixturesDao.getFixtures()
+
 
     @SuppressLint("CheckResult")
     fun refreshFixtures(){

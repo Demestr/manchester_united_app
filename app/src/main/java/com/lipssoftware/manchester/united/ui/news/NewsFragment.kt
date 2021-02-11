@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 09.02.21 17:06
+ * Created by Dmitry Lipski on 11.02.21 14:44
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.02.21 16:40
+ * Last modified 11.02.21 14:16
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -16,40 +16,35 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.transition.MaterialSharedAxis
+import com.google.android.material.transition.MaterialElevationScale
 import com.lipssoftware.manchester.united.R
 import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
-import com.lipssoftware.manchester.united.data.repository.NewsRepository
 import com.lipssoftware.manchester.united.databinding.FragmentNewsBinding
+import com.lipssoftware.manchester.united.ui.news.fullnews.FullNewsFragment.Companion.NEWS_ARG_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 import javax.inject.Inject
+import javax.inject.Provider
 
 @AndroidEntryPoint
 class NewsFragment : MvpAppCompatFragment(), NewsView {
 
-    private lateinit var binding: FragmentNewsBinding
-
-//    @Inject
-//    lateinit var presenterProvider: Provider<NewsPresenter>
-
     @Inject
-    lateinit var repo: NewsRepository
-
-    private val newsPresenter: NewsPresenter by lazy { NewsPresenter(repo) }
+    lateinit var presenterProvider: Provider<NewsPresenter>
+    private val newsPresenter: NewsPresenter by moxyPresenter { presenterProvider.get() }
+    private lateinit var binding: FragmentNewsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        newsPresenter.attachView(this)
         binding = FragmentNewsBinding.inflate(inflater)
-        //context ?: return binding.root
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+        exitTransition = MaterialElevationScale(false).apply {
             duration = resources.getInteger(R.integer.normal_animation_duration).toLong()
         }
-        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+        reenterTransition = MaterialElevationScale(true).apply {
             duration = resources.getInteger(R.integer.normal_animation_duration).toLong()
         }
         return binding.root
@@ -57,44 +52,51 @@ class NewsFragment : MvpAppCompatFragment(), NewsView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rvNewsList.apply { layoutManager = LinearLayoutManager(context) }
-        binding.srlNews.setOnRefreshListener { newsPresenter.onRefresh() }
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
-    }
-
-    override fun loadNews(news: List<NewsDomain>) {
-        binding.rvNewsList.adapter = NewsAdapter(news) { newsItem, itemView ->
-            val bundle = Bundle().apply { putParcelable("fullNews", newsItem) }
-            val extras = FragmentNavigatorExtras(
-                itemView to "news_${newsItem.id}",
-            )
-            findNavController().navigate(
-                R.id.action_navigation_news_to_fullNewsFragment,
-                bundle,
-                null,
-                extras
-            )
+        binding.rvNewsList.apply { layoutManager = LinearLayoutManager(context) }
+        binding.srlNews.setOnRefreshListener { newsPresenter.onRefresh() }
+        binding.rvNewsList.adapter = NewsAdapter { newsItem, itemView ->
+            newsPresenter.onNewsClick(newsItem, itemView)
         }
     }
 
-    override fun showProgress(isProgress: Boolean) {
-        binding.rvNewsList.isVisible = !isProgress
-        binding.pbNews.isVisible = isProgress
-        if (!isProgress) binding.srlNews.isRefreshing = false
+    override fun updateNews(news: List<NewsDomain>) {
+        with(binding.rvNewsList) {
+            (adapter as NewsAdapter).updateList(news) {
+                val savedInstance = this.layoutManager?.onSaveInstanceState()
+                it.dispatchUpdatesTo(this.adapter as NewsAdapter)
+                this.layoutManager?.onRestoreInstanceState(savedInstance)
+            }
+        }
+    }
+
+    override fun showIsUpdatedMessage(message: String) {
+        activity?.runOnUiThread {
+            Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun openNewsDetail(newsDomain: NewsDomain, view: View) {
+        val bundle = Bundle().apply { putParcelable(NEWS_ARG_KEY, newsDomain) }
+        val extras = FragmentNavigatorExtras(
+            view to "news_${newsDomain.pubDate}",
+        )
+        findNavController().navigate(
+            R.id.action_navigation_news_to_fullNewsFragment,
+            bundle,
+            null,
+            extras
+        )
+    }
+
+    override fun showLoading(isLoading: Boolean) {
+        binding.rvNewsList.isVisible = !isLoading
+        binding.pbNews.isVisible = isLoading
+        if (!isLoading) binding.srlNews.isRefreshing = false
     }
 
     override fun showError(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        newsPresenter.detachView()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        newsPresenter.destroy()
     }
 }

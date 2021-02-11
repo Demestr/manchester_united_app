@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 08.02.21 14:09
+ * Created by Dmitry Lipski on 11.02.21 14:44
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 08.02.21 13:42
+ * Last modified 11.02.21 14:43
  */
 
 package com.lipssoftware.manchester.united.ui.fixtures
@@ -14,25 +14,29 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
+import com.lipssoftware.manchester.united.data.model.domain.MatchDomain
 import com.lipssoftware.manchester.united.databinding.FragmentFixturesBinding
-import com.lipssoftware.manchester.united.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
+import javax.inject.Inject
+import javax.inject.Provider
 import kotlin.math.abs
 
 @AndroidEntryPoint
-class FixturesFragment : Fragment() {
+class FixturesFragment : MvpAppCompatFragment(), FixturesView {
 
+    @Inject
+    lateinit var presenterProvider: Provider<FixturesPresenter>
+    private val fixturesPresenter by moxyPresenter { presenterProvider.get() }
     private lateinit var binding: FragmentFixturesBinding
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var snapHelper: SnapHelper
     private var isPositioned: Boolean = false
-    private val fixturesViewModel by viewModels<FixturesViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,20 +57,20 @@ class FixturesFragment : Fragment() {
             setItemViewCacheSize(4)
             layoutManager = this@FixturesFragment.layoutManager
             val itemDecor = FixturesAdapter.BoundsOffsetDecoration(
-                    isVertical = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+                isVertical = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+            )
             addItemDecoration(itemDecor)
             setHasFixedSize(true)
         }
         snapHelper.attachToRecyclerView(binding.rvFixturesList)
+        binding.fabScrollToLastMatch.isVisible = abs((binding.rvFixturesList.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition() - fixturesPresenter.indexOfLastPlayedMatch) > 1
         binding.fabScrollToLastMatch.setOnClickListener {
-            val direction =
-                if ((binding.rvFixturesList.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() < fixturesViewModel.indexOfLastPlayedMatch) 1 else -1
-            binding.rvFixturesList.smoothScrollToPosition(fixturesViewModel.indexOfLastPlayedMatch + direction)
+            fixturesPresenter.goToLastMatchClick()
         }
         binding.rvFixturesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (abs((recyclerView.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition() - fixturesViewModel.indexOfLastPlayedMatch) > 1)
+                if (abs((recyclerView.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition() - fixturesPresenter.indexOfLastPlayedMatch) > 1)
                     binding.fabScrollToLastMatch.show()
                 else
                     binding.fabScrollToLastMatch.hide()
@@ -75,34 +79,29 @@ class FixturesFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        fixturesViewModel.standings.observe(viewLifecycleOwner) { standings ->
-            standings?.let { resource ->
-                when (standings.status) {
-                    Status.LOADING -> {
-                        showUI(false)
-                    }
-                    Status.SUCCESS -> {
-                        resource.data?.let { list ->
-                            binding.rvFixturesList.adapter = FixturesAdapter(list)
-                            if (!isPositioned) initRecyclerViewPosition(fixturesViewModel.indexOfLastPlayedMatch)
-                        }
-                        showUI()
-                    }
-                    Status.ERROR -> {
-                        showUI()
-                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
-        }
+    override fun showFixtures(fixtures: List<MatchDomain>) {
+        binding.rvFixturesList.adapter = FixturesAdapter(fixtures)
+        if (!isPositioned) initRecyclerViewPosition(fixturesPresenter.indexOfLastPlayedMatch)
+    }
+
+    override fun scrollToLastMatch() {
+        val direction =
+            if ((binding.rvFixturesList.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() < fixturesPresenter.indexOfLastPlayedMatch) 1 else -1
+        binding.rvFixturesList.smoothScrollToPosition(fixturesPresenter.indexOfLastPlayedMatch + direction)
+    }
+
+    override fun showLoading(isLoading: Boolean) {
+        binding.rvFixturesList.isVisible = !isLoading
+        binding.pbFixtures.isVisible = isLoading
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     private fun initRecyclerViewPosition(position: Int) {
 
         layoutManager.scrollToPosition(position)
-
         binding.rvFixturesList.doOnPreDraw {
             val targetView = layoutManager.findViewByPosition(position) ?: return@doOnPreDraw
             val distanceToFinalSnap =
@@ -115,12 +114,6 @@ class FixturesFragment : Fragment() {
                     -distanceToFinalSnap[0]
             layoutManager.scrollToPositionWithOffset(position, distance)
         }
-
         isPositioned = true
-    }
-
-    private fun showUI(showUi: Boolean = true) {
-        binding.rvFixturesList.isVisible = showUi
-        binding.pbFixtures.isVisible = !showUi
     }
 }
