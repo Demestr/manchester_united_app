@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 08.02.21 14:09
+ * Created by Dmitry Lipski on 12.02.21 15:28
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 08.02.21 11:15
+ * Last modified 12.02.21 15:04
  */
 
 package com.lipssoftware.manchester.united.ui.fixtures
@@ -64,9 +64,8 @@ class FixturesAdapter(private val fixtures: List<MatchDomain>) :
             item.tvItemFixtureScoreDivider.isVisible = match.statusShort != "NS"
             item.tvItemFixtureNameAwayTeam.text = match.awayTeamName
             item.tvItemFixtureStatus.text = match.statusLong
-            item.tvItemFixtureVenue.text = "${match.venueName}, ${match.venueCity}"
-            item.tvItemFixtureReferee.text =
-                if (match.referee != null) "Referee - ${match.referee}" else ""
+            item.tvItemFixtureVenue.text = "${match.venueName ?: "Unknown Stadium"}, ${match.venueCity ?: "Somewhere"}"
+            item.tvItemFixtureReferee.text = "Referee - ${match.referee ?: "Unknown"}"
         }
     }
 

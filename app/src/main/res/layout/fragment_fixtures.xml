@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Dmitry Lipski on 26.01.21 16:30
+  ~ Created by Dmitry Lipski on 12.02.21 15:28
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 26.01.21 16:16
+  ~ Last modified 12.02.21 13:16
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +43,6 @@
         android:backgroundTint="@color/red_500"
         android:fontFamily="@font/iceberg"
         android:paddingStart="24dp"
-        android:paddingLeft="24dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
         android:text="Last match"
