@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 11.02.21 15:35
+ * Created by Dmitry Lipski on 12.02.21 9:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.02.21 14:56
+ * Last modified 12.02.21 8:52
  */
 
 package com.lipssoftware.manchester.united.ui.news
@@ -38,9 +38,11 @@ class NewsPresenter @Inject constructor(
             .getNews()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doFinally { viewState.showLoading(false) }
             .subscribe(
-                { matchesList -> viewState.updateNews(matchesList) },
+                { matchesList ->
+                    viewState.updateNews(matchesList)
+                    viewState.showLoading(false)
+                },
                 { viewState.showError(it.message ?: "Error") }))
     }
 

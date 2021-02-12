@@ -1,7 +1,7 @@
 /*
- * Created by Dmitry Lipski on 11.02.21 15:35
+ * Created by Dmitry Lipski on 12.02.21 9:10
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.02.21 14:53
+ * Last modified 12.02.21 9:10
  */
 
 package com.lipssoftware.manchester.united.data.database
@@ -11,7 +11,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.lipssoftware.manchester.united.data.model.domain.NewsDomain
-import io.reactivex.Single
+import io.reactivex.Flowable
 
 @Dao
 interface NewsDao {
@@ -20,7 +20,7 @@ interface NewsDao {
     fun insertNews(news: List<NewsDomain>)
 
     @Query("SELECT * FROM news ORDER BY pubDate DESC")
-    fun getNews(): Single<List<NewsDomain>>
+    fun getNews(): Flowable<List<NewsDomain>>
 
     @Query("SELECT EXISTS(SELECT * FROM news WHERE id = :newsId)")
     fun isExist(newsId: String): Boolean
